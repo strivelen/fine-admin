@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Switch, ConfigProvider } from 'antd';
 import theme from 'antd/es/theme/export';
 import { useAppSelector, useAppDispatch } from '@/hooks/public';
@@ -25,6 +25,9 @@ export function DarkModeConfigProvider({
   children: React.ReactNode;
 }) {
   const isDarkMode = useAppSelector(selectIsDarkMode);
+  useEffect(() => {
+      document.body.style.backgroundColor = isDarkMode ? "#000" : "#fff";
+  }, [isDarkMode]);
   return (
     <ConfigProvider
       theme={{

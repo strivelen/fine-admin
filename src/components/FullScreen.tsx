@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tooltip, Button } from 'antd';
+import { Tooltip } from 'antd';
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import { useFullscreen } from 'ahooks';
 import HeaderButton from './HeaderButton';
