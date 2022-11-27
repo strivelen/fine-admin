@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react';
 import {
   useNavigate,
   useLocation,
@@ -14,7 +13,7 @@ import { ItemType } from 'antd/es/menu/hooks/useItems';
 import { useAppDispatch } from '@/hooks/public';
 import { setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { routes } from '@/router/routes';
-import { HomeOutlined } from '@ant-design/icons';
+import DynamicIcons from './DynamicIcons';
 
 export default function LayoutMenu() {
   const dispatch = useAppDispatch();
@@ -124,7 +123,7 @@ const generateMenuItems = (data: MenuItem[]): ItemType[] => {
     menu.push({
       key: item.key as string,
       label: item.Name,
-      icon: item.Icon && <HomeOutlined />,
+      icon: <DynamicIcons icon={item.Icon} />,
       children
     });
   });

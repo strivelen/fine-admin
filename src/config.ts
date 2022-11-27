@@ -1,3 +1,4 @@
+import type { DynamicIconKeys } from '@/components/DynamicIcons';
 /**
  * 配置文件
  */
@@ -56,13 +57,14 @@ export const MenuData = [
   },
   {
     Name: '订单管理',
-    Icon: 'HomeOutlined',
+    Icon: 'UnorderedListOutlined',
     Children: [
       {
         Name: '采购订单',
         Children: [
           {
             Name: '三级菜单',
+            Icon: 'LinkOutlined',
             Children: [
               {
                 Name: '四级菜单',
@@ -76,7 +78,7 @@ export const MenuData = [
   },
   {
     Name: '用户管理',
-    Icon: 'HomeOutlined',
+    Icon: 'UserOutlined',
     Children: [
       {
         Name: '角色管理',
@@ -86,12 +88,12 @@ export const MenuData = [
   },
   {
     Name: '系统设置',
-    Icon: 'HomeOutlined',
+    Icon: 'SettingOutlined',
     Url: '/system'
   },
   {
     Name: '组件示例',
-    Icon: 'HomeOutlined',
+    Icon: 'BlockOutlined',
     Children: [
       {
         Name: '自定义面包屑',
@@ -107,7 +109,7 @@ export const MenuData = [
 export interface MenuItem {
   key?: string;
   Name: string;
-  Icon?: string;
+  Icon?: DynamicIconKeys;
   Url?: string;
   Children?: MenuItem[];
 }
