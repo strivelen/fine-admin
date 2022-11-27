@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import RouterAuth from './RouterAuth';
+import { ErrorPage } from './ErrorBoundary';
 
 const Layout = lazy(() => import('@/components/Layout'));
 const Login = lazy(() => import('@/pages/login/Login'));
@@ -14,13 +15,21 @@ const ProForm = lazy(() => import('@/pages/pro-form'));
 
 export const routes: RouteObject[] = [
   {
+    path: '/login',
+    element: <Login />
+  },
+  {
     element: <RouterAuth />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
         element: <Layout />,
         children: [
-          { index: true, element: <Home /> },
+          {
+            index: true,
+            element: <Home />
+          },
           {
             path: 'home',
             element: <Home />
@@ -43,18 +52,14 @@ export const routes: RouteObject[] = [
               { path: 'customBreadcrumb', element: <CustomBreadcrumb /> },
               { path: 'pro-form', element: <ProForm /> }
             ]
+          },
+          {
+            path: '*',
+            element: <NotFound />
           }
         ]
       }
     ]
-  },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '*',
-    element: <NotFound />
   }
 ];
 

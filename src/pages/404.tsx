@@ -6,8 +6,8 @@ export default function NoFound() {
   return (
     <div
       style={{
-        width: '100vw',
-        minHeight: '100vh',
+        width: '100%',
+        minHeight: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
