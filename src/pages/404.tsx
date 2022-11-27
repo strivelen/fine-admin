@@ -1,6 +1,5 @@
-import { Button, Result, Row, Col, Typography } from 'antd';
+import { Button, Result, Row, Col } from 'antd';
 import { useNavigate } from 'react-router-dom';
-const { Text } = Typography;
 
 export default function NoFound() {
   const navigate = useNavigate();
