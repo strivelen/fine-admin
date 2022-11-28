@@ -41,6 +41,8 @@ export const layoutSlice = createSlice({
 export const { setBreadcrumb, setCollapsed, setDarkMode, setThemeColor } =
   layoutSlice.actions;
 
+export const selectCollapsed = (state: RootState) => state.layout.collapsed;
+
 export const selectBreadcrumb = (state: RootState) => state.layout.breadcrumb;
 
 export const selectIsDarkMode = (state: RootState) => state.layout.isDarkMode;
