@@ -27,11 +27,9 @@ export default function LayoutHeader() {
           <Space>
             <HeaderButton
               icon={React.createElement(
-                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-                {
-                  onClick: () => dispatch(setCollapsed(!collapsed))
-                }
+                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
               )}
+              onClick={() => dispatch(setCollapsed(!collapsed))}
             />
             <LayoutBreadcrumb />
           </Space>
