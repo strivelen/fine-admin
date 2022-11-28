@@ -49,7 +49,7 @@ export const PageSize = 20; // 每页多少条数据
 
 // 菜单相关
 export const IsUseServerMenu = false; // 是否使用服务端菜单数据
-export const MenuData = [
+export const MenuData: MenuItem[] = [
   {
     Name: '首页',
     Icon: 'HomeOutlined',
