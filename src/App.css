@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 16px 0;
+  margin: 10px 16px 6px;
   overflow: hidden;
 }
 @keyframes bgp {
