@@ -67,4 +67,6 @@ export const routes: RouteObject[] = [
   }
 ];
 
-export default createBrowserRouter(routes);
+export default createBrowserRouter(routes, {
+  basename: import.meta.env.BASE_URL
+});
