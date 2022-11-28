@@ -12,6 +12,7 @@ declare global {
   const login: typeof import('./store/reducer/userSlice')['login']
   const memo: typeof import('react')['memo']
   const selectBreadcrumb: typeof import('./store/reducer/layoutSlice')['selectBreadcrumb']
+  const selectCollapsed: typeof import('./store/reducer/layoutSlice')['selectCollapsed']
   const selectCount: typeof import('./store/reducer/counterSlice')['selectCount']
   const selectIsDarkMode: typeof import('./store/reducer/layoutSlice')['selectIsDarkMode']
   const selectLoading: typeof import('./store/reducer/loadingSlice')['selectLoading']

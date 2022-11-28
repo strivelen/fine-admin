@@ -13,9 +13,10 @@
 }
 
 .logo {
-  height: 28px;
-  margin: 16px;
-  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 16px 0;
   overflow: hidden;
 }
 @keyframes bgp {
@@ -27,11 +28,12 @@
   }
 }
 .logo_text {
+  padding-left: 12px;
   white-space: nowrap;
   margin-bottom: 0;
   text-align: center;
   line-height: 28px;
-  font-size: 17px;
+  font-size: 24px;
   list-style-type: none;
   font-weight: bold;
   background-image: linear-gradient(

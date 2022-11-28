@@ -11,6 +11,7 @@
     "login": true,
     "memo": true,
     "selectBreadcrumb": true,
+    "selectCollapsed": true,
     "selectCount": true,
     "selectIsDarkMode": true,
     "selectLoading": true,
