@@ -12,7 +12,6 @@ import { ConfigProvider } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import zhCN from 'antd/locale/zh_CN';
-import '@/assets/iconfont/iconfont.css';
 import 'antd/dist/reset.css';
 import './App.css';
 

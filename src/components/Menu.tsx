@@ -88,26 +88,6 @@ export default function LayoutMenu() {
 }
 
 /**
- * 菜单Icon
- * @param param0 iconfont name
- * @returns
- */
-function MenuIcon({ name }: { name: string | undefined }) {
-  if (!name) return null;
-  return (
-    <span
-      className="anticon ant-menu-item-icon"
-      style={{ verticalAlign: 'top' }}
-    >
-      <i
-        className={`iconfont ${name}`}
-        style={{ fontSize: 26, verticalAlign: 'sub', marginLeft: -5 }}
-      />
-    </span>
-  );
-}
-
-/**
  * 菜单配置数据生成Menu组件用数据
  * @param {MenuItem[]} data
  * @returns
