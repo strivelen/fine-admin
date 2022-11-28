@@ -1,6 +1,6 @@
 import { FC, useState, createElement, ReactNode } from 'react';
 import { message, Space, Form } from 'antd';
-import theme from 'antd/es/theme/export'
+import theme from 'antd/es/theme/export';
 import type { FormItemProps } from 'antd';
 import { useAppDispatch } from '@/hooks/public';
 import { login } from '@/store/reducer/userSlice';
@@ -18,6 +18,7 @@ import {
   EyeInvisibleOutlined
 } from '@ant-design/icons';
 import { LoginForm } from '@ant-design/pro-components';
+import LoginLogo from './LoginLogo';
 
 const FormItem = Form.Item;
 const { useToken } = theme;
@@ -63,7 +64,7 @@ export default function Login() {
     <LoginContainer>
       <div>
         <LoginForm
-          title={config.AppName}
+          title={<LoginLogo />}
           subTitle={
             <span className={styles.subtitle}>中后台管理系统通用模板</span>
           }

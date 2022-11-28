@@ -23,37 +23,10 @@
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.2);
 }
-@keyframes bgp {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -100% 0;
-  }
-}
 .subtitle {
   font-size: 16px;
-  font-weight: 600;
-  background-image: linear-gradient(
-    to right,
-    red,
-    orange,
-    #0a98d2,
-    #1ffdc4,
-    #0a98d2,
-    orange,
-    red,
-    orange,
-    #0a98d2,
-    #1ffdc4,
-    #0a98d2,
-    orange,
-    red
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-size: 200% 100%;
-  animation: bgp 8s infinite linear;
+  color: #fff;
+  font-weight: 200;
 }
 .login_title {
   text-align: center;
