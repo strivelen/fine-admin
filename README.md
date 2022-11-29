@@ -8,6 +8,7 @@
 <div align="center">中后台管理系统通用模板</div>
 
 <div align="center">
+<br />
 <img alt="node" src="https://img.shields.io/badge/Node-%3E%3D16.x-green">
 <img alt="pnpm" src="https://img.shields.io/badge/pnpm-v7.14.0-blue">
 <img alt="antd" src="https://img.shields.io/badge/antd-v5.x-brightgreen" />
@@ -19,7 +20,7 @@
 <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/strivelen/fine-admin/total">
 </div>
 
-<div align="center"><a target="_blank" href="https://strivelen.github.io/fine-admin/">查看演示</a></div>
+[在线演示](https://strivelen.github.io/fine-admin/)
 
 ### 📦 快速开始
 
