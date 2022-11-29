@@ -52,23 +52,24 @@ export function useOpenKeysState(menuData: MenuItem[]) {
   // 处理菜单openKeys改变
   const onOpenChange = useCallback<(keys: string[]) => void>(
     (keys) => {
-      const rootSubmenuKeys = menuData
+      const rootKeys = menuData
         .filter((item) => item.Children && item.Children.length > 0)
         .map((item) => item.key);
 
-      const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+      const latestOpenKey = keys.length > 0 ? keys[keys.length - 1] : undefined;
 
-      if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-        setOpenKeys(keys);
+      if (latestOpenKey && rootKeys.includes(latestOpenKey)) {
+        // 走到这里说明打开新的根菜单
+        setOpenKeys([latestOpenKey]);
       } else {
-        const childKeys = keys.filter(
-          (item) => latestOpenKey && item.indexOf(latestOpenKey) > -1
-        );
-        setOpenKeys(latestOpenKey ? [...childKeys, latestOpenKey] : []);
+        // 走到这里说明两种情况：
+        // 1. onchange keys 是空的，直接赋值。
+        // 2. 打开的是子菜单，也是直接赋值。
+        setOpenKeys(keys);
       }
     },
     [menuData, openKeys]
   );
 
-  return { openKeys, onOpenChange };
+  return { openKeys, setOpenKeys, onOpenChange };
 }
