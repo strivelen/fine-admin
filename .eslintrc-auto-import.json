@@ -31,8 +31,6 @@
     "useInsertionEffect": true,
     "useLayoutEffect": true,
     "useMemo": true,
-    "useMenuData": true,
-    "useOpenKeysState": true,
     "useReducer": true,
     "useRef": true,
     "useState": true,
