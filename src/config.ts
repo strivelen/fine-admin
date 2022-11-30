@@ -51,24 +51,24 @@ export const PageSize = 20; // 每页多少条数据
 export const IsUseServerMenu = false; // 是否使用服务端菜单数据
 export const MenuData: MenuItem[] = [
   {
-    Name: '首页',
-    Icon: 'HomeOutlined',
-    Url: '/'
+    label: '首页',
+    icon: 'HomeOutlined',
+    route: '/'
   },
   {
-    Name: '订单管理',
-    Icon: 'UnorderedListOutlined',
-    Children: [
+    label: '订单管理',
+    icon: 'UnorderedListOutlined',
+    children: [
       {
-        Name: '采购订单',
-        Children: [
+        label: '采购订单',
+        children: [
           {
-            Name: '三级菜单',
-            Icon: 'LinkOutlined',
-            Children: [
+            label: '三级菜单',
+            icon: 'LinkOutlined',
+            children: [
               {
-                Name: '四级菜单',
-                Url: '/order/list/123/'
+                label: '四级菜单',
+                route: '/order/list/123/'
               }
             ]
           }
@@ -77,39 +77,39 @@ export const MenuData: MenuItem[] = [
     ]
   },
   {
-    Name: '用户管理',
-    Icon: 'UserOutlined',
-    Children: [
+    label: '用户管理',
+    icon: 'UserOutlined',
+    children: [
       {
-        Name: '角色管理',
-        Url: '/list/1'
+        label: '角色管理',
+        route: '/list/1'
       }
     ]
   },
   {
-    Name: '系统设置',
-    Icon: 'SettingOutlined',
-    Url: '/system'
+    label: '系统设置',
+    icon: 'SettingOutlined',
+    route: '/system'
   },
   {
-    Name: '组件示例',
-    Icon: 'BlockOutlined',
-    Children: [
+    label: '组件示例',
+    icon: 'BlockOutlined',
+    children: [
       {
-        Name: '自定义面包屑',
-        Url: '/components/customBreadcrumb'
+        label: '自定义面包屑',
+        route: '/components/customBreadcrumb'
       },
       {
-        Name: 'ProForm',
-        Url: '/components/pro-form'
+        label: 'ProForm',
+        route: '/components/pro-form'
       }
     ]
   }
 ]; // 本地菜单数据
 export interface MenuItem {
   key?: string;
-  Name: string;
-  Icon?: DynamicIconKeys;
-  Url?: string;
-  Children?: MenuItem[];
+  label: string;
+  icon?: DynamicIconKeys;
+  route?: string;
+  children?: MenuItem[];
 }

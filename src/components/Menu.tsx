@@ -7,80 +7,73 @@ import {
   To
 } from 'react-router-dom';
 import { Menu } from 'antd';
-import { useMenuData, useOpenKeysState } from '@/hooks/useMenu';
-import { MenuItem } from '@/config';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
-import { useAppDispatch } from '@/hooks/public';
-import { setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { routes } from '@/router/routes';
 import DynamicIcons from './DynamicIcons';
+import { useBreadcrumbfromMenuData } from './Breadcrumb';
+import { flatArrTree } from '@/utils/utils';
+import { useSetState } from 'ahooks';
+import type { SetState } from 'ahooks/es/useSetState';
+import * as config from '@/config';
+import type { MenuItem } from '@/config';
+import { fetchUserMenu } from '@/api/User';
+
+interface State {
+  openKeys: string[];
+  selectKey: string;
+}
 
 export default function LayoutMenu() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const menuData = useMenuData();
-  const expandMenuDataRef = useRef<MenuItem[]>([]);
+  const [state, setState] = useSetState<State>({
+    openKeys: [],
+    selectKey: ''
+  });
 
-  const { openKeys, onOpenChange } = useOpenKeysState(menuData);
-  const [selectedKeys, setselectedKeys] = useState<string[] | undefined>();
+  // 路由改变或者菜单数据变更更新菜单状态
+  const menuItems = useMapLocationToMenuState({
+    menuData,
+    setState
+  });
 
-  useEffect(() => {
-    if (menuData.length > 0) {
-      // 展开菜单树结构数据
-      expandMenuDataRef.current = expandTreeStructureMenu([...menuData]);
-      // 设置菜单初始化状态
-      const menuStatus = getMenuStatus(expandMenuDataRef.current, location);
-      setselectedKeys(menuStatus.selectKeys);
-      onOpenChange(menuStatus.openKeys);
-    }
-  }, [menuData]);
+  const onOpenChange = (keys: string[]) => {
+    const rootKeys = menuData
+      .filter((item) => item.children && item.children.length > 0)
+      .map((item) => item.key);
 
-  useEffect(() => {
-    if (expandMenuDataRef.current.length > 0) {
-      const menuStatus = getMenuStatus(expandMenuDataRef.current, location);
-      setselectedKeys(menuStatus.selectKeys);
-      menuStatus.openKeys.length > 0 && onOpenChange(menuStatus.openKeys);
-    }
-  }, [location.pathname]);
+    const latestOpenKey = keys.length > 0 ? keys[keys.length - 1] : undefined;
 
-  useEffect(() => {
-    // 自动渲染 breadcrumb
-    if (!selectedKeys || selectedKeys.length === 0) {
-      return;
+    if (latestOpenKey && rootKeys.includes(latestOpenKey)) {
+      // 走到这里说明打开新的根菜单
+      setState({ openKeys: [latestOpenKey] });
+    } else {
+      // 走到这里说明两种情况：
+      // 1. onchange keys 是空的，直接赋值。
+      // 2. 打开的是子菜单，也是直接赋值。
+      setState({ openKeys: keys });
     }
-    const currentOpenKeys = getOpenKeys([], selectedKeys[0]);
-    let breadcrumbPath: string[] = [];
-    if (currentOpenKeys.length !== 0) {
-      breadcrumbPath = currentOpenKeys.map((key) => {
-        const menuItem = expandMenuDataRef.current.find(
-          (menuItem) => key === menuItem.key
-        ) as MenuItem;
-        return menuItem.Name;
-      });
-    }
-    const breadcrumbFouces = expandMenuDataRef.current.find(
-      (menuitem) => menuitem.key === (selectedKeys || [])[0]
-    ) as MenuItem;
-    const breadcrumb = [...breadcrumbPath, breadcrumbFouces.Name];
-    dispatch(setBreadcrumb(breadcrumb));
-  }, [selectedKeys]);
+  };
+
+  useBreadcrumbfromMenuData({
+    menu: menuData,
+    ...state
+  });
 
   return (
     <Menu
       id="custom-menu-popup"
       theme="dark"
       mode="inline"
-      selectedKeys={selectedKeys}
+      selectedKeys={[state.selectKey]}
       onClick={({ key, keyPath, domEvent }) => {
-        setselectedKeys([key]);
-        const pageUrl = expandMenuDataRef.current.find(
-          (item) => item.key === key
-        )?.Url as To;
+        setState({ selectKey: key });
+        const pageUrl = menuItems.current.find((item) => item.key === key)
+          ?.route as To;
         navigate(pageUrl);
       }}
-      openKeys={openKeys}
+      openKeys={state.openKeys}
       onOpenChange={onOpenChange}
       items={generateMenuItems(menuData)}
     />
@@ -96,41 +89,23 @@ const generateMenuItems = (data: MenuItem[]): ItemType[] => {
   const menu: ItemType[] = [];
   data.forEach((item) => {
     let children;
-    if (item.Children) {
-      children = generateMenuItems(item.Children);
+    if (item.children) {
+      children = generateMenuItems(item.children);
     }
-
     menu.push({
-      key: item.key as string,
-      label: item.Name,
-      icon: <DynamicIcons icon={item.Icon} />,
+      key: item.key,
+      label: item.label,
+      icon: <DynamicIcons icon={item.icon} />,
       children
-    });
+    } as ItemType);
   });
   return menu;
 };
 
-type GetMenuStatus = (
-  menuData: MenuItem[],
-  location: Location
-) => {
-  selectKeys: string[];
-  openKeys: string[];
-};
-
-// 根据路径匹配菜单状态
-const getMenuStatus: GetMenuStatus = function (expandMenuList, location) {
-  const selectKey = getSelectKeys(expandMenuList, location);
-  return {
-    selectKeys: selectKey ? [selectKey] : [],
-    openKeys: getOpenKeys([], selectKey)
-  };
-};
-
-// 定位菜单selectKeys
-function getSelectKeys(expandMenuList: MenuItem[], location: Location): string {
+// 通过 location 匹配出 菜单 selectKey
+function getSelectKeys(expandMenuList: MenuItem[], location: Location) {
   let currentMenuItemConfig = expandMenuList.find(
-    (item) => item.Url === location.pathname
+    (item) => item.route === location.pathname
   );
   if (!currentMenuItemConfig) {
     // 此分支是为了处理菜单路由使用的是动态路由的情况
@@ -143,39 +118,93 @@ function getSelectKeys(expandMenuList: MenuItem[], location: Location): string {
       )
       .replace(/\/\//g, '/');
     currentMenuItemConfig = expandMenuList.find((menuItem) => {
-      return !!matchPath(routeModel || '', menuItem.Url || '');
+      return !!matchPath(routeModel || '', menuItem.route || '');
     });
   }
   return currentMenuItemConfig?.key || '';
 }
 
-// 定位菜单openKeys(递归解析selectKey)
-function getOpenKeys(keys: string[] = [], key: string): string[] {
-  if (!key || key.split('-').length === 2) {
-    return keys;
+// 通过 selectKey 解析出 openKeys
+export function getOpenKeys(selectKey: string): string[] {
+  if (!selectKey || selectKey.split('-').length === 2) {
+    return [];
   }
-  const selectKeyParse = key.split('-');
-  const parentDirKey = selectKeyParse
-    .slice(0, selectKeyParse.length - 1)
-    .join('-');
-  keys.push(parentDirKey);
-  return getOpenKeys(keys, parentDirKey);
+  const parseKey = selectKey.split('-');
+  const parseKeyLen = parseKey.length - 1;
+  const first = parseKey[0] + '-' + parseKey[1];
+  const openKeys: string[] = [first];
+  for (let i = 2; i < parseKeyLen; i++) {
+    const level = parseKey.slice(0, i + 1).join('-');
+    openKeys.push(level);
+  }
+  return openKeys;
+}
+
+// 路由改变或者菜单数据变更更新菜单状态
+function useMapLocationToMenuState({
+  menuData,
+  setState
+}: {
+  menuData: MenuItem[];
+  setState: SetState<State>;
+}) {
+  const menuItems = useRef<MenuItem[]>([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    // 展开菜单树结构数据
+    if (menuItems.current.length === 0 && menuData.length > 0) {
+      menuItems.current = flatArrTree(menuData, 'children');
+    }
+    // 设置菜单初始化状态
+    if (menuData.length === 0 || menuItems.current.length === 0) {
+      return;
+    }
+    const selectKey = getSelectKeys(menuItems.current, location);
+    const openKeys = getOpenKeys(selectKey);
+    setState((prevState) => ({
+      openKeys: openKeys.length > 0 ? openKeys : prevState.openKeys,
+      selectKey
+    }));
+  }, [menuData, location.pathname]);
+
+  return menuItems;
 }
 
 /**
- * 菜单树结构展开
+ * 自动添加菜单数据唯一key，如：menu-0 menu-1 menu-1-0 menu-1-1
+ * @param data
+ * @param prefix
+ * @returns
  */
-function expandTreeStructureMenu(data: MenuItem[]) {
-  let newData: MenuItem[] = [];
-  data.forEach((item) => {
-    if (item.Children) {
-      const curItem = { ...item };
-      const child = expandTreeStructureMenu(curItem.Children || []);
-      delete curItem.Children;
-      newData = [...newData, curItem, ...child];
-    } else {
-      newData.push(item);
+const addMenuKeys = (data: MenuItem[], prefix: string) => {
+  const menu: MenuItem[] = [];
+  data.forEach((item, index) => {
+    const key = prefix + '-' + index;
+    if (item.children) {
+      item.children = addMenuKeys(item.children, key);
     }
+    menu.push({ ...item, key });
   });
-  return newData;
+  return menu;
+};
+
+/**
+ * 获取菜单数据
+ * @returns
+ */
+function useMenuData() {
+  const [menuData, setMenuData] = useState<ExpandRecursively<MenuItem[]>>(
+    addMenuKeys(config.MenuData, 'menu')
+  );
+  useEffect(() => {
+    (async () => {
+      if (config.IsUseServerMenu) {
+        const menu = await fetchUserMenu();
+        setMenuData(addMenuKeys(menu, 'menu'));
+      }
+    })();
+  }, []);
+
+  return menuData;
 }

@@ -149,3 +149,28 @@ export function getApiTypesValue(api: Api) {
   }
   return { url, params };
 }
+
+/**
+ * 扁平化树数据为数组
+ * @param data
+ * @param nodeKey
+ * @returns
+ */
+export function flatArrTree(data: object[] = [], nodeKey: string) {
+  let newData = JSON.parse(JSON.stringify(data));
+  if (newData.length === 0) {
+    return [];
+  }
+  let arr = [];
+  for (let leaf of newData) {
+    const childs = leaf[nodeKey];
+    if (childs) {
+      const flatChilds = flatArrTree(childs, nodeKey);
+      delete leaf[nodeKey];
+      arr = [...arr, leaf, ...flatChilds];
+    } else {
+      arr.push(leaf);
+    }
+  }
+  return arr;
+}

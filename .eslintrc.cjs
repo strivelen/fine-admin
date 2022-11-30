@@ -29,7 +29,8 @@ module.exports = {
     'no-promise-executor-return': 'off',
     '@typescript-eslint/no-require-imports': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-invalid-void-type': 'off'
+    '@typescript-eslint/no-invalid-void-type': 'off',
+    '@typescript-eslint/consistent-type-assertions': 'off'
   },
   settings: {
     react: {
