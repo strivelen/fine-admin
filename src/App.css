@@ -5,8 +5,14 @@
   min-height: 100vh;
 }
 .site-content {
+  margin: 0 10px;
   padding: 8px 16px;
   overflow: initial;
+  background-color: #fff;
+}
+
+.dark .site-content {
+  background-color: #111318;
 }
 
 .logo {
@@ -35,19 +41,13 @@
   font-weight: bold;
   background-image: linear-gradient(
     to right,
-    red,
-    orange,
     #0a98d2,
     #1ffdc4,
     #0a98d2,
     orange,
-    red,
-    orange,
     #0a98d2,
     #1ffdc4,
-    #0a98d2,
-    orange,
-    red
+    #0a98d2
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
