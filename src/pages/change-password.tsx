@@ -1,4 +1,4 @@
-import { Row, Col, Button, Form } from 'antd';
+import { Row, Col, Form } from 'antd';
 import { ProForm, ProFormText } from '@ant-design/pro-components';
 
 const formItemLayout = {
@@ -8,8 +8,8 @@ const formItemLayout = {
 
 export default function ChangePassword() {
   const onFinish = async (values: { OldPassword: string }) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(values);
-    await setTimeout(Promise.resolve, 1000);
   };
   return (
     <Row align="middle" style={{ height: '100%' }}>
