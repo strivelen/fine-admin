@@ -8,6 +8,7 @@ const Layout = lazy(() => import('@/components/Layout'));
 const Login = lazy(() => import('@/pages/login/Login'));
 const NotFound = lazy(() => import('@/pages/404'));
 const Home = lazy(() => import('@/pages/home'));
+const ChangePassword = lazy(() => import('@/pages/change-password'));
 const Components = lazy(() => import('@/pages/components'));
 const List = lazy(() => import('@/pages/list'));
 const CustomBreadcrumb = lazy(() => import('@/pages/custom-breadcrumb'));
@@ -35,6 +36,10 @@ export const routes: RouteObject[] = [
               {
                 path: 'home',
                 element: <Home />
+              },
+              {
+                path: 'change-password',
+                element: <ChangePassword />
               },
               {
                 path: 'list',

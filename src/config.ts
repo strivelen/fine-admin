@@ -89,7 +89,12 @@ export const MenuData: MenuItem[] = [
   {
     label: '系统设置',
     icon: 'SettingOutlined',
-    route: '/system'
+    children: [
+      {
+        label: '修改密码',
+        route: '/change-password'
+      }
+    ]
   },
   {
     label: '组件示例',
