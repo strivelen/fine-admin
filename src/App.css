@@ -1,9 +1,6 @@
 .dark {
   background-color: #000;
 }
-.dark .anticon {
-  color: rgba(255, 255, 255, 0.85);
-}
 .site-layout {
   min-height: 100vh;
 }
