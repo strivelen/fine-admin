@@ -13,10 +13,6 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #b6b7b9;
 }
-
-.dark {
-  background-color: #000;
-}
 .site-layout {
   min-height: 100vh;
 }
@@ -26,7 +22,13 @@
   overflow: initial;
   background-color: #fff;
 }
+.site-footer .ant-pro-global-footer {
+  margin-top: 30px;
+}
 
+.dark {
+  background-color: #000;
+}
 .dark .site-content {
   background-color: #111318;
 }

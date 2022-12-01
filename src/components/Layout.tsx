@@ -6,7 +6,8 @@ import LayoutHeader from './Header';
 import Loading from './Loading';
 import { useAppSelector } from '@/hooks/public';
 import Logo from './Logo';
-const { Sider, Content, Footer } = Layout;
+import Footer from './Footer';
+const { Sider, Content } = Layout;
 const { useToken } = theme;
 
 export default function AdminLayout() {
@@ -44,7 +45,7 @@ export default function AdminLayout() {
             <Outlet />
           </Suspense>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Footer</Footer>
+        <Footer />
       </Layout>
     </Layout>
   );
