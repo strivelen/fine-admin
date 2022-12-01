@@ -13,6 +13,7 @@ const Components = lazy(() => import('@/pages/components'));
 const List = lazy(() => import('@/pages/list'));
 const CustomBreadcrumb = lazy(() => import('@/pages/custom-breadcrumb'));
 const ProForm = lazy(() => import('@/pages/pro-form'));
+const MyInfo = lazy(() => import('@/pages/my-info'));
 
 export const routes: RouteObject[] = [
   {
@@ -36,6 +37,10 @@ export const routes: RouteObject[] = [
               {
                 path: 'home',
                 element: <Home />
+              },
+              {
+                path: 'my-info',
+                element: <MyInfo />
               },
               {
                 path: 'change-password',

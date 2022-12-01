@@ -47,6 +47,9 @@ export default function PersonalCenterEntry() {
         style: { width: 110 },
         onClick: (e) => {
           switch (e.key) {
+            case PersonalCenterMenuKeys.MyInfo:
+              navigate('/my-info');
+              break;
             case PersonalCenterMenuKeys.ModifyPassword:
               navigate('/change-password');
               break;

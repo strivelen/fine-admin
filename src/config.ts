@@ -91,6 +91,10 @@ export const MenuData: MenuItem[] = [
     icon: 'SettingOutlined',
     children: [
       {
+        label: '我的信息',
+        route: '/my-info'
+      },
+      {
         label: '修改密码',
         route: '/change-password'
       }
