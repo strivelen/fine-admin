@@ -4,6 +4,12 @@ import type { MenuProps } from 'antd';
 import { persistor } from '@/store';
 import { selectUserInfo } from '@/store/reducer/userSlice';
 import { useAppSelector } from '@/hooks/public';
+import {
+  FormOutlined,
+  PoweroffOutlined,
+  IdcardOutlined
+} from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const enum PersonalCenterMenuKeys {
   MyInfo = 'MYINFO',
@@ -12,11 +18,25 @@ const enum PersonalCenterMenuKeys {
 }
 
 export default function PersonalCenterEntry() {
+  const navigate = useNavigate();
   const items: MenuProps['items'] = [
-    { key: PersonalCenterMenuKeys.MyInfo, label: '我的信息' },
-    { key: PersonalCenterMenuKeys.ModifyPassword, label: '修改密码' },
+    {
+      key: PersonalCenterMenuKeys.MyInfo,
+      label: '我的信息',
+      icon: <IdcardOutlined />
+    },
+    {
+      key: PersonalCenterMenuKeys.ModifyPassword,
+      label: '修改密码',
+      icon: <FormOutlined />
+    },
     { type: 'divider' },
-    { key: PersonalCenterMenuKeys.Logout, danger: true, label: '退出登录' }
+    {
+      key: PersonalCenterMenuKeys.Logout,
+      danger: true,
+      label: '退出登录',
+      icon: <PoweroffOutlined />
+    }
   ];
   const userInfo = useAppSelector(selectUserInfo);
   return (
@@ -24,10 +44,15 @@ export default function PersonalCenterEntry() {
       trigger={['hover']}
       menu={{
         items,
-        style: { width: 100, textAlign: 'center' },
+        style: { width: 110 },
         onClick: (e) => {
-          if (e.key === PersonalCenterMenuKeys.Logout) {
-            persistor.purge(); // 清楚硬盘（如：localStorage）中的所有数据
+          switch (e.key) {
+            case PersonalCenterMenuKeys.ModifyPassword:
+              navigate('/change-password');
+              break;
+            case PersonalCenterMenuKeys.Logout:
+              persistor.purge(); // 清楚硬盘（如：localStorage）中的所有数据
+              break;
           }
         }
       }}
