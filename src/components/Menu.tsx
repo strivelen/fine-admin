@@ -56,10 +56,13 @@ export default function LayoutMenu() {
     }
   };
 
-  useBreadcrumbfromMenuData({
-    menu: menuData,
-    ...state
-  });
+  useBreadcrumbfromMenuData(
+    {
+      menu: menuData,
+      menuStatePathKeys: [...getOpenKeys(state.selectKey), state.selectKey]
+    },
+    [state.selectKey]
+  );
 
   return (
     <Menu
