@@ -30,7 +30,8 @@ module.exports = {
     '@typescript-eslint/no-require-imports': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-invalid-void-type': 'off',
-    '@typescript-eslint/consistent-type-assertions': 'off'
+    '@typescript-eslint/consistent-type-assertions': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off'
   },
   settings: {
     react: {
