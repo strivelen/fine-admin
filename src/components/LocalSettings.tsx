@@ -19,10 +19,7 @@ export default function LocalSettingsHeaderButton() {
 function LocalSettingsBtn({ onClick }: ButtonProps) {
   return (
     <Tooltip placement="bottomRight" title="本地设置" arrowPointAtCenter>
-      <HeaderButton
-        icon={<SettingOutlined style={{ fontSize: 16 }} />}
-        onClick={onClick}
-      />
+      <HeaderButton icon={<SettingOutlined />} onClick={onClick} />
     </Tooltip>
   );
 }
