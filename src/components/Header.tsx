@@ -18,6 +18,8 @@ export default function LayoutHeader() {
   return (
     <Header
       style={{
+        height: 48,
+        lineHeight: '48px',
         padding: '0 12px',
         backgroundColor: !isDarkMode ? '#fff' : undefined
       }}
