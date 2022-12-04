@@ -1,5 +1,7 @@
-import { Row, Col, Form } from 'antd';
+import { Row, Col, Form, theme } from 'antd';
 import { ProForm, ProFormText } from '@ant-design/pro-components';
+
+const { useToken } = theme;
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -7,12 +9,20 @@ const formItemLayout = {
 };
 
 export default function ChangePassword() {
+  const { token } = useToken();
   const onFinish = async (values: { OldPassword: string }) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(values);
   };
   return (
-    <Row align="middle" style={{ height: '100%' }}>
+    <Row
+      align="middle"
+      style={{
+        minHeight: '100%',
+        borderRadius: token.borderRadius,
+        backgroundColor: token.colorBgContainer
+      }}
+    >
       <Col xs={24} md={18} lg={16} xl={12} xxl={10}>
         <ProForm
           {...formItemLayout}
