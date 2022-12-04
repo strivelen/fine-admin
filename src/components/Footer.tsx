@@ -3,29 +3,27 @@ import { GithubOutlined } from '@ant-design/icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 
 const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <DefaultFooter
       className="site-footer"
-      copyright={`${currentYear} 此项目出品人：strivelen`}
+      copyright={false}
       links={[
         {
-          key: 'Fine Admin',
-          title: 'Fine Admin',
-          href: 'https://strivelen.github.io/fine-admin/',
+          key: 'source-code',
+          title: 'Source Code',
+          href: 'https://github.com/strivelen/fine-admin',
           blankTarget: true
         },
         {
           key: 'github',
           title: <GithubOutlined />,
-          href: 'https://github.com/strivelen/fine-admin',
+          href: 'https://github.com/strivelen',
           blankTarget: true
         },
         {
-          key: 'Ant Design',
-          title: 'Ant Design',
-          href: 'https://ant.design',
+          key: 'Preview',
+          title: 'Preview',
+          href: 'https://strivelen.github.io/fine-admin/',
           blankTarget: true
         }
       ]}
