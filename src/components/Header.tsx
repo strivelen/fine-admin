@@ -8,6 +8,7 @@ import { selectIsDarkMode } from '@/store/reducer/layoutSlice';
 import { setCollapsed } from '@/store/reducer/layoutSlice';
 import LocalSettingsHeaderButton from './LocalSettings';
 import { FullScreenHeaderButton } from './FullScreen';
+import NoticeHeaderButton from './NoticeIcon';
 import HeaderButton from './HeaderButton';
 const { Header } = Layout;
 
@@ -39,6 +40,7 @@ export default function LayoutHeader() {
         <Col>
           <Space>
             <FullScreenHeaderButton />
+            <NoticeHeaderButton />
             <PersonalCenter />
             <LocalSettingsHeaderButton />
           </Space>

@@ -6,6 +6,7 @@ declare namespace API {
     extra?: string;
     key?: string;
     read?: boolean;
+    clickClose?: boolean;
     avatar?: string;
     title?: string;
     status?: string;
