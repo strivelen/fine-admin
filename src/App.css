@@ -17,20 +17,24 @@
   min-height: 100vh;
 }
 .site-content {
-  margin: 0 10px;
-  padding: 8px 16px;
+  margin: 16px 16px 0;
   overflow: initial;
-  background-color: #fff;
 }
 .site-footer .ant-pro-global-footer {
   margin-top: 30px;
 }
+.dark .ant-pro-global-footer-list-link {
+  color: #ccc;
+}
+.dark .ant-pro-global-footer-list-link:hover {
+  color: #fff;
+}
+.dark .ant-pro-global-footer-copyright {
+  color: #ccc;
+}
 
 .dark {
   background-color: #000;
-}
-.dark .site-content {
-  background-color: #111318;
 }
 
 .logo {
