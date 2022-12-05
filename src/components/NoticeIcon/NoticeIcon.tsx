@@ -118,7 +118,11 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
     // </span>
     <HeaderButton
       icon={
-        <Badge count={6} style={{ boxShadow: 'none', fontSize: 14 }}>
+        <Badge
+          size="small"
+          count={15}
+          style={{ boxShadow: 'none', fontSize: 12, lineHeight: 1 }}
+        >
           {NoticeBellIcon}
         </Badge>
       }
