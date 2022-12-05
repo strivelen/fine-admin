@@ -1,6 +1,6 @@
 .trendItem {
   display: inline-block;
-  /* font-size: @font-size-base; */
+  font-size: 14px;
   line-height: 22px;
 }
 .up,
@@ -15,21 +15,17 @@
   transform: scale(0.83);
 }
 .up {
-  /* color: @red-6; */
+  color: #e24348;
+  vertical-align: 6%;
 }
 .down {
-  top: -1px;
-  /* color: @green-6; */
-}
-
-.trendItem.trendItemGrey .up,
-.trendItem.trendItemGrey .down {
-  /* color: @text-color; */
+  color: #88db57;
+  vertical-align: 6%;
 }
 
 .trendItem.reverseColor .up {
-  /* color: @green-6; */
+  color: #88db57;
 }
 .trendItem.reverseColor .down {
-  /* color: @red-6; */
+  color: #e24348;
 }

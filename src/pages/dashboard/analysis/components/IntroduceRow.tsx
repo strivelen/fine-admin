@@ -34,18 +34,18 @@ const IntroduceRow = ({
           </Tooltip>
         }
         loading={loading}
-        total={() => 123}
+        total={() => `￥ ${numeral(126560).format('0,0')}`}
         footer={
           <Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />
         }
         contentHeight={46}
       >
         <Trend flag="up" style={{ marginRight: 16 }}>
-          周同比
+          周同比&nbsp;&nbsp;
           <span>12%</span>
         </Trend>
         <Trend flag="down">
-          日同比
+          日同比&nbsp;&nbsp;
           <span>11%</span>
         </Trend>
       </ChartCard>
@@ -122,11 +122,11 @@ const IntroduceRow = ({
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
             <Trend flag="up" style={{ marginRight: 16 }}>
-              周同比
+              周同比&nbsp;&nbsp;
               <span>12%</span>
             </Trend>
             <Trend flag="down">
-              日同比
+              日同比&nbsp;&nbsp;
               <span>11%</span>
             </Trend>
           </div>

@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import styles from './index.module.css';
 
 export type TrendProps = {
-  colorful?: boolean;
   flag: 'up' | 'down';
   style?: React.CSSProperties;
   reverseColor?: boolean;
@@ -13,7 +12,6 @@ export type TrendProps = {
 };
 
 const Trend: React.FC<TrendProps> = ({
-  colorful = true,
   reverseColor = false,
   flag,
   children,
@@ -23,8 +21,7 @@ const Trend: React.FC<TrendProps> = ({
   const classString = classNames(
     styles.trendItem,
     {
-      [styles.trendItemGrey]: !colorful,
-      [styles.reverseColor]: reverseColor && colorful
+      [styles.reverseColor]: reverseColor
     },
     className
   );

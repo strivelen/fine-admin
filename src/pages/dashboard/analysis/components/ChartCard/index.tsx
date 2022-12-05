@@ -1,10 +1,12 @@
 import React from 'react';
-import { Card } from 'antd';
+import { Card, theme } from 'antd';
 import type { CardProps } from 'antd/es/card';
 import classNames from 'classnames';
 import styles from './index.module.css';
 
 type totalType = () => React.ReactNode;
+
+const { useToken } = theme;
 
 const renderTotal = (total?: number | totalType | React.ReactNode) => {
   if (!total && total !== 0) {
@@ -45,6 +47,7 @@ export default function ChartCard({
   children,
   ...rest
 }: ChartCardProps) {
+  const { token } = useToken();
   const renderContent = () => {
     if (loading) {
       return false;
@@ -58,7 +61,13 @@ export default function ChartCard({
         >
           <div className={styles.avatar}>{avatar}</div>
           <div className={styles.metaWrap}>
-            <div className={styles.meta}>
+            <div
+              className={styles.meta}
+              style={{
+                color: token.colorTextSecondary,
+                fontSize: token.fontSize
+              }}
+            >
               <span className={styles.title}>{title}</span>
               <span className={styles.action}>{action}</span>
             </div>
