@@ -1,0 +1,179 @@
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { TinyArea, TinyColumn, Progress, Bullet } from '@ant-design/charts';
+import { Col, Row, Tooltip } from 'antd';
+
+import numeral from 'numeral';
+import ChartCard from './ChartCard';
+import Trend from './Trend';
+import Field from './Field';
+
+const topColResponsiveProps = {
+  xs: 24,
+  sm: 12,
+  md: 12,
+  lg: 12,
+  xl: 6,
+  style: { marginBottom: 24 }
+};
+
+const IntroduceRow = ({
+  loading,
+  visitData
+}: {
+  loading: boolean;
+  visitData: any[];
+}) => (
+  <Row gutter={24}>
+    <Col {...topColResponsiveProps}>
+      <ChartCard
+        bordered={false}
+        title="总销售额"
+        action={
+          <Tooltip title="指标说明">
+            <InfoCircleOutlined />
+          </Tooltip>
+        }
+        loading={loading}
+        total={() => 123}
+        footer={
+          <Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />
+        }
+        contentHeight={46}
+      >
+        <Trend flag="up" style={{ marginRight: 16 }}>
+          周同比
+          <span>12%</span>
+        </Trend>
+        <Trend flag="down">
+          日同比
+          <span>11%</span>
+        </Trend>
+      </ChartCard>
+    </Col>
+    <Col {...topColResponsiveProps}>
+      <ChartCard
+        bordered={false}
+        loading={loading}
+        title="访问量"
+        action={
+          <Tooltip title="指标说明">
+            <InfoCircleOutlined />
+          </Tooltip>
+        }
+        total={numeral(8846).format('0,0')}
+        footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+        contentHeight={46}
+      >
+        <TinyArea
+          color="#975FE4"
+          height={46}
+          autoFit={true}
+          smooth
+          data={visitData.map((i) => i.y)}
+          tooltip={{
+            customContent: (x, data) => {
+              return `日期：${visitData[Number(x)].x} 数量：${
+                data[0]?.data?.y
+              }`;
+            }
+          }}
+        />
+      </ChartCard>
+    </Col>
+    <Col {...topColResponsiveProps}>
+      <ChartCard
+        bordered={false}
+        loading={loading}
+        title="支付笔数"
+        action={
+          <Tooltip title="指标说明">
+            <InfoCircleOutlined />
+          </Tooltip>
+        }
+        total={numeral(6560).format('0,0')}
+        footer={<Field label="转化率" value="60%" />}
+        contentHeight={46}
+      >
+        <TinyColumn
+          height={46}
+          autoFit={true}
+          data={visitData.map((i) => i.y)}
+          tooltip={{
+            customContent: (x, data) => {
+              return `日期：${visitData[Number(x)].x} 数量：${
+                data[0]?.data?.y
+              }`;
+            }
+          }}
+        />
+      </ChartCard>
+    </Col>
+    <Col {...topColResponsiveProps}>
+      <ChartCard
+        loading={loading}
+        bordered={false}
+        title="运营活动效果"
+        action={
+          <Tooltip title="指标说明">
+            <InfoCircleOutlined />
+          </Tooltip>
+        }
+        total="68%"
+        footer={
+          <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+            <Trend flag="up" style={{ marginRight: 16 }}>
+              周同比
+              <span>12%</span>
+            </Trend>
+            <Trend flag="down">
+              日同比
+              <span>11%</span>
+            </Trend>
+          </div>
+        }
+        contentHeight={46}
+      >
+        {/* <Progress
+          height={46}
+          percent={0.78}
+          color="#13C2C2"
+          autoFit={false}
+          tooltip={{
+            marker: [
+              {
+                value: 0.8,
+                style: {
+                  stroke: '#13C2C2'
+                }
+              }
+            ]
+          }}
+        /> */}
+        <Bullet
+          data={[
+            {
+              title: '满意度',
+              ranges: [100],
+              measures: [68],
+              target: 85
+            }
+          ]}
+          height={20}
+          autoFit={true}
+          measureField="measures"
+          rangeField="ranges"
+          targetField="target"
+          xField="title"
+          xAxis={false}
+          yAxis={false}
+          tooltip={{
+            showMarkers: false,
+            shared: true
+          }}
+        />
+      </ChartCard>
+    </Col>
+  </Row>
+);
+
+export default IntroduceRow;

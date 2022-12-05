@@ -5,7 +5,8 @@ import {
   UserOutlined,
   BlockOutlined,
   LinkOutlined,
-  LockOutlined
+  LockOutlined,
+  DashboardOutlined
 } from '@ant-design/icons';
 
 export type DynamicIconKeys = keyof typeof icons;
@@ -17,7 +18,8 @@ const icons = {
   UserOutlined: <UserOutlined />,
   BlockOutlined: <BlockOutlined />,
   LinkOutlined: <LinkOutlined />,
-  LockOutlined: <LockOutlined />
+  LockOutlined: <LockOutlined />,
+  DashboardOutlined: <DashboardOutlined />
 };
 
 export default function DynamicIcons({ icon }: { icon?: DynamicIconKeys }) {

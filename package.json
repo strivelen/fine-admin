@@ -10,6 +10,7 @@
     "deploy": "tsc && vite build --base=/fine-admin/ && deploy.sh"
   },
   "dependencies": {
+    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.8.0",
     "@ant-design/pro-components": "^2.3.35",
     "@reduxjs/toolkit": "^1.9.0",
@@ -19,6 +20,7 @@
     "classnames": "^2.3.2",
     "dayjs": "^1.11.6",
     "lodash-es": "^4.17.21",
+    "numeral": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.9",
+    "@types/numeral": "^2.0.2",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.44.0",

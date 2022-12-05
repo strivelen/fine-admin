@@ -56,6 +56,20 @@ export const MenuData: MenuItem[] = [
     route: '/'
   },
   {
+    label: 'Dashboard',
+    icon: 'DashboardOutlined',
+    children: [
+      {
+        label: '分析页',
+        route: '/dashboard/analysis'
+      },
+      {
+        label: '工作台',
+        route: '/dashboard/workplace'
+      }
+    ]
+  },
+  {
     label: '订单管理',
     icon: 'UnorderedListOutlined',
     children: [
