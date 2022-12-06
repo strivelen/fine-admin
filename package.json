@@ -10,8 +10,8 @@
     "deploy": "tsc && vite build --base=/fine-admin/ && deploy.sh"
   },
   "dependencies": {
-    "@ant-design/charts": "^1.4.2",
     "@ant-design/icons": "^4.8.0",
+    "@ant-design/plots": "^1.2.2",
     "@ant-design/pro-components": "^2.3.35",
     "@reduxjs/toolkit": "^1.9.0",
     "ahooks": "^3.7.2",

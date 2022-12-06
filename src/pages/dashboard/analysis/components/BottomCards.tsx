@@ -1,10 +1,10 @@
 import { Card, Row, Col } from 'antd';
-import { Pie, RadialBar, WordCloud } from '@ant-design/charts';
+import { Pie, RadialBar, WordCloud } from '@ant-design/plots';
 import type {
   PieConfig,
   RadialBarConfig,
   WordCloudConfig
-} from '@ant-design/charts';
+} from '@ant-design/plots';
 
 export default function BottomCards() {
   const configPie: PieConfig = {

@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { TinyArea, TinyColumn, Progress, Bullet } from '@ant-design/charts';
+import { TinyArea, TinyColumn, Bullet } from '@ant-design/plots';
 import { Col, Row, Tooltip } from 'antd';
 
 import numeral from 'numeral';

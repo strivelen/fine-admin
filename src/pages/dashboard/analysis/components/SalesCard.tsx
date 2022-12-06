@@ -1,5 +1,5 @@
 import { Card, Tabs, Space, DatePicker } from 'antd';
-import { Column } from '@ant-design/charts';
+import { Column } from '@ant-design/plots';
 import '../style.css';
 const { RangePicker } = DatePicker;
 
