@@ -1,13 +1,17 @@
 import IntroduceRow from './components/IntroduceRow';
 import { fetchAnalysisChart } from '@/api/dashboard';
+import { useRequest } from 'ahooks';
+import SalesCard from './components/SalesCard';
+import BottomCards from './components/BottomCards';
 
 export default function Analysis() {
-  const [chartData, setChartData] = useState<API.AnalysisChartResData>({});
-  useEffect(() => {
-    (async () => {
-      const chartData = await fetchAnalysisChart();
-      setChartData(chartData);
-    })();
-  }, []);
-  return <IntroduceRow loading={false} visitData={chartData.visitData || []} />;
+  const { loading, data = {} } = useRequest(fetchAnalysisChart);
+
+  return (
+    <>
+      <IntroduceRow loading={loading} visitData={data.visitData || []} />
+      <SalesCard loading={loading} data={data?.salesData || []} />
+      <BottomCards />
+    </>
+  );
 }

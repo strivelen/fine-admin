@@ -2,6 +2,7 @@ declare namespace API {
   type AnalysisChartResData = {
     visitData?: any[];
     visitData2?: any[];
+    salesData?: any[];
   };
 
   type NoticeIconItemType = 'notification' | 'message' | 'event';
