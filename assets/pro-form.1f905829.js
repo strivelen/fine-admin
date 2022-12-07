@@ -1,0 +1,1 @@
+import{n as o}from"./vendor.5fa8bce0.js";import{P as m}from"./index.80756967.js";import{P as t}from"./index.909ed438.js";import"./index.90a41d8c.js";import"./throttle.d3646907.js";import"./relativeTime.143fe78c.js";const l=()=>o(m,{onFinish:async r=>{console.log(r)},children:o(t,{name:"name",label:"\u59D3\u540D"})});export{l as default};

@@ -1,0 +1,1 @@
+import{bK as n,bh as l}from"./vendor.5fa8bce0.js";var g=n,c=l,d="Expected a function";function u(i,a,e){var r=!0,t=!0;if(typeof i!="function")throw new TypeError(d);return c(e)&&(r="leading"in e?!!e.leading:r,t="trailing"in e?!!e.trailing:t),g(i,a,{leading:r,maxWait:a,trailing:t})}var f=u;export{f as t};
