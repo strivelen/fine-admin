@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAppSelector } from '@/hooks/public';
+import { useAppSelector } from '@/hooks/useAppHooks';
 import { fetchIsTokenValid } from '@/api/User';
 import { selectToken } from '@/store/reducer/userSlice';
 

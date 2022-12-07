@@ -3,7 +3,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Layout, Row, Col, Space } from 'antd';
 import LayoutBreadcrumb from './Breadcrumb';
 import PersonalCenter from './PersonalCenter';
-import { useAppSelector, useAppDispatch } from '@/hooks/public';
+import { useAppSelector, useAppDispatch } from '@/hooks/useAppHooks';
 import { selectIsDarkMode } from '@/store/reducer/layoutSlice';
 import { setCollapsed } from '@/store/reducer/layoutSlice';
 import LocalSettingsHeaderButton from './LocalSettings';

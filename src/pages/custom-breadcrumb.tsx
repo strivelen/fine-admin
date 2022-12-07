@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/hooks/public';
+import { useAppDispatch } from '@/hooks/useAppHooks';
 import { setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { Button, Alert } from 'antd';
 

@@ -1,6 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin, Row, Col } from 'antd';
-import { useAppSelector } from '@/hooks/public';
 import { selectIsDarkMode } from '@/store/reducer/layoutSlice';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;

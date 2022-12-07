@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { ConfigProvider, Space } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
-import { useAppSelector, useAppDispatch } from '@/hooks/public';
+import { useAppSelector, useAppDispatch } from '@/hooks/useAppHooks';
 import { selectThemeColor, setThemeColor } from '@/store/reducer/layoutSlice';
 import { ThemeColors } from '@/config';
 

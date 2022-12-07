@@ -3,7 +3,7 @@ import { Dropdown, Row, Col, Avatar } from 'antd';
 import type { MenuProps } from 'antd';
 import { persistor } from '@/store';
 import { selectUserInfo } from '@/store/reducer/userSlice';
-import { useAppSelector } from '@/hooks/public';
+import { useAppSelector } from '@/hooks/useAppHooks';
 import {
   FormOutlined,
   PoweroffOutlined,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '@/hooks/public';
 import { selectBreadcrumb, setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { MenuItem } from '@/config';
 

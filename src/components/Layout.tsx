@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import LayoutMenu from './Menu';
 import LayoutHeader from './Header';
 import Loading from './Loading';
-import { useAppSelector } from '@/hooks/public';
+import { useAppSelector } from '@/hooks/useAppHooks';
 import Logo from './Logo';
 import Footer from './Footer';
 const { Sider, Content } = Layout;
