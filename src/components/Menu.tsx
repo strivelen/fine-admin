@@ -16,7 +16,7 @@ import { useSetState } from 'ahooks';
 import type { SetState } from 'ahooks/es/useSetState';
 import * as config from '@/config';
 import type { MenuItem } from '@/config';
-import { fetchUserMenu } from '@/api/User';
+import { fetchUserMenu } from '@/services/api';
 
 interface State {
   openKeys: string[];

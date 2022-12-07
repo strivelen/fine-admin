@@ -1,5 +1,5 @@
 import IntroduceRow from './components/IntroduceRow';
-import { fetchAnalysisChart } from '@/api/dashboard';
+import { fetchAnalysisChart } from '@/services/api';
 import { useRequest } from 'ahooks';
 import SalesCard from './components/SalesCard';
 import Ranking from './components/Ranking';

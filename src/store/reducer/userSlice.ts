@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
-import { fetchLogin, LoginParams, UserInfo } from '@/api/User';
+import { fetchLogin } from '@/services/api';
 import { PURGE } from 'redux-persist';
 
 export interface UserState {
-  userInfo: UserInfo;
+  userInfo: API.UserInfo;
   token: string | undefined;
   isLogin: boolean;
 }
@@ -17,7 +17,7 @@ const initialState: UserState = {
 
 export const login = createAsyncThunk(
   'user/fetchLogin',
-  async (params: Expand<LoginParams>) => {
+  async (params: Expand<API.LoginParams>) => {
     const response = await fetchLogin(params);
     return response;
   }

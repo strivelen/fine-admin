@@ -1,5 +1,5 @@
 declare namespace API {
-  type AnalysisChartResData = {
+  type AnalysisChartData = {
     visitData?: any[];
     visitData2?: any[];
     salesData?: any[];
@@ -20,4 +20,21 @@ declare namespace API {
     description?: string;
     type?: NoticeIconItemType;
   };
+
+  interface UserInfo {
+    Name?: string;
+    Email?: string;
+    Phone?: string;
+    Address?: string;
+  }
+
+  interface LoginData {
+    SessionKey: string;
+    UserInfo: UserInfo;
+  }
+
+  interface LoginParams {
+    username: string;
+    password: string;
+  }
 }

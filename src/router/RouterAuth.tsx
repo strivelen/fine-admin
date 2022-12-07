@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppSelector } from '@/hooks/useAppHooks';
-import { fetchIsTokenValid } from '@/api/User';
+import { fetchIsTokenValid } from '@/services/api';
 import { selectToken } from '@/store/reducer/userSlice';
 
 /**
