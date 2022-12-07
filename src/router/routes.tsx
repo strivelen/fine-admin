@@ -7,15 +7,14 @@ import { ErrorPage } from '@/components/ErrorBoundary';
 const Layout = lazy(() => import('@/components/Layout'));
 const Login = lazy(() => import('@/pages/login/Login'));
 const NotFound = lazy(() => import('@/pages/404'));
-const Home = lazy(() => import('@/pages/home'));
+const Test = lazy(() => import('@/pages/test'));
 const ChangePassword = lazy(() => import('@/pages/change-password'));
 const Components = lazy(() => import('@/pages/components'));
 const List = lazy(() => import('@/pages/list'));
 const CustomBreadcrumb = lazy(() => import('@/pages/custom-breadcrumb'));
 const ProForm = lazy(() => import('@/pages/pro-form'));
 const MyInfo = lazy(() => import('@/pages/my-info'));
-const Analysis = lazy(() => import('@/pages/dashboard/analysis'));
-const Workplace = lazy(() => import('@/pages/dashboard/workplace'));
+const Dashboard = lazy(() => import('@/pages/dashboard'));
 
 export const routes: RouteObject[] = [
   {
@@ -34,28 +33,7 @@ export const routes: RouteObject[] = [
             children: [
               {
                 index: true,
-                element: <Home />
-              },
-              {
-                path: 'home',
-                element: <Home />
-              },
-              {
-                path: 'dashboard',
-                children: [
-                  {
-                    index: true,
-                    element: <Analysis />
-                  },
-                  {
-                    path: 'analysis',
-                    element: <Analysis />
-                  },
-                  {
-                    path: 'workplace',
-                    element: <Workplace />
-                  }
-                ]
+                element: <Dashboard />
               },
               {
                 path: 'my-info',
@@ -83,6 +61,10 @@ export const routes: RouteObject[] = [
                   { path: 'customBreadcrumb', element: <CustomBreadcrumb /> },
                   { path: 'pro-form', element: <ProForm /> }
                 ]
+              },
+              {
+                path: 'test',
+                element: <Test />
               },
               {
                 path: '*',

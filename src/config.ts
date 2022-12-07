@@ -51,23 +51,9 @@ export const PageSize = 20; // 每页多少条数据
 export const IsUseServerMenu = false; // 是否使用服务端菜单数据
 export const MenuData: MenuItem[] = [
   {
-    label: '首页',
-    icon: 'HomeOutlined',
-    route: '/'
-  },
-  {
     label: 'Dashboard',
     icon: 'DashboardOutlined',
-    children: [
-      {
-        label: '分析页',
-        route: '/dashboard/analysis'
-      },
-      {
-        label: '工作台',
-        route: '/dashboard/workplace'
-      }
-    ]
+    route: '/'
   },
   {
     label: '订单管理',
@@ -127,6 +113,11 @@ export const MenuData: MenuItem[] = [
         route: '/components/pro-form'
       }
     ]
+  },
+  {
+    label: '测试页',
+    icon: 'HomeOutlined',
+    route: '/test'
   }
 ]; // 本地菜单数据
 export interface MenuItem {
