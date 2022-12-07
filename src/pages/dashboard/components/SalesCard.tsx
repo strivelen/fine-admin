@@ -17,11 +17,12 @@ function SalesCard({ loading, data }: SalesCardProps) {
       bordered={false}
       bodyStyle={{ padding: 0 }}
       className="analysis_salesCard"
+      style={{ height: '100%' }}
     >
       <Tabs
         size="large"
         tabBarStyle={tabBarStyle}
-        tabBarExtraContent={<TabBarExtraContent />}
+        // tabBarExtraContent={<TabBarExtraContent />}
       >
         <Tabs.TabPane tab="销售额" key="sales">
           <Column
@@ -32,7 +33,7 @@ function SalesCard({ loading, data }: SalesCardProps) {
             yField="y"
             xAxis={{
               title: {
-                text: '当年月份'
+                text: '2022年'
               }
             }}
             yAxis={{
@@ -55,17 +56,19 @@ function SalesCard({ loading, data }: SalesCardProps) {
             xField="x"
             yField="y"
             xAxis={{
-              label: {
-                autoHide: true
+              title: {
+                text: '2022年'
+              }
+            }}
+            yAxis={{
+              title: {
+                text: '访问量'
               }
             }}
             meta={{
               y: {
-                alias: '销售量'
+                alias: '访问量'
               }
-            }}
-            tooltip={{
-              title: '销售趋势'
             }}
           />
         </Tabs.TabPane>

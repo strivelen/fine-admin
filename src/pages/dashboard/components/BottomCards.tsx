@@ -1,12 +1,50 @@
+import React from 'react';
 import { Card, Row, Col } from 'antd';
-import { Pie, RadialBar, WordCloud } from '@ant-design/plots';
+import { Pie, measureTextWidth, RadialBar, WordCloud } from '@ant-design/plots';
 import type {
   PieConfig,
   RadialBarConfig,
   WordCloudConfig
 } from '@ant-design/plots';
 
-export default function BottomCards() {
+interface BottomCardsProps {
+  loading: boolean;
+}
+
+export default function BottomCards({ loading }: BottomCardsProps) {
+  const cardHeadStyle: React.CSSProperties = {
+    fontWeight: 400
+  };
+  function renderStatistic(
+    containerWidth: number,
+    text: string,
+    style: React.CSSProperties
+  ) {
+    const { width: textWidth, height: textHeight } = measureTextWidth(
+      text,
+      style
+    );
+    const R = containerWidth / 2; // r^2 = (w / 2)^2 + (h - offsetY)^2
+
+    let scale = 1;
+
+    if (containerWidth < textWidth) {
+      scale = Math.min(
+        Math.sqrt(
+          Math.abs(
+            Math.pow(R, 2) /
+              (Math.pow(textWidth / 2, 2) + Math.pow(textHeight, 2))
+          )
+        ),
+        1
+      );
+    }
+
+    const textStyleStr = `width:${containerWidth}px;`;
+    return `<div style="${textStyleStr};font-size:${scale}em;line-height:${
+      scale < 1 ? 1 : 'inherit'
+    };">${text}</div>`;
+  }
   const configPie: PieConfig = {
     appendPadding: 10,
     data: [
@@ -37,19 +75,60 @@ export default function BottomCards() {
     ],
     angleField: 'value',
     colorField: 'type',
-    radius: 0.9,
-    label: {
-      type: 'inner',
-      offset: '-30%',
-      content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
-      style: {
-        fontSize: 14,
-        textAlign: 'center'
+    radius: 1,
+    innerRadius: 0.64,
+    meta: {
+      value: {
+        formatter: (v) => `${v} ¥`
       }
     },
+    label: {
+      type: 'inner',
+      offset: '-50%',
+      style: {
+        textAlign: 'center'
+      },
+      autoRotate: false,
+      content: '{value}'
+    },
+    statistic: {
+      title: {
+        offsetY: -4,
+        customHtml: (container, view, datum) => {
+          const { width, height } = container.getBoundingClientRect();
+          const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+          const text = datum ? datum.type : '总计';
+          return renderStatistic(d, text, {
+            fontSize: 28
+          });
+        }
+      },
+      content: {
+        offsetY: 4,
+        style: {
+          fontSize: '32px'
+        },
+        customHtml: (container, view, datum, data = []) => {
+          const { width } = container.getBoundingClientRect();
+          const text = datum
+            ? `¥ ${datum.value}`
+            : `¥ ${data.reduce((r, d) => r + d.value, 0)}`;
+          return renderStatistic(width, text, {
+            fontSize: 32
+          });
+        }
+      }
+    },
+    // 添加 中心统计文本 交互
     interactions: [
       {
+        type: 'element-selected'
+      },
+      {
         type: 'element-active'
+      },
+      {
+        type: 'pie-statistic-active'
       }
     ]
   };
@@ -116,17 +195,32 @@ export default function BottomCards() {
   return (
     <Row gutter={16} style={{ marginTop: 16 }}>
       <Col span={8}>
-        <Card title="转化率">
+        <Card
+          headStyle={cardHeadStyle}
+          title="转化率"
+          bordered={false}
+          loading={loading}
+        >
           <Pie {...configPie} />
         </Card>
       </Col>
       <Col span={8}>
-        <Card title="玉珏图">
+        <Card
+          loading={loading}
+          headStyle={cardHeadStyle}
+          title="玉珏图"
+          bordered={false}
+        >
           <RadialBar {...configRadialBar} />
         </Card>
       </Col>
       <Col span={8}>
-        <Card title="词云图">
+        <Card
+          loading={loading}
+          headStyle={cardHeadStyle}
+          title="词云图"
+          bordered={false}
+        >
           <DemoWordCloud />
         </Card>
       </Col>
@@ -156,14 +250,12 @@ const DemoWordCloud = () => {
     wordField: 'name',
     weightField: 'value',
     colorField: 'name',
+    imageMask:
+      'https://gw.alipayobjects.com/mdn/rms_2274c3/afts/img/A*07tdTIOmvlYAAAAAAAAAAABkARQnAQ',
     wordStyle: {
       fontFamily: 'Verdana',
-      fontSize: [8, 32],
-      rotation: 0
-    },
-    // 返回值设置成一个 [0, 1) 区间内的值，
-    // 可以让每次渲染的位置相同（前提是每次的宽高一致）。
-    random: () => 0.5
+      fontSize: [8, 32]
+    }
   };
 
   return <WordCloud {...config} />;
