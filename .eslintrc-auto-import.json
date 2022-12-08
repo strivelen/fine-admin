@@ -5,6 +5,7 @@
     "forwardRef": true,
     "incrementAsync": true,
     "incrementIfOdd": true,
+    "initUserInfo": true,
     "layoutSlice": true,
     "lazy": true,
     "loadingSlice": true,
@@ -36,6 +37,7 @@
     "useState": true,
     "useSyncExternalStore": true,
     "useTransition": true,
+    "useUserInfo": true,
     "userSlice": true
   }
 }

@@ -5,6 +5,7 @@ import Loading from '@/components/Loading';
 import { Provider } from 'react-redux';
 import { store, persistor } from '@/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { initUserInfo } from '@/hooks/useUserInfo';
 
 import { DarkModeConfigProvider } from '@/components/DarkModeSwitch';
 import { ThemeColorConfigProvider } from '@/components/ThemeColors';
@@ -16,6 +17,8 @@ import 'antd/dist/reset.css';
 import './App.css';
 
 dayjs.locale('zh-cn');
+
+initUserInfo();
 
 function App() {
   return (

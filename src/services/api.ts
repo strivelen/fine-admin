@@ -24,3 +24,8 @@ export const fetchIsTokenValid = () => axios.get<boolean>('/User/Auth');
  */
 export const fetchUserMenu = () =>
   axios.get<ExpandRecursively<MenuItem[]>>('/User/PageList');
+
+/**
+ * 获取用户信息
+ */
+export const fetchUserInfo = () => axios.get<API.UserInfo>('/User/Get');

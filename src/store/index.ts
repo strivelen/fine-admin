@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
   counter: counterReducer,
   user: persistReducer(
     {
-      key: 'userInfo',
+      key: 'user',
       storage,
       blacklist: ['status']
     },

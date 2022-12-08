@@ -29,6 +29,9 @@ export const userSlice = createSlice({
   reducers: {
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
+    },
+    setUserInfo: (state, action: PayloadAction<API.UserInfo>) => {
+      state.userInfo = action.payload;
     }
   },
 
@@ -58,7 +61,7 @@ export const userSlice = createSlice({
   }
 });
 
-export const { setToken } = userSlice.actions;
+export const { setToken, setUserInfo } = userSlice.actions;
 
 export const selectToken = (state: RootState) => state.user.token;
 export const selectUserInfo = (state: RootState) => state.user.userInfo;

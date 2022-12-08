@@ -6,6 +6,7 @@ declare global {
   const forwardRef: typeof import('react')['forwardRef']
   const incrementAsync: typeof import('./store/reducer/counterSlice')['incrementAsync']
   const incrementIfOdd: typeof import('./store/reducer/counterSlice')['incrementIfOdd']
+  const initUserInfo: typeof import('./hooks/useUserInfo')['initUserInfo']
   const layoutSlice: typeof import('./store/reducer/layoutSlice')['default']
   const lazy: typeof import('react')['lazy']
   const loadingSlice: typeof import('./store/reducer/loadingSlice')['default']
@@ -37,5 +38,6 @@ declare global {
   const useState: typeof import('react')['useState']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
   const useTransition: typeof import('react')['useTransition']
+  const useUserInfo: typeof import('./hooks/useUserInfo')['useUserInfo']
   const userSlice: typeof import('./store/reducer/userSlice')['default']
 }
