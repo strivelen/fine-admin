@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppSelector } from '@/hooks/useAppHooks';
 import { fetchIsTokenValid } from '@/services/api';
 import { selectToken } from '@/store/reducer/userSlice';
+import { useRequest } from 'ahooks';
 
 /**
  * 路由守卫
@@ -11,16 +12,16 @@ import { selectToken } from '@/store/reducer/userSlice';
 export default function RouterAuth() {
   const location = useLocation();
   const token = useAppSelector(selectToken);
-  const [isTokenValid, setIsTokenValid] = useState(true);
+
+  const { data: tokenIsValid = true, run } = useRequest(fetchIsTokenValid, {
+    manual: true
+  });
 
   useEffect(() => {
-    (async () => {
-      const isTokenValid = await fetchIsTokenValid();
-      setIsTokenValid(isTokenValid);
-    })();
+    run();
   }, [location]);
 
-  if (!token || !isTokenValid) {
+  if (!token || !tokenIsValid) {
     return <Navigate to="/login" state={location} replace />;
   }
   return <Outlet />;
