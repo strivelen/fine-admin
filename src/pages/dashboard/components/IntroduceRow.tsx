@@ -1,8 +1,8 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { TinyArea, TinyColumn, Bullet } from '@ant-design/plots';
 import { Col, Row, Tooltip } from 'antd';
+import CountUp from 'react-countup';
 
-import numeral from 'numeral';
 import ChartCard from './ChartCard';
 import Trend from './Trend';
 import Field from './Field';
@@ -34,9 +34,12 @@ const IntroduceRow = ({
           </Tooltip>
         }
         loading={loading}
-        total={() => `￥ ${numeral(126560).format('0,0')}`}
+        total={<CountUp prefix="￥" separator="," end={126560} />}
         footer={
-          <Field label="日销售额" value={`￥${numeral(12423).format('0,0')}`} />
+          <Field
+            label="日销售额"
+            value={<CountUp prefix="￥" separator="," end={12423} />}
+          />
         }
         contentHeight={46}
       >
@@ -60,8 +63,13 @@ const IntroduceRow = ({
             <InfoCircleOutlined />
           </Tooltip>
         }
-        total={numeral(8846).format('0,0')}
-        footer={<Field label="日访问量" value={numeral(1234).format('0,0')} />}
+        total={<CountUp prefix="￥" separator="," end={8846} />}
+        footer={
+          <Field
+            label="日访问量"
+            value={<CountUp prefix="￥" separator="," end={1234} />}
+          />
+        }
         contentHeight={46}
       >
         <TinyArea
@@ -90,8 +98,13 @@ const IntroduceRow = ({
             <InfoCircleOutlined />
           </Tooltip>
         }
-        total={numeral(6560).format('0,0')}
-        footer={<Field label="转化率" value="60%" />}
+        total={<CountUp prefix="￥" separator="," end={6560} />}
+        footer={
+          <Field
+            label="转化率"
+            value={<CountUp suffix="%" end={60} duration={1} />}
+          />
+        }
         contentHeight={46}
       >
         <TinyColumn
@@ -118,16 +131,20 @@ const IntroduceRow = ({
             <InfoCircleOutlined />
           </Tooltip>
         }
-        total="68%"
+        total={<CountUp suffix="%" end={68} duration={1} />}
         footer={
           <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
             <Trend flag="up" style={{ marginRight: 16 }}>
               周同比&nbsp;&nbsp;
-              <span>12%</span>
+              <span>
+                <CountUp suffix="%" end={12} duration={1} />
+              </span>
             </Trend>
             <Trend flag="down">
               日同比&nbsp;&nbsp;
-              <span>11%</span>
+              <span>
+                <CountUp suffix="%" end={11} duration={1} />
+              </span>
             </Trend>
           </div>
         }

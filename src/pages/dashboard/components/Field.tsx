@@ -22,7 +22,7 @@ const numberStyle: React.CSSProperties = {
 
 interface FieldProps {
   label: string;
-  value: string;
+  value: string | React.ReactNode;
   style?: React.CSSProperties;
 }
 

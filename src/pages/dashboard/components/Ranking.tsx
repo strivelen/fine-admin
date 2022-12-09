@@ -1,12 +1,13 @@
 import React from 'react';
 import { Card } from 'antd';
-import numeral from 'numeral';
+import CountUp from 'react-countup';
+
 import '../style.css';
 
 interface RankingItemProps {
   rankNumber: number;
   title: string;
-  value: number | string;
+  value: number;
 }
 
 export default function Ranking({
@@ -79,7 +80,11 @@ function RankingItem({ rankNumber, title, value }: RankingItemProps) {
         </span>
         <span style={ranking_item_title}>{title}</span>
       </div>
-      <span style={ranking_item_value}>{numeral(value).format('0,0')}</span>
+      <CountUp separator="," delay={0} end={value}>
+        {({ countUpRef }) => (
+          <span ref={countUpRef} style={ranking_item_value} />
+        )}
+      </CountUp>
     </div>
   );
 }
