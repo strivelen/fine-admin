@@ -56,6 +56,16 @@ export const MenuData: MenuItem[] = [
     route: '/'
   },
   {
+    label: '表单页',
+    icon: 'FormOutlined',
+    children: [
+      {
+        label: '基础表单',
+        route: '/form/basic-form'
+      }
+    ]
+  },
+  {
     label: '订单管理',
     icon: 'UnorderedListOutlined',
     children: [
