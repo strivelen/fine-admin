@@ -62,6 +62,10 @@ export const MenuData: MenuItem[] = [
       {
         label: '基础表单',
         route: '/form/basic-form'
+      },
+      {
+        label: '分布表单',
+        route: '/form/step-form'
       }
     ]
   },

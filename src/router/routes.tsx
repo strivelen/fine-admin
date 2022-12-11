@@ -16,6 +16,7 @@ const ProForm = lazy(() => import('@/pages/pro-form'));
 const MyInfo = lazy(() => import('@/pages/my-info'));
 const Dashboard = lazy(() => import('@/pages/dashboard'));
 const BasicForm = lazy(() => import('@/pages/form/basic-form'));
+const StepForm = lazy(() => import('@/pages/form/step-form'));
 
 export const routes: RouteObject[] = [
   {
@@ -42,6 +43,10 @@ export const routes: RouteObject[] = [
                   {
                     path: 'basic-form',
                     element: <BasicForm />
+                  },
+                  {
+                    path: 'step-form',
+                    element: <StepForm />
                   }
                 ]
               },
