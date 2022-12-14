@@ -29,3 +29,11 @@ export const fetchUserMenu = () =>
  * 获取用户信息
  */
 export const fetchUserInfo = () => axios.get<API.UserInfo>('/User/Get');
+
+/**
+ * 获取文章列表
+ * @param params
+ * @returns
+ */
+export const fetchArticleList = (params: any) =>
+  axios.post<any, API.ArticleList>('/Article/List', params);

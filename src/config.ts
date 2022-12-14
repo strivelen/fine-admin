@@ -70,6 +70,16 @@ export const MenuData: MenuItem[] = [
     ]
   },
   {
+    label: '列表页',
+    icon: 'TableOutlined',
+    children: [
+      {
+        label: '搜索列表',
+        route: '/list/search'
+      }
+    ]
+  },
+  {
     label: '订单管理',
     icon: 'UnorderedListOutlined',
     children: [

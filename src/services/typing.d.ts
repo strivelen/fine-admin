@@ -1,4 +1,32 @@
 declare namespace API {
+  interface Article {
+    id?: string;
+    owner?: string;
+    title?: string;
+    avatar?: string;
+    cover?: string;
+    status?: string;
+    percent?: string;
+    logo?: string;
+    href?: string;
+    updatedAt?: number;
+    createdAt?: number;
+    subDescription?: string;
+    description?: string;
+    activeUser?: string;
+    newUser?: string;
+    star?: string;
+    like?: string;
+    message?: string;
+    content?: string;
+    members?: Array<{
+      avatar: string;
+      name: string;
+      id: string;
+    }>;
+  }
+  type ArticleList = Article[];
+
   type AnalysisChartData = {
     visitData?: any[];
     visitData2?: any[];
