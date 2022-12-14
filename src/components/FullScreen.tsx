@@ -5,8 +5,8 @@ import { useFullscreen } from 'ahooks';
 import HeaderButton from './HeaderButton';
 
 export function FullScreenHeaderButton() {
-  const [isFullscreen, { toggleFullscreen }] = useFullscreen(
-    () => document.getElementsByTagName('body')[0]
+  const [isFullscreen, { toggleFullscreen }] = useFullscreen(() =>
+    document.querySelector('html')
   );
   return (
     <Tooltip
