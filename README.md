@@ -3,7 +3,7 @@
     <img width="88" src="https://strivelen.github.io/fine-admin/logo128.png">
   </a>
 </p>
-<h1 align="center">Fine Admin</h1>
+<h1 align="center">React Fine Admin 🔥 (under development)</h1>
 
 <div align="center">中后台管理系统通用模板</div>
 
