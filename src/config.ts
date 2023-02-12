@@ -76,6 +76,10 @@ export const MenuData: MenuItem[] = [
       {
         label: '搜索列表',
         route: '/list/search'
+      },
+      {
+        label: '查询表格',
+        route: '/list/table-list'
       }
     ]
   },

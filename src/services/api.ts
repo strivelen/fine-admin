@@ -37,3 +37,11 @@ export const fetchUserInfo = () => axios.get<API.UserInfo>('/User/Get');
  */
 export const fetchArticleList = (params: any) =>
   axios.post<any, API.ArticleList>('/Article/List', params);
+
+/**
+ * 请求规则列表
+ * @param params
+ * @returns
+ */
+export const getRules = (params: any) =>
+  axios.post<any, API.List<API.RuleItem[]>>('/Rule/List', params);

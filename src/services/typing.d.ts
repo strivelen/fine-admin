@@ -1,4 +1,24 @@
 declare namespace API {
+  interface List<D> {
+    List: D;
+    VirtualCount: number;
+  }
+
+  type RuleItem = {
+    key: number;
+    disabled?: boolean;
+    href: string;
+    avatar: string;
+    name: string;
+    owner: string;
+    desc: string;
+    callNo: number;
+    status: string;
+    updatedAt: Date;
+    createdAt: Date;
+    progress: number;
+  };
+
   interface Article {
     id?: string;
     owner?: string;

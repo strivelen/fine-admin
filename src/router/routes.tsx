@@ -10,7 +10,6 @@ const NotFound = lazy(() => import('@/pages/404'));
 const Test = lazy(() => import('@/pages/test'));
 const ChangePassword = lazy(() => import('@/pages/change-password'));
 const Components = lazy(() => import('@/pages/components'));
-const List = lazy(() => import('@/pages/list'));
 const CustomBreadcrumb = lazy(() => import('@/pages/custom-breadcrumb'));
 const ProForm = lazy(() => import('@/pages/pro-form'));
 const MyInfo = lazy(() => import('@/pages/my-info'));
@@ -18,6 +17,7 @@ const Dashboard = lazy(() => import('@/pages/dashboard'));
 const BasicForm = lazy(() => import('@/pages/form/basic-form'));
 const StepForm = lazy(() => import('@/pages/form/step-form'));
 const Search = lazy(() => import('@/pages/list/search'));
+const TableList = lazy(() => import('@/pages/list/table-list'));
 
 export const routes: RouteObject[] = [
   {
@@ -57,6 +57,10 @@ export const routes: RouteObject[] = [
                   {
                     path: 'search',
                     element: <Search />
+                  },
+                  {
+                    path: 'table-list',
+                    element: <TableList />
                   }
                 ]
               },
@@ -67,16 +71,6 @@ export const routes: RouteObject[] = [
               {
                 path: 'change-password',
                 element: <ChangePassword />
-              },
-              {
-                path: 'list',
-                element: <List />,
-                children: [
-                  {
-                    path: ':id',
-                    element: <List />
-                  }
-                ]
               },
               {
                 path: 'components',
