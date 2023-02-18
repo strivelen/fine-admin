@@ -7,20 +7,25 @@ import {
   ProFormText,
   ProFormTextArea,
   ProFormDigit,
-  ProFormSelect
+  ProFormSelect,
+  ProTable
 } from '@ant-design/pro-components';
-import { ProTable } from '@ant-design/pro-components';
 import { PlusOutlined } from '@ant-design/icons';
 import { getRules } from '@/services/api';
 import styled from 'styled-components';
+import { PageSize } from '@/config';
 
 const { useToken } = theme;
 
 const getDataSource = async (params: any, sort: any, filter: any) => {
-  const { List, VirtualCount } = await getRules({
+  const fetchParams = {
+    ...params,
     pageNumber: params.current,
-    pageSize: params.pageSize
-  });
+    isASC: Object.values(sort)[0] === 'ascend', // 是否是升序
+    name: Object.keys(sort)[0] || 'ID' // 排序字段
+  };
+  delete fetchParams.current;
+  const { List, VirtualCount } = await getRules(fetchParams);
   return {
     data: List,
     success: true,
@@ -133,6 +138,9 @@ export default function TableList() {
         search={{
           labelWidth: 120
         }}
+        pagination={{
+          defaultPageSize: PageSize
+        }}
         toolBarRender={() => [
           <Button
             key="down_pdf"
@@ -140,6 +148,7 @@ export default function TableList() {
             icon={<DownloadOutlined />}
             onClick={() => {
               modal.warning({
+                centered: true,
                 title: '请自行添加事件'
               });
             }}
@@ -149,11 +158,6 @@ export default function TableList() {
           <AddRule key="add_rule" />
         ]}
         request={getDataSource}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            // setSelectedRows(selectedRows);
-          }
-        }}
       />
       {contextHolder}
     </CustomProTableTheme>
