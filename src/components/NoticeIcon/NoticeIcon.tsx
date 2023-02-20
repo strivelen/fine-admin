@@ -1,12 +1,11 @@
 import React from 'react';
-import { Tabs, Dropdown, Spin, Badge, theme } from 'antd';
+import { Tabs, TabsProps, Popover, Spin, Badge, theme } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
 import NoticeList, { NoticeIconTabProps } from './NoticeList';
 import { useControllableValue } from 'ahooks';
 // import classNames from 'classnames';
 import styles from './index.module.css';
 import HeaderButton from '../HeaderButton';
-const { TabPane } = Tabs;
 
 export type NoticeIconProps = {
   count?: number;
@@ -48,7 +47,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
     if (!children) {
       return null;
     }
-    const panes: React.ReactNode[] = [];
+    const panes: TabsProps['items'] = [];
     React.Children.forEach(
       children,
       (child: React.ReactElement<NoticeIconTabProps>): void => {
@@ -61,8 +60,10 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
         const msgCount = count || count === 0 ? count : len;
         const tabTitle: string =
           msgCount > 0 ? `${title} (${msgCount})` : title;
-        panes.push(
-          <TabPane tab={tabTitle} key={tabKey}>
+        panes.push({
+          key: tabKey,
+          label: tabTitle,
+          children: (
             <NoticeList
               clearText={clearText}
               viewMoreText={viewMoreText}
@@ -75,8 +76,8 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
               showViewMore={showViewMore}
               title={title}
             />
-          </TabPane>
-        );
+          )
+        });
       }
     );
     return (
@@ -90,9 +91,8 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
           }}
           className={styles.tabs}
           onChange={onTabChange}
-        >
-          {panes}
-        </Tabs>
+          items={panes}
+        />
       </Spin>
     );
   };
@@ -120,7 +120,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
       icon={
         <Badge
           size="small"
-          count={15}
+          count={count}
           style={{ boxShadow: 'none', fontSize: 12, lineHeight: 1 }}
         >
           {NoticeBellIcon}
@@ -133,16 +133,18 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
   }
 
   return (
-    <Dropdown
+    <Popover
+      overlayInnerStyle={{ padding: 0 }}
+      showArrow={false}
       placement="bottomRight"
-      overlay={notificationBox as React.ReactElement}
+      content={notificationBox as React.ReactElement}
       overlayClassName={styles.popover}
       trigger={['click']}
-      visible={visible}
-      onVisibleChange={setVisible}
+      open={visible}
+      onOpenChange={setVisible}
     >
       {trigger}
-    </Dropdown>
+    </Popover>
   );
 };
 

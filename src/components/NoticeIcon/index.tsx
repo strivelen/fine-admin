@@ -5,7 +5,6 @@ import { getNotices } from './getNoticeData';
 import NoticeIcon from './NoticeIcon';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import styles from './index.module.css';
 
 dayjs.extend(relativeTime);
 
@@ -67,7 +66,7 @@ const getUnreadData = (noticeData: Record<string, API.NoticeIconItem[]>) => {
 };
 
 const NoticeIconView: React.FC = () => {
-  const { currentUser } = { currentUser: { unreadCount: 6 } };
+  const { currentUser } = { currentUser: { unreadCount: 11 } };
   const [notices, setNotices] = useState<API.NoticeIconItem[]>(
     getNotices // 在使用时应该是通过API返回的数据
   );
@@ -102,7 +101,6 @@ const NoticeIconView: React.FC = () => {
 
   return (
     <NoticeIcon
-      className={styles.action}
       count={currentUser?.unreadCount}
       onItemClick={(item) => {
         changeReadState(item.id!);
