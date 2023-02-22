@@ -8,7 +8,8 @@ import {
   LockOutlined,
   DashboardOutlined,
   FormOutlined,
-  TableOutlined
+  TableOutlined,
+  ProfileOutlined
 } from '@ant-design/icons';
 
 export type DynamicIconKeys = keyof typeof icons;
@@ -23,7 +24,8 @@ const icons = {
   LockOutlined: <LockOutlined />,
   DashboardOutlined: <DashboardOutlined />,
   FormOutlined: <FormOutlined />,
-  TableOutlined: <TableOutlined />
+  TableOutlined: <TableOutlined />,
+  ProfileOutlined: <ProfileOutlined />
 };
 
 export default function DynamicIcons({ icon }: { icon?: DynamicIconKeys }) {

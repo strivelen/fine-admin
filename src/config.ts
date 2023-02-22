@@ -84,6 +84,30 @@ export const MenuData: MenuItem[] = [
     ]
   },
   {
+    label: '详情页',
+    icon: 'ProfileOutlined',
+    children: [
+      {
+        label: '基础详情页',
+        route: '/profile/basic'
+      }
+    ]
+  },
+  {
+    label: '系统设置',
+    icon: 'SettingOutlined',
+    children: [
+      {
+        label: '我的信息',
+        route: '/my-info'
+      },
+      {
+        label: '修改密码',
+        route: '/change-password'
+      }
+    ]
+  },
+  {
     label: '订单管理',
     icon: 'UnorderedListOutlined',
     children: [
@@ -101,30 +125,6 @@ export const MenuData: MenuItem[] = [
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    label: '用户管理',
-    icon: 'UserOutlined',
-    children: [
-      {
-        label: '角色管理',
-        route: '/list/1'
-      }
-    ]
-  },
-  {
-    label: '系统设置',
-    icon: 'SettingOutlined',
-    children: [
-      {
-        label: '我的信息',
-        route: '/my-info'
-      },
-      {
-        label: '修改密码',
-        route: '/change-password'
       }
     ]
   },
