@@ -4,7 +4,7 @@ import { ApiBaseUrl, ApiSessionKey, ApiTimeout, HttpStatus } from '@/config';
 import type { DTO, HttpStatusCode } from '@/config';
 import { selectToken } from '@/store/reducer/userSlice';
 import { store, persistor } from '@/store';
-import { message } from 'antd';
+import { message } from '@/hooks/useGlobalTips';
 import { downloadStreamFile } from '@/utils/utils';
 
 class Request {

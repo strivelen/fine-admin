@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Tag, message } from 'antd';
+import { Tag } from 'antd';
 import groupBy from 'lodash-es/groupBy';
 import { getNotices } from './getNoticeData';
 import NoticeIcon from './NoticeIcon';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { message } from '@/hooks/useGlobalTips';
 
 dayjs.extend(relativeTime);
 

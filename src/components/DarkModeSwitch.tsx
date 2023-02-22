@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, ConfigProvider } from 'antd';
-import theme from 'antd/es/theme/export';
+import { Switch, ConfigProvider, theme } from 'antd';
 import { selectIsDarkMode, setDarkMode } from '@/store/reducer/layoutSlice';
 const { darkAlgorithm } = theme;
 

@@ -1,8 +1,8 @@
 import { FC, useState, createElement, ReactNode } from 'react';
-import { message, Space, Form } from 'antd';
-import theme from 'antd/es/theme/export';
+import { Space, Form, theme } from 'antd';
 import type { FormItemProps } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppHooks';
+import { message } from '@/hooks/useGlobalTips';
 import { login } from '@/store/reducer/userSlice';
 import styles from './login.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';

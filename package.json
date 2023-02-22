@@ -15,7 +15,7 @@
     "@ant-design/pro-components": "^2.3.35",
     "@reduxjs/toolkit": "^1.9.0",
     "ahooks": "^3.7.2",
-    "antd": "^5.0.1",
+    "antd": "^5.2.2",
     "axios": "^1.2.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.6",
