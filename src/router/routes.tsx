@@ -19,6 +19,7 @@ const StepForm = lazy(() => import('@/pages/form/step-form'));
 const Search = lazy(() => import('@/pages/list/search'));
 const TableList = lazy(() => import('@/pages/list/table-list'));
 const ProfileBasic = lazy(() => import('@/pages/profile/basic'));
+const ProfileAdvanced = lazy(() => import('@/pages/profile/advanced'));
 
 export const routes: RouteObject[] = [
   {
@@ -71,6 +72,10 @@ export const routes: RouteObject[] = [
                   {
                     path: 'basic',
                     element: <ProfileBasic />
+                  },
+                  {
+                    path: 'advanced',
+                    element: <ProfileAdvanced />
                   }
                 ]
               },

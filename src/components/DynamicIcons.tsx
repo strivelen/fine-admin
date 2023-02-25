@@ -9,7 +9,10 @@ import {
   DashboardOutlined,
   FormOutlined,
   TableOutlined,
-  ProfileOutlined
+  ProfileOutlined,
+  DownOutlined,
+  EllipsisOutlined,
+  InfoCircleOutlined
 } from '@ant-design/icons';
 
 export type DynamicIconKeys = keyof typeof icons;
@@ -25,7 +28,10 @@ const icons = {
   DashboardOutlined: <DashboardOutlined />,
   FormOutlined: <FormOutlined />,
   TableOutlined: <TableOutlined />,
-  ProfileOutlined: <ProfileOutlined />
+  ProfileOutlined: <ProfileOutlined />,
+  DownOutlined: <DownOutlined />,
+  EllipsisOutlined: <EllipsisOutlined />,
+  InfoCircleOutlined: <InfoCircleOutlined />
 };
 
 export default function DynamicIcons({ icon }: { icon?: DynamicIconKeys }) {

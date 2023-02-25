@@ -90,6 +90,10 @@ export const MenuData: MenuItem[] = [
       {
         label: '基础详情页',
         route: '/profile/basic'
+      },
+      {
+        label: '高级详情页',
+        route: '/profile/advanced'
       }
     ]
   },
