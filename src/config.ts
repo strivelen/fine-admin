@@ -102,6 +102,10 @@ export const MenuData: MenuItem[] = [
     icon: 'CheckCircleOutlined',
     children: [
       {
+        label: '成功页',
+        route: '/result/success'
+      },
+      {
         label: '失败页',
         route: '/result/fail'
       }

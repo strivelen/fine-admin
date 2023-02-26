@@ -13,7 +13,9 @@ const Content = (
       <Typography.Text>您提交的内容有如下错误：</Typography.Text>
     </div>
     <Typography.Text style={{ marginBottom: 16, display: 'block' }}>
-      <Icons icon="CloseCircleOutlined" />
+      <Typography.Text type="danger">
+        <Icons icon="CloseCircleOutlined" />
+      </Typography.Text>
       <span style={{ paddingLeft: 8 }}>您的账户已被冻结</span>
       <a style={{ marginLeft: 16 }}>
         <span>立即解冻</span>
@@ -21,7 +23,9 @@ const Content = (
       </a>
     </Typography.Text>
     <Typography.Text>
-      <Icons icon="CloseCircleOutlined" />
+      <Typography.Text type="danger">
+        <Icons icon="CloseCircleOutlined" />
+      </Typography.Text>
       <span style={{ paddingLeft: 8 }}>您的账户还不具备申请资格</span>
       <a style={{ marginLeft: 16 }}>
         <span>立即升级</span>

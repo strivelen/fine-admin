@@ -15,7 +15,8 @@ import {
   InfoCircleOutlined,
   CloseCircleOutlined,
   RightOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
+  DingdingOutlined
 } from '@ant-design/icons';
 
 export type DynamicIconKeys = keyof typeof icons;
@@ -37,7 +38,8 @@ const icons = {
   InfoCircleOutlined: <InfoCircleOutlined />,
   CloseCircleOutlined: <CloseCircleOutlined />,
   RightOutlined: <RightOutlined />,
-  CheckCircleOutlined: <CheckCircleOutlined />
+  CheckCircleOutlined: <CheckCircleOutlined />,
+  DingdingOutlined: <DingdingOutlined />
 };
 
 export default function DynamicIcons({ icon }: { icon?: DynamicIconKeys }) {
