@@ -98,6 +98,16 @@ export const MenuData: MenuItem[] = [
     ]
   },
   {
+    label: '结果页',
+    icon: 'CheckCircleOutlined',
+    children: [
+      {
+        label: '失败页',
+        route: '/result/fail'
+      }
+    ]
+  },
+  {
     label: '系统设置',
     icon: 'SettingOutlined',
     children: [

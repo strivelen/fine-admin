@@ -20,6 +20,7 @@ const Search = lazy(() => import('@/pages/list/search'));
 const TableList = lazy(() => import('@/pages/list/table-list'));
 const ProfileBasic = lazy(() => import('@/pages/profile/basic'));
 const ProfileAdvanced = lazy(() => import('@/pages/profile/advanced'));
+const FailResult = lazy(() => import('@/pages/result/fail'));
 
 export const routes: RouteObject[] = [
   {
@@ -76,6 +77,15 @@ export const routes: RouteObject[] = [
                   {
                     path: 'advanced',
                     element: <ProfileAdvanced />
+                  }
+                ]
+              },
+              {
+                path: 'result',
+                children: [
+                  {
+                    path: 'fail',
+                    element: <FailResult />
                   }
                 ]
               },
