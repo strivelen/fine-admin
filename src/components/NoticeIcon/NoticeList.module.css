@@ -1,6 +1,7 @@
 .list {
   max-height: 400px;
   overflow: auto;
+  padding-inline: 12px;
 }
 .list::-webkit-scrollbar {
   display: none;
