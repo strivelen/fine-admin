@@ -1,7 +1,7 @@
-import type { DynamicIconKeys } from '@/components/DynamicIcons';
 /**
- * 配置文件
+ * 手动配置文件
  */
+import type { IRoute } from '@/router/routes';
 
 // 应用相关
 export const AppName = '后台管理系统';
@@ -47,129 +47,156 @@ export interface DTO<ResDataType = any> {
 // Table数据相关
 export const PageSize = 20; // 每页多少条数据
 
-// 菜单相关
-export const IsUseServerMenu = false; // 是否使用服务端菜单数据
-export const MenuData: MenuItem[] = [
+// 路由 & 菜单 配置
+// export const IsUseServerMenu = false; // 是否使用服务端菜单数据
+export const routes: IRoute[] = [
   {
-    label: 'Dashboard',
-    icon: 'DashboardOutlined',
-    route: '/'
+    path: 'login',
+    componentPath: 'login/Login',
+    layoutRender: false,
+    menuRender: false
   },
   {
-    label: '表单页',
+    path: 'dashboard',
+    componentPath: 'dashboard',
+    name: 'Dashboard',
+    key: 'dashboard',
+    icon: 'DashboardOutlined'
+  },
+  {
+    path: 'form',
+    name: '表单页',
+    key: 'form',
     icon: 'FormOutlined',
     children: [
       {
-        label: '基础表单',
-        route: '/form/basic-form'
+        path: 'basic-form',
+        componentPath: 'form/basic-form',
+        name: '基础表单',
+        key: 'form/basic-form'
       },
       {
-        label: '分布表单',
-        route: '/form/step-form'
+        path: 'step-form',
+        componentPath: 'form/step-form',
+        name: '分布表单',
+        key: 'form/step-form'
       }
     ]
   },
   {
-    label: '列表页',
+    path: 'list',
+    name: '列表页',
+    key: 'list',
     icon: 'TableOutlined',
     children: [
       {
-        label: '搜索列表',
-        route: '/list/search'
+        path: 'search',
+        componentPath: 'list/search',
+        name: '搜索列表',
+        key: 'list/search'
+        // layoutRender: false
       },
       {
-        label: '查询表格',
-        route: '/list/table-list'
+        path: 'table-list',
+        componentPath: 'list/table-list',
+        name: '查询列表',
+        key: 'list/table-list'
+        // menuRender: false
       }
     ]
   },
   {
-    label: '详情页',
+    path: 'profile',
+    name: '详情页',
+    key: 'profile',
     icon: 'ProfileOutlined',
     children: [
       {
-        label: '基础详情页',
-        route: '/profile/basic'
+        path: 'basic',
+        componentPath: 'profile/basic',
+        name: '基础详情页',
+        key: 'profile/basic'
       },
       {
-        label: '高级详情页',
-        route: '/profile/advanced'
+        path: 'advanced',
+        componentPath: 'profile/advanced',
+        name: '高级详情页',
+        key: 'profile/advanced'
       }
     ]
   },
   {
-    label: '结果页',
+    path: 'result',
+    name: '结果页',
+    key: 'result',
     icon: 'CheckCircleOutlined',
     children: [
       {
-        label: '成功页',
-        route: '/result/success'
+        path: 'success',
+        componentPath: 'result/success',
+        name: '成功页',
+        key: 'result/success'
       },
       {
-        label: '失败页',
-        route: '/result/fail'
+        path: 'fail',
+        componentPath: 'result/fail',
+        name: '失败页',
+        key: 'result/fail'
       }
     ]
   },
   {
-    label: '系统设置',
+    path: 'setting',
+    name: '系统设置',
+    key: 'setting',
     icon: 'SettingOutlined',
     children: [
       {
-        label: '我的信息',
-        route: '/my-info'
+        path: 'my-info',
+        componentPath: 'my-info',
+        name: '我的信息',
+        key: 'setting/my-info'
       },
       {
-        label: '修改密码',
-        route: '/change-password'
+        path: 'change-password',
+        componentPath: 'change-password',
+        name: '修改密码',
+        key: 'setting/change-password'
       }
     ]
   },
+  // {
+  //   path: 'test',
+  //   componentPath: 'test',
+  //   menuRender: false,
+  //   parentKey: 'result/success'
+  // }
   {
-    label: '订单管理',
+    // path: 'more-level-menu',
+    // menuRender: false,
+    name: '多级菜单',
+    key: 'more-level-menu',
     icon: 'UnorderedListOutlined',
     children: [
       {
-        label: '采购订单',
+        name: '二级菜单',
+        key: 'two-level',
         children: [
           {
-            label: '三级菜单',
-            icon: 'LinkOutlined',
+            name: '三级菜单',
+            key: 'three-level',
+            icon: 'SettingOutlined',
             children: [
               {
-                label: '四级菜单',
-                route: '/order/list/123/'
+                path: 'test',
+                componentPath: 'test',
+                name: '四级菜单',
+                key: 'test'
               }
             ]
           }
         ]
       }
     ]
-  },
-  {
-    label: '组件示例',
-    icon: 'BlockOutlined',
-    children: [
-      {
-        label: '自定义面包屑',
-        route: '/components/customBreadcrumb'
-      },
-      {
-        label: 'ProForm',
-        route: '/components/pro-form'
-      }
-    ]
-  },
-  {
-    label: '测试页',
-    icon: 'HomeOutlined',
-    route: '/test'
   }
-]; // 本地菜单数据
-export interface MenuItem {
-  key?: string;
-  label: string;
-  icon?: DynamicIconKeys;
-  route?: string;
-  children?: MenuItem[];
-}
+];

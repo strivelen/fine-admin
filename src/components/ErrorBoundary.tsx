@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Result, Row, Col } from 'antd';
 
-export const ErrorPage: React.FC = () => {
+const ErrorPage: React.FC = () => {
   return (
     <Row
       justify="center"
@@ -30,3 +30,5 @@ export const ErrorPage: React.FC = () => {
     </Row>
   );
 };
+
+export default ErrorPage;

@@ -1,132 +1,60 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import type { RouteObject } from 'react-router-dom';
+import {
+  generateRoutes,
+  getLayoutRoutes,
+  getNoLayoutRoutes
+} from './router.helper';
 import RouterAuth from './RouterAuth';
-import { ErrorPage } from '@/components/ErrorBoundary';
+import type { DynamicIconKeys } from '@/components/DynamicIcons';
+import { routes } from '@/config';
 
+// const modules = import.meta.glob('../pages/*/*.tsx');
+// console.log(modules);
+
+export interface IRoute {
+  path?: string; // url
+  componentPath?: string; // 页面组件地址，基于pages文件夹下
+  name?: string; // 菜单名称 同时也是面包屑名称
+  key?: string; // 菜单key 同时也是菜单path
+  icon?: DynamicIconKeys;
+  access?: string;
+  breadcrumb?: boolean;
+  children?: Array<IRoute>;
+  layoutRender?: false;
+  menuRender?: false;
+  /**
+   * 当打开一个非菜单页面（也就是页面的menuRender为false）想让菜单的某一项高亮，那么把此属性设为高亮菜单页面的key。
+   */
+  parentKey?: string;
+}
+// export interface IRouteSetting {}
+
+const ErrorPage = lazy(() => import('@/components/ErrorBoundary'));
 const Layout = lazy(() => import('@/components/Layout'));
-const Login = lazy(() => import('@/pages/login/Login'));
 const NotFound = lazy(() => import('@/pages/404'));
-const Test = lazy(() => import('@/pages/test'));
-const ChangePassword = lazy(() => import('@/pages/change-password'));
-const Components = lazy(() => import('@/pages/components'));
-const CustomBreadcrumb = lazy(() => import('@/pages/custom-breadcrumb'));
-const ProForm = lazy(() => import('@/pages/pro-form'));
-const MyInfo = lazy(() => import('@/pages/my-info'));
-const Dashboard = lazy(() => import('@/pages/dashboard'));
-const BasicForm = lazy(() => import('@/pages/form/basic-form'));
-const StepForm = lazy(() => import('@/pages/form/step-form'));
-const Search = lazy(() => import('@/pages/list/search'));
-const TableList = lazy(() => import('@/pages/list/table-list'));
-const ProfileBasic = lazy(() => import('@/pages/profile/basic'));
-const ProfileAdvanced = lazy(() => import('@/pages/profile/advanced'));
-const FailSuccess = lazy(() => import('@/pages/result/success'));
-const FailResult = lazy(() => import('@/pages/result/fail'));
 
-export const routes: RouteObject[] = [
+const layoutRoutesConfig = getLayoutRoutes(routes);
+
+const noLayoutRoutesConfig = getNoLayoutRoutes(routes);
+
+export default createBrowserRouter(
+  [
+    {
+      errorElement: <ErrorPage />,
+      element: <Layout />,
+      children: generateRoutes(layoutRoutesConfig)
+    },
+    {
+      errorElement: <ErrorPage />,
+      children: generateRoutes(noLayoutRoutesConfig)
+    },
+    {
+      path: '*',
+      element: <NotFound />
+    }
+  ],
   {
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/login',
-        element: <Login />
-      },
-      {
-        element: <RouterAuth />,
-        children: [
-          {
-            path: '/',
-            element: <Layout />,
-            children: [
-              {
-                index: true,
-                element: <Dashboard />
-              },
-              {
-                path: 'form',
-                children: [
-                  {
-                    path: 'basic-form',
-                    element: <BasicForm />
-                  },
-                  {
-                    path: 'step-form',
-                    element: <StepForm />
-                  }
-                ]
-              },
-              {
-                path: 'list',
-                children: [
-                  {
-                    path: 'search',
-                    element: <Search />
-                  },
-                  {
-                    path: 'table-list',
-                    element: <TableList />
-                  }
-                ]
-              },
-              {
-                path: 'profile',
-                children: [
-                  {
-                    path: 'basic',
-                    element: <ProfileBasic />
-                  },
-                  {
-                    path: 'advanced',
-                    element: <ProfileAdvanced />
-                  }
-                ]
-              },
-              {
-                path: 'result',
-                children: [
-                  {
-                    path: 'success',
-                    element: <FailSuccess />
-                  },
-                  {
-                    path: 'fail',
-                    element: <FailResult />
-                  }
-                ]
-              },
-              {
-                path: 'my-info',
-                element: <MyInfo />
-              },
-              {
-                path: 'change-password',
-                element: <ChangePassword />
-              },
-              {
-                path: 'components',
-                element: <Components />,
-                children: [
-                  { index: true, element: <Components /> },
-                  { path: 'customBreadcrumb', element: <CustomBreadcrumb /> },
-                  { path: 'pro-form', element: <ProForm /> }
-                ]
-              },
-              {
-                path: 'test',
-                element: <Test />
-              },
-              {
-                path: '*',
-                element: <NotFound />
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    basename: import.meta.env.BASE_URL
   }
-];
-
-export default createBrowserRouter(routes, {
-  basename: import.meta.env.BASE_URL
-});
+);
