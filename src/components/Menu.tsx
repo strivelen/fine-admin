@@ -11,17 +11,16 @@ import { ItemType } from 'antd/es/menu/hooks/useItems';
 import type { IRoute } from '@/router/routes';
 import { routes } from '@/config';
 import DynamicIcons, { DynamicIconKeys } from './DynamicIcons';
-import { useSetState } from 'ahooks';
-import type { SetState } from 'ahooks/es/useSetState';
+import { useSetState, useEventListener } from 'ahooks';
 
 interface State {
-  openKeys: string[];
-  selectKey: string;
+  openKeys?: string[];
+  selectKey?: string;
 }
 
 export default function LayoutMenu() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const menuData = useMemo(() => getMenuData(routes), []);
 
   const [state, setState] = useSetState<State>({
@@ -29,11 +28,31 @@ export default function LayoutMenu() {
     selectKey: ''
   });
 
-  // 初始化菜单数据更新菜单状态
-  useInitMenuState({
-    menuData,
-    setState
-  });
+  const updateMenuState = ({ openKeys = [], selectKey }: State) => {
+    setState((prevState) => ({
+      openKeys: openKeys.length > 0 ? openKeys : prevState.openKeys,
+      selectKey
+    }));
+  };
+
+  // 初始化菜单状态
+  useEffect(() => {
+    if (menuData.length === 0) {
+      return;
+    }
+    const menuState = handleMenuState(location);
+    updateMenuState(menuState);
+  }, [menuData]);
+
+  // 页面前进后退时定位菜单状态
+  useEventListener(
+    'popstate',
+    () => {
+      const menuState = handleMenuState(location);
+      updateMenuState(menuState);
+    },
+    { target: window }
+  );
 
   const onOpenChange = (keys: string[]) => {
     const rootKeys = menuData
@@ -58,7 +77,7 @@ export default function LayoutMenu() {
       id="custom-menu-popup"
       theme="dark"
       mode="inline"
-      selectedKeys={[state.selectKey]}
+      selectedKeys={[state.selectKey || '']}
       onClick={({ key, keyPath, domEvent }) => {
         setState({ selectKey: key });
         navigate('/' + key);
@@ -131,27 +150,3 @@ const handleMenuState = (location: Location) => {
   }
   return { selectKey, openKeys };
 };
-
-// 路由改变或者菜单数据变更更新菜单状态
-function useInitMenuState({
-  menuData,
-  setState
-}: {
-  menuData: IRoute[];
-  setState: SetState<State>;
-}) {
-  const location = useLocation();
-
-  useEffect(() => {
-    // 设置菜单初始化状态
-    if (menuData.length === 0) {
-      return;
-    }
-    const { selectKey, openKeys } = handleMenuState(location);
-
-    setState((prevState) => ({
-      openKeys: openKeys.length > 0 ? openKeys : prevState.openKeys,
-      selectKey: selectKey || ''
-    }));
-  }, [menuData]);
-}
