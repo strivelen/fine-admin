@@ -79,6 +79,7 @@ declare namespace API {
   interface LoginData {
     SessionKey: string;
     UserInfo: UserInfo;
+    MenuItems: object[];
   }
 
   interface LoginParams {

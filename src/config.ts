@@ -47,8 +47,8 @@ export interface DTO<ResDataType = any> {
 // Table数据相关
 export const PageSize = 20; // 每页多少条数据
 
-// 路由 & 菜单 配置
-// export const IsUseServerMenu = false; // 是否使用服务端菜单数据
+// 路由 & 菜单 & 面包屑 配置
+export const isRenderServerMenu = false; // 是否使用服务端菜单数据
 export const routes: IRoute[] = [
   {
     path: 'login',

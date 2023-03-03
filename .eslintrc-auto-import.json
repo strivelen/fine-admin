@@ -19,6 +19,7 @@
     "selectCount": true,
     "selectIsDarkMode": true,
     "selectLoading": true,
+    "selectMenuItems": true,
     "selectThemeColor": true,
     "selectToken": true,
     "selectUserInfo": true,

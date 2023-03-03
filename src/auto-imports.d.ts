@@ -20,6 +20,7 @@ declare global {
   const selectCount: typeof import('./store/reducer/counterSlice')['selectCount']
   const selectIsDarkMode: typeof import('./store/reducer/layoutSlice')['selectIsDarkMode']
   const selectLoading: typeof import('./store/reducer/loadingSlice')['selectLoading']
+  const selectMenuItems: typeof import('./store/reducer/userSlice')['selectMenuItems']
   const selectThemeColor: typeof import('./store/reducer/layoutSlice')['selectThemeColor']
   const selectToken: typeof import('./store/reducer/userSlice')['selectToken']
   const selectUserInfo: typeof import('./store/reducer/userSlice')['selectUserInfo']

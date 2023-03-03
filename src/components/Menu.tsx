@@ -9,7 +9,7 @@ import last from 'lodash-es/last';
 import { Menu } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 import type { IRoute } from '@/router/routes';
-import { routes } from '@/config';
+import { routes, isRenderServerMenu } from '@/config';
 import DynamicIcons, { DynamicIconKeys } from './DynamicIcons';
 import { useSetState, useEventListener } from 'ahooks';
 
@@ -21,7 +21,10 @@ interface State {
 export default function LayoutMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const menuData = useMemo(() => getMenuData(routes), []);
+  const serverMenuData = useAppSelector(selectMenuItems);
+  const menuData = isRenderServerMenu
+    ? serverMenuData
+    : useMemo(() => getMenuData(routes), []);
 
   const [state, setState] = useSetState<State>({
     openKeys: [],
