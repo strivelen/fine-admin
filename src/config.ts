@@ -57,6 +57,12 @@ export const routes: IRoute[] = [
     menuRender: false
   },
   {
+    path: '/',
+    componentPath: 'dashboard',
+    menuRender: false,
+    parentKey: 'dashboard'
+  },
+  {
     path: 'dashboard',
     componentPath: 'dashboard',
     name: 'Dashboard',
