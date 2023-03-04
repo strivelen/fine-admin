@@ -1,5 +1,5 @@
 import React from 'react';
-import { GithubOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { DefaultFooter } from '@ant-design/pro-components';
 
 const Footer: React.FC = () => {
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
         },
         {
           key: 'github',
-          title: <GithubOutlined />,
+          title: <Icon type="GithubOutlined" />,
           href: 'https://github.com/strivelen',
           blankTarget: true
         },

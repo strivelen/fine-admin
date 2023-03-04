@@ -1,8 +1,8 @@
-import { LoadingOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { Spin, Row, Col } from 'antd';
 import { selectIsDarkMode } from '@/store/reducer/layoutSlice';
 
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const antIcon = <Icon type="LoadingOutlined" style={{ fontSize: 24 }} spin />;
 
 interface LoadingParams {
   height?: string | number;

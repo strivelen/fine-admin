@@ -1,14 +1,9 @@
-import { UserOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { Dropdown, Row, Col, Avatar } from 'antd';
 import type { MenuProps } from 'antd';
 import { persistor } from '@/store';
 import { selectUserInfo } from '@/store/reducer/userSlice';
 import { useAppSelector } from '@/hooks/useAppHooks';
-import {
-  FormOutlined,
-  PoweroffOutlined,
-  IdcardOutlined
-} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 const enum PersonalCenterMenuKeys {
@@ -23,19 +18,19 @@ export default function PersonalCenterEntry() {
     {
       key: PersonalCenterMenuKeys.MyInfo,
       label: '我的信息',
-      icon: <IdcardOutlined />
+      icon: <Icon type="IdcardOutlined" />
     },
     {
       key: PersonalCenterMenuKeys.ModifyPassword,
       label: '修改密码',
-      icon: <FormOutlined />
+      icon: <Icon type="FormOutlined" />
     },
     { type: 'divider' },
     {
       key: PersonalCenterMenuKeys.Logout,
       danger: true,
       label: '退出登录',
-      icon: <PoweroffOutlined />
+      icon: <Icon type="PoweroffOutlined" />
     }
   ];
   const userInfo = useAppSelector(selectUserInfo);
@@ -70,7 +65,7 @@ export default function PersonalCenterEntry() {
         }}
       >
         <Col>
-          <Avatar size="default" icon={<UserOutlined />} />
+          <Avatar size="default" icon={<Icon type="UserOutlined" />} />
         </Col>
         <Col>{userInfo.Name || 'Admin'}</Col>
       </Row>

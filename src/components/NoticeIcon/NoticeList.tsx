@@ -1,7 +1,6 @@
 import React from 'react';
 import { List, Avatar, theme, Tag } from 'antd';
 import classNames from 'classnames';
-import { UserOutlined } from '@ant-design/icons';
 import styles from './NoticeList.module.css';
 const { useToken } = theme;
 

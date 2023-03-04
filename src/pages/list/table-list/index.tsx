@@ -1,5 +1,4 @@
 import { Input, Button, theme, Form, Modal } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
 import {
   ActionType,
   ModalForm,
@@ -10,7 +9,7 @@ import {
   ProFormSelect,
   ProTable
 } from '@ant-design/pro-components';
-import { PlusOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { getRules } from '@/services/api';
 import styled from 'styled-components';
 import { PageSize } from '@/config';
@@ -145,7 +144,7 @@ export default function TableList() {
           <Button
             key="down_pdf"
             type="primary"
-            icon={<DownloadOutlined />}
+            icon={<Icon type="DownloadOutlined" />}
             onClick={() => {
               modal.warning({
                 centered: true,
@@ -178,7 +177,7 @@ function AddRule() {
       modalProps={{ title: '新增规则', destroyOnClose: true, width: 560 }}
       trigger={
         <Button type="primary">
-          <PlusOutlined />
+          <Icon type="PlusOutlined" />
           新建
         </Button>
       }

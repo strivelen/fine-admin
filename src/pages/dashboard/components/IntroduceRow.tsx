@@ -1,4 +1,4 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { TinyArea, TinyColumn, Bullet } from '@ant-design/plots';
 import { Col, Row, Tooltip } from 'antd';
 import CountUp from 'react-countup';
@@ -30,7 +30,7 @@ const IntroduceRow = ({
         title="总销售额"
         action={
           <Tooltip title="指标说明">
-            <InfoCircleOutlined />
+            <Icon type="InfoCircleOutlined" />
           </Tooltip>
         }
         loading={loading}
@@ -60,7 +60,7 @@ const IntroduceRow = ({
         title="访问量"
         action={
           <Tooltip title="指标说明">
-            <InfoCircleOutlined />
+            <Icon type="InfoCircleOutlined" />
           </Tooltip>
         }
         total={<CountUp prefix="￥" separator="," end={8846} />}
@@ -95,7 +95,7 @@ const IntroduceRow = ({
         title="支付笔数"
         action={
           <Tooltip title="指标说明">
-            <InfoCircleOutlined />
+            <Icon type="InfoCircleOutlined" />
           </Tooltip>
         }
         total={<CountUp prefix="￥" separator="," end={6560} />}
@@ -128,7 +128,7 @@ const IntroduceRow = ({
         title="运营活动效果"
         action={
           <Tooltip title="指标说明">
-            <InfoCircleOutlined />
+            <Icon type="InfoCircleOutlined" />
           </Tooltip>
         }
         total={<CountUp suffix="%" end={68} duration={1} />}

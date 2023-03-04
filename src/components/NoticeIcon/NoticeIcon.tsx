@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, TabsProps, Popover, Spin, Badge, theme } from 'antd';
-import { BellOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import NoticeList, { NoticeIconTabProps } from './NoticeList';
 import { useControllableValue } from 'ahooks';
 // import classNames from 'classnames';
@@ -105,7 +105,7 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
   });
   // const noticeButtonClass = classNames(className, styles.noticeButton);
   const notificationBox = getNotificationBox();
-  const NoticeBellIcon = bell || <BellOutlined />;
+  const NoticeBellIcon = bell || <Icon type="BellOutlined" />;
   const trigger = (
     // <span className={classNames(noticeButtonClass, { opened: visible })}>
     //   <Badge

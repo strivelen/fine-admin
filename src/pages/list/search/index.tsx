@@ -12,12 +12,7 @@ import {
 } from 'antd';
 import { ProForm, ProFormSelect } from '@ant-design/pro-components';
 import { TagMultiSelect } from '@/components/FormItems/TagSelect';
-import {
-  StarOutlined,
-  LikeOutlined,
-  MessageOutlined,
-  LoadingOutlined
-} from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { useInfiniteScroll } from 'ahooks';
 import { fetchArticleList } from '@/services/api';
 import dayjs from 'dayjs';
@@ -161,21 +156,21 @@ const IconText: React.FC<{
     case 'star-o':
       return (
         <span>
-          <StarOutlined style={{ marginRight: 8 }} />
+          <Icon type="StarOutlined" style={{ marginRight: 8 }} />
           {text}
         </span>
       );
     case 'like-o':
       return (
         <span>
-          <LikeOutlined style={{ marginRight: 8 }} />
+          <Icon type="LikeOutlined" style={{ marginRight: 8 }} />
           {text}
         </span>
       );
     case 'message':
       return (
         <span>
-          <MessageOutlined style={{ marginRight: 8 }} />
+          <Icon type="MessageOutlined" style={{ marginRight: 8 }} />
           {text}
         </span>
       );
@@ -196,7 +191,7 @@ function ArticleList({
       <Button onClick={loadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
         {loadingMore ? (
           <span>
-            <LoadingOutlined /> 加载中...
+            <Icon type="LoadingOutlined" /> 加载中...
           </span>
         ) : (
           '加载更多'

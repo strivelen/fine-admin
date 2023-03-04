@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { Layout, Row, Col, Space } from 'antd';
 import LayoutBreadcrumb from './Breadcrumb';
 import PersonalCenter from './PersonalCenter';
@@ -30,7 +30,7 @@ export default function LayoutHeader() {
           <Space>
             <HeaderButton
               icon={React.createElement(
-                collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
+                collapsed ? Icon.MenuUnfoldOutlined : Icon.MenuFoldOutlined
               )}
               onClick={() => dispatch(setCollapsed(!collapsed))}
             />

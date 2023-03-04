@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ConfigProvider, Space } from 'antd';
-import { CheckOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { useAppSelector, useAppDispatch } from '@/hooks/useAppHooks';
 import { selectThemeColor, setThemeColor } from '@/store/reducer/layoutSlice';
 import { ThemeColors } from '@/config';
@@ -83,7 +83,10 @@ function ColorItemActive() {
         alignItems: 'center'
       }}
     >
-      <CheckOutlined style={{ color: '#fff', fontWeight: 'bold' }} />
+      <Icon
+        type="CheckOutlined"
+        style={{ color: '#fff', fontWeight: 'bold' }}
+      />
     </div>
   );
 }

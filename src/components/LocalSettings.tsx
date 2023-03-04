@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tooltip, Drawer, Row, Col, Divider } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import type { DrawerProps, ButtonProps } from 'antd';
 import { DarkModeSwitch } from './DarkModeSwitch';
 import { ThemeColorsSelect } from './ThemeColors';
@@ -18,8 +18,8 @@ export default function LocalSettingsHeaderButton() {
 
 function LocalSettingsBtn({ onClick }: ButtonProps) {
   return (
-    <Tooltip placement="bottomRight" title="本地设置" arrowPointAtCenter>
-      <HeaderButton icon={<SettingOutlined />} onClick={onClick} />
+    <Tooltip placement="bottomRight" title="本地设置" arrow>
+      <HeaderButton icon={<Icon type="SettingOutlined" />} onClick={onClick} />
     </Tooltip>
   );
 }

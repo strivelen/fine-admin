@@ -7,15 +7,7 @@ import { login } from '@/store/reducer/userSlice';
 import styles from './login.module.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
-import {
-  AlipayCircleFilled,
-  LockOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
-  EyeOutlined,
-  EyeInvisibleOutlined
-} from '@ant-design/icons';
+import Icon from '@/components/Icons';
 import { LoginForm } from '@ant-design/pro-components';
 import LoginLogo from './LoginLogo';
 
@@ -117,7 +109,8 @@ function UserName(formItemProps: FormItemProps) {
     <LoginFormItem
       {...formItemProps}
       prefix={
-        <UserOutlined
+        <Icon
+          type="UserOutlined"
           className={classnames(styles.form_item_icon, styles.prefix)}
         />
       }
@@ -133,14 +126,18 @@ function Password(formItemProps: FormItemProps) {
     <LoginFormItem
       {...formItemProps}
       prefix={
-        <LockOutlined
+        <Icon
+          type="LockOutlined"
           className={classnames(styles.form_item_icon, styles.prefix)}
         />
       }
-      suffix={createElement(isLock ? EyeOutlined : EyeInvisibleOutlined, {
-        className: classnames(styles.form_item_icon, styles.suffix),
-        onClick: () => setLock((preState) => !preState)
-      })}
+      suffix={createElement(
+        isLock ? Icon.EyeOutlined : Icon.EyeInvisibleOutlined,
+        {
+          className: classnames(styles.form_item_icon, styles.suffix),
+          onClick: () => setLock((preState) => !preState)
+        }
+      )}
     >
       <input
         type={isLock ? 'text' : 'password'}
@@ -155,9 +152,18 @@ function Actions() {
   return (
     <Space>
       其他登录方式
-      <AlipayCircleFilled style={{ ...iconStyles, color: '#1976ff' }} />
-      <TaobaoCircleOutlined style={{ ...iconStyles, color: '#eb602d' }} />
-      <WeiboCircleOutlined style={{ ...iconStyles, color: '#f10000' }} />
+      <Icon
+        type="AlipayCircleFilled"
+        style={{ ...iconStyles, color: '#1976ff' }}
+      />
+      <Icon
+        type="TaobaoCircleOutlined"
+        style={{ ...iconStyles, color: '#eb602d' }}
+      />
+      <Icon
+        type="WeiboCircleOutlined"
+        style={{ ...iconStyles, color: '#f10000' }}
+      />
     </Space>
   );
 }
