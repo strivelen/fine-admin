@@ -1,12 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button, Space, Input, Select, DatePicker } from 'antd';
-import {
-  HomeOutlined,
-  LoadingOutlined,
-  SettingFilled,
-  SmileOutlined,
-  SyncOutlined
-} from '@ant-design/icons';
+import Icon from '@/components/Icons';
 // import Loading from '@/components/Loading';
 
 export default function Home() {
@@ -20,12 +14,9 @@ export default function Home() {
         //   console.log(date, dateString);
         // }}
         />
-
-        <SettingFilled />
-        <SmileOutlined />
-        <SyncOutlined spin />
-        <SmileOutlined rotate={180} />
-        <LoadingOutlined />
+        {/* <UserOutlined /> */}
+        <Icon.UserOutlined />
+        <Icon.BlockOutlined />
         <Input placeholder="你好" />
         <Select
           defaultValue="lucy"
@@ -54,13 +45,9 @@ export default function Home() {
         <Button type="primary">按钮</Button>
       </Space>
       <div>
-        <Button
-          title="123"
-          shape="circle"
-          style={{ border: 'none', backgroundColor: 'transparent' }}
-          block
-          icon={<HomeOutlined />}
-        />
+        <Button title="按钮" block icon={<Icon type="HomeOutlined" />}>
+          按钮
+        </Button>
       </div>
     </>
   );

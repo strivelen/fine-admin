@@ -40,7 +40,7 @@ Icon.DingdingOutlined = DingdingOutlined;
 export type IconType = keyof typeof Icon;
 
 interface IconProps {
-  type: IconType;
+  type?: IconType;
   className?: string;
   style?: CSSProperties;
   rotate?: number;
@@ -49,6 +49,9 @@ interface IconProps {
 }
 
 export default function Icon({ type, ...iconProps }: IconProps) {
+  if (!type) {
+    return null;
+  }
   const IcomComp = Icon[type];
   return <IcomComp {...iconProps} />;
 }

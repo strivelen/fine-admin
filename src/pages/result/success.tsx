@@ -1,5 +1,5 @@
 import { Button, Card, Steps, Result, Descriptions } from 'antd';
-import Icons from '@/components/DynamicIcons';
+import Icons from '@/components/Icons';
 const Step = Steps.Step;
 
 const desc1 = (
@@ -12,7 +12,7 @@ const desc1 = (
   >
     <div style={{ margin: '8px 0 4px' }}>
       <span style={{ paddingRight: 8 }}>曲丽丽</span>
-      <Icons icon="DingdingOutlined" />
+      <Icons type="DingdingOutlined" />
     </div>
     <div>2016-12-12 12:32</div>
   </div>
@@ -29,7 +29,7 @@ const desc2 = (
     <div style={{ margin: '8px 0 4px' }}>
       <span style={{ paddingRight: 8 }}>周毛毛</span>
       <a href="">
-        <Icons icon="DingdingOutlined" />
+        <Icons type="DingdingOutlined" />
         &nbsp;&nbsp;催一下
       </a>
     </div>

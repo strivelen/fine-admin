@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {
   Descriptions,
   Typography,
@@ -15,14 +15,9 @@ import {
   Tooltip,
   Table
 } from 'antd';
-import {
-  PageContainer,
-  RouteContext,
-  PageHeader
-} from '@ant-design/pro-components';
+import { RouteContext, PageHeader } from '@ant-design/pro-components';
 import styled from 'styled-components';
-import Icons from '@/components/DynamicIcons';
-import Icon from '@/components/DynamicIcons';
+import Icon from '@/components/Icons';
 const { Title } = Typography;
 const Step = Steps.Step;
 
@@ -64,7 +59,7 @@ const action = (
         return (
           <Dropdown.Button
             type="primary"
-            icon={<Icons icon="DownOutlined" />}
+            icon={<Icon type="DownOutlined" />}
             menu={{
               items: [
                 { label: '操作一', key: 1 },
@@ -94,7 +89,7 @@ const action = (
               }}
               placement="bottomRight"
             >
-              <Button icon={<Icons icon="EllipsisOutlined" />} />
+              <Button icon={<Icon type="EllipsisOutlined" />} />
             </Dropdown>
           </Button.Group>
           <Button type="primary">主操作</Button>
@@ -196,7 +191,7 @@ export default function Advanced() {
                   某某数据
                   <Tooltip title="数据说明">
                     <span style={{ marginLeft: 6 }}>
-                      <Icon icon="InfoCircleOutlined" />
+                      <Icon type="InfoCircleOutlined" />
                     </span>
                   </Tooltip>
                 </span>

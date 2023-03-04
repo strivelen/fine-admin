@@ -10,7 +10,7 @@ import { Menu } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 import type { IRoute } from '@/router/routes';
 import { routes, isRenderServerMenu } from '@/config';
-import DynamicIcons, { DynamicIconKeys } from './DynamicIcons';
+import Icon from './Icons';
 import { useSetState, useEventListener } from 'ahooks';
 
 interface State {
@@ -125,7 +125,7 @@ const generateMenuItems = (data: IRoute[]): ItemType[] => {
     menu.push({
       key: item.key,
       label: item.name,
-      icon: <DynamicIcons icon={item.icon as DynamicIconKeys} />,
+      icon: <Icon type={item.icon} />,
       children
     } as ItemType);
   });

@@ -6,7 +6,7 @@ import {
   getNoLayoutRoutes
 } from './router.helper';
 import RouterAuth from './RouterAuth';
-import type { DynamicIconKeys } from '@/components/DynamicIcons';
+import type { IconType } from '@/components/Icons';
 import { routes } from '@/config';
 
 // const modules = import.meta.glob('../pages/*/*.tsx');
@@ -17,7 +17,7 @@ export interface IRoute {
   componentPath?: string; // 页面组件地址，基于pages文件夹下
   name?: string; // 菜单名称 同时也是面包屑名称
   key?: string; // 菜单key 同时也是菜单path
-  icon?: DynamicIconKeys;
+  icon?: IconType;
   access?: string;
   breadcrumb?: boolean;
   children?: Array<IRoute>;
