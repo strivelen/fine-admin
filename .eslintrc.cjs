@@ -19,10 +19,7 @@ module.exports = {
     // myGlobal: false
     API: 'readonly',
     Expand: 'readonly',
-    ExpandRecursively: 'readonly',
-    Api: 'readonly',
-    ComponentProps: 'readonly',
-    ActionProps: 'readonly'
+    ExpandRecursively: 'readonly'
   },
   rules: {
     // 自定义你的规则

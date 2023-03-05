@@ -22,25 +22,3 @@ type ExpandRecursively<T> = T extends object
 
 // 将对象的value作为联合类型
 // typeof obj[keyof typeof obj]
-
-/**
- * 取出组件的props
- */
-type ComponentProps<T> = T extends
-  | React.ComponentType<infer P>
-  | React.Component<infer P>
-  ? JSX.LibraryManagedAttributes<T, P>
-  : never;
-
-interface ActionComProps {
-  onAction: () => void;
-}
-
-// CRUDTemplate组件在封装可复用Action时必需接受的props
-interface ActionProps<ModalProps> {
-  option: Omit<ModalProps, 'visible' | 'onOk' | 'onCancel'>;
-  actionCom: (p: ActionComProps) => ReactNode;
-  [propName: string]: any;
-}
-
-type Api = string | { url: string; params?: object };

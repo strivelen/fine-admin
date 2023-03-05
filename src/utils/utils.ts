@@ -133,24 +133,6 @@ export function handleLongText(text, length, icon) {
 }
 
 /**
- * 处理Api类型取值
- * @param {Api} api
- * @return
- **/
-export function getApiTypesValue(api: Api) {
-  let url: string;
-  let params: object;
-  if (typeof api === 'string') {
-    url = api;
-  }
-  if (typeof api === 'object') {
-    url = api.url;
-    params = api.params || {};
-  }
-  return { url, params };
-}
-
-/**
  * 扁平化树数据为数组
  * @param data
  * @param nodeKey
