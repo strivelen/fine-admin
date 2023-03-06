@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router-dom';
-import type { IRoute } from './routes';
+import type { IRoute, MenuRoute } from './routes';
 
 /**
  * 从路由配置中获取具有Layout的routes
@@ -12,7 +12,7 @@ export const getLayoutRoutes = function (routes: IRoute[]) {
     const _route = { ...route };
     if (_route.layoutRender !== false) {
       if (_route.children) {
-        _route.children = getLayoutRoutes(_route.children);
+        _route.children = getLayoutRoutes(_route.children) as MenuRoute[];
       }
       layoutRoutes.push(_route);
     }
@@ -30,7 +30,7 @@ export const getNoLayoutRoutes = function (routes: IRoute[]) {
   routes.forEach((route) => {
     const _route = { ...route };
     if (_route.children) {
-      _route.children = getNoLayoutRoutes(_route.children);
+      _route.children = getNoLayoutRoutes(_route.children) as MenuRoute[];
     }
     if (_route.layoutRender === false || (_route.children || []).length) {
       noLayoutRoutes.push(_route);

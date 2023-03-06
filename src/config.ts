@@ -53,10 +53,11 @@ export const routes: IRoute[] = [
   {
     path: 'login',
     componentPath: 'login/Login',
-    layoutRender: false,
-    menuRender: false
+    layoutRender: false
   },
   {
+    key: 'dashboard',
+    name: 'Dashboard',
     path: '/',
     componentPath: 'dashboard',
     menuRender: false,
@@ -99,8 +100,8 @@ export const routes: IRoute[] = [
         path: 'search',
         componentPath: 'list/search',
         name: '搜索列表',
-        key: 'list/search'
-        // layoutRender: false
+        key: 'list/search',
+        layoutRender: false
       },
       {
         path: 'table-list',
@@ -198,6 +199,8 @@ export const routes: IRoute[] = [
                 componentPath: 'test',
                 name: '四级菜单',
                 key: 'test'
+                // menuRender: false,
+                // parentKey: 'setting/my-info'
               }
             ]
           }
