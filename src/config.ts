@@ -100,7 +100,7 @@ export const routes: IRoute[] = [
         path: 'search',
         componentPath: 'list/search',
         name: '搜索列表',
-        key: 'login'
+        key: 'list/search'
       },
       {
         path: 'table-list',
