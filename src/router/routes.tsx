@@ -15,7 +15,9 @@ import type { MergeExclusive, SetOptional } from 'type-fest';
 
 type CustomRoute = Required<
   Omit<MenuItemRoute, 'key' | 'name' | 'icon' | 'parentKey' | 'menuRender'>
->;
+> & {
+  layoutRender?: false;
+};
 
 interface BaseMenuItem {
   // 菜单key 同时也是菜单path
@@ -23,8 +25,8 @@ interface BaseMenuItem {
   // 菜单名称 同时也是面包屑名称
   name: string;
   icon?: IconType;
-  layoutRender?: false;
-  //   access?: string;
+  // layoutRender?: false;
+  // access?: string;
   // breadcrumb?: boolean;
   path: string;
   // 页面组件地址，基于pages文件夹下

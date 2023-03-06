@@ -5,11 +5,11 @@ import {
   matchRoutes,
   Location
 } from 'react-router-dom';
-import last from 'lodash-es/last';
 import { Menu } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
-import type { IRoute } from '@/router/routes';
-import { routes, isRenderServerMenu } from '@/config';
+import type { IRoute, MenuRoute } from '@/router/routes';
+import { layoutRoutesConfig as routes } from '@/router/routes';
+import { isRenderServerMenu } from '@/config';
 import Icon from './Icons';
 import { useSetState, useEventListener } from 'ahooks';
 
@@ -102,7 +102,7 @@ function getMenuData(routes: IRoute[]) {
     const _route = { ...route };
     if (_route.menuRender !== false) {
       if (_route.children) {
-        _route.children = getMenuData(_route.children);
+        _route.children = getMenuData(_route.children) as MenuRoute[];
       }
       menuData.push(_route);
     }
@@ -135,7 +135,7 @@ const generateMenuItems = (data: IRoute[]): ItemType[] => {
 // 处理菜单状态
 const handleMenuState = (location: Location) => {
   const currentPageMatchRoutes = matchRoutes(routes, location);
-  const selectRoute = last(currentPageMatchRoutes)?.route;
+  const selectRoute = currentPageMatchRoutes?.at(-1)?.route;
 
   let selectKey = selectRoute?.key;
   let openKeys = (currentPageMatchRoutes
