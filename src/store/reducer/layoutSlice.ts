@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
-
-type BreadcrumbItem = string | { name: string; path: string };
-
-type Breadcrumb = Array<BreadcrumbItem>;
+import type { Breadcrumb } from '@/components/Breadcrumb';
 
 export interface LayoutState {
   collapsed: boolean;
