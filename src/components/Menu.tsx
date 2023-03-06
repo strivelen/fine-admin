@@ -9,7 +9,7 @@ import { Menu } from 'antd';
 import { ItemType } from 'antd/es/menu/hooks/useItems';
 import type { IRoute, MenuRoute } from '@/router/routes';
 import { layoutRoutesConfig as routes } from '@/router/routes';
-import { isRenderServerMenu } from '@/config';
+import config from '@/config';
 import Icon from './Icons';
 import { useSetState, useEventListener } from 'ahooks';
 
@@ -22,7 +22,7 @@ export default function LayoutMenu() {
   const navigate = useNavigate();
   const location = useLocation();
   const serverMenuData = useAppSelector(selectMenuItems);
-  const menuData = isRenderServerMenu
+  const menuData = config.isRenderServerMenu
     ? serverMenuData
     : useMemo(() => getMenuData(routes), []);
 

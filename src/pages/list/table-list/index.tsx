@@ -12,7 +12,7 @@ import {
 import Icon from '@/components/Icons';
 import { getRules } from '@/services/api';
 import styled from 'styled-components';
-import { PageSize } from '@/config';
+import config from '@/config';
 
 const { useToken } = theme;
 
@@ -138,7 +138,7 @@ export default function TableList() {
           labelWidth: 120
         }}
         pagination={{
-          defaultPageSize: PageSize
+          defaultPageSize: config.pageSize
         }}
         toolBarRender={() => [
           <Button

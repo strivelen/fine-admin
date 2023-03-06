@@ -7,7 +7,7 @@ import {
 } from './router.helper';
 import RouterAuth from './RouterAuth';
 import type { IconType } from '@/components/Icons';
-import { routes } from '@/config';
+import config from '@/config';
 import type { MergeExclusive, SetOptional } from 'type-fest';
 
 // const modules = import.meta.glob('../pages/*/*.tsx');
@@ -56,9 +56,9 @@ const ErrorPage = lazy(() => import('@/components/ErrorBoundary'));
 const Layout = lazy(() => import('@/components/Layout'));
 const NotFound = lazy(() => import('@/pages/404'));
 
-export const layoutRoutesConfig = getLayoutRoutes(routes);
+export const layoutRoutesConfig = getLayoutRoutes(config.routes);
 
-const noLayoutRoutesConfig = getNoLayoutRoutes(routes);
+const noLayoutRoutesConfig = getNoLayoutRoutes(config.routes);
 
 export default createBrowserRouter(
   [

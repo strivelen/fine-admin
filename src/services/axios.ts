@@ -1,18 +1,26 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-import { ApiBaseUrl, ApiSessionKey, ApiTimeout, HttpStatus } from '@/config';
-import type { DTO, HttpStatusCode } from '@/config';
+import localConfig from '@/config';
 import { selectToken } from '@/store/reducer/userSlice';
 import { store, persistor } from '@/store';
 import { message } from '@/hooks/useGlobalTips';
 import { downloadStreamFile } from '@/utils/utils';
 
+type HttpStatusCode = keyof typeof localConfig.api.status;
+
+export interface DTO<ResDataType = any> {
+  Code: HttpStatusCode;
+  Data: ResDataType;
+  Message: string | undefined;
+  Success: boolean;
+}
+
 class Request {
   private instance: AxiosInstance;
 
   private baseConfig: AxiosRequestConfig = {
-    baseURL: ApiBaseUrl,
-    timeout: ApiTimeout
+    baseURL: localConfig.api.baseUrl,
+    timeout: localConfig.api.timeout
   };
 
   public constructor(config: AxiosRequestConfig = {}) {
@@ -23,7 +31,7 @@ class Request {
       (config) => {
         const token = selectToken(store.getState());
         if (token) {
-          config.headers![ApiSessionKey] = token;
+          config.headers![localConfig.api.sessionKey] = token;
         }
         return config;
       },
@@ -40,7 +48,7 @@ class Request {
           if (data.Code !== 200) {
             const errorText =
               data.Message ||
-              HttpStatus[data.Code as HttpStatusCode] ||
+              localConfig.api.status[data.Code as HttpStatusCode] ||
               'HTTP响应错误';
             data.Code === 401 && persistor.purge(); // 退出登录
             message.error(errorText);

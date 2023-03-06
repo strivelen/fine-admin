@@ -3,7 +3,7 @@ import { ConfigProvider, Space } from 'antd';
 import Icon from '@/components/Icons';
 import { useAppSelector, useAppDispatch } from '@/hooks/useAppHooks';
 import { selectThemeColor, setThemeColor } from '@/store/reducer/layoutSlice';
-import { ThemeColors } from '@/config';
+import config from '@/config';
 
 export function ThemeColorConfigProvider({
   children
@@ -29,7 +29,7 @@ export function ThemeColorsSelect() {
   const themeColor = useAppSelector(selectThemeColor);
   return (
     <Space>
-      {ThemeColors.map((color, index) => (
+      {config.themeColors.map((color, index) => (
         <ColorBlockItem
           key={index}
           color={color}
