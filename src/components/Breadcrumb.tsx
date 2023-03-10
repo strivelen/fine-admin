@@ -69,7 +69,10 @@ function mapRouteMatchToBreadcrmb(
   return routeMatch?.map((item, index, arr) => {
     const routeConfig = item.route as IRoute;
     if (index === arr.length - 1) {
-      return routeConfig.name as BreadcrumbItem;
+      return {
+        name: routeConfig.name,
+        icon: routeConfig.icon
+      } as BreadcrumbItem;
     }
     return {
       name: routeConfig.name,
