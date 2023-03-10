@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
-import type { Breadcrumb } from '@/components/Breadcrumb';
+import type { BreadcrumbType } from '@/components/Breadcrumb';
 
 export interface LayoutState {
   collapsed: boolean;
-  breadcrumb: Breadcrumb;
+  breadcrumb: BreadcrumbType;
   isDarkMode: boolean;
   themeColor: string;
 }
@@ -20,7 +20,7 @@ export const layoutSlice = createSlice({
   name: 'layout',
   initialState,
   reducers: {
-    setBreadcrumb: (state, action: PayloadAction<Breadcrumb>) => {
+    setBreadcrumb: (state, action: PayloadAction<BreadcrumbType>) => {
       state.breadcrumb = action.payload;
     },
     setCollapsed: (state, action: PayloadAction<boolean>) => {

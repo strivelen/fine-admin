@@ -1,28 +1,32 @@
 import React from 'react';
 import { Breadcrumb } from 'antd';
-import { Link, useLocation, matchRoutes } from 'react-router-dom';
+import { Link, useLocation, matchRoutes, RouteMatch } from 'react-router-dom';
 import { selectBreadcrumb, setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { IRoute, layoutRoutesConfig as routes } from '@/router/routes';
+import Icon, { IconType } from '@/components/Icons';
 
-type BreadcrumbItem = string | { name: string; path: string };
+type BreadcrumbItem = string | { name: string; path?: string; icon?: IconType };
 
-export type Breadcrumb = Array<BreadcrumbItem>;
+export type BreadcrumbType = Array<BreadcrumbItem>;
 
 /**
  * Layout面包屑
- * @param {Array<String | {name: String; path: String}>} data
+ * @param {BreadcrumbType} data
  * @returns
  */
 export default function LayoutBreadcrumb() {
   const breadcrumb = useAppSelector(selectBreadcrumb);
   useBreadcrumbFormRoutes({ routes });
   return breadcrumb.length > 0 ? (
-    <Breadcrumb separator=">">
+    <Breadcrumb separator="/">
       {breadcrumb.map((item, index) => {
         if (typeof item === 'object') {
           return (
             <Breadcrumb.Item key={index}>
-              <Link to={item.path}>{item.name}</Link>
+              {item.icon && (
+                <Icon type={item.icon} style={{ marginRight: 8 }} />
+              )}
+              {item.path ? <Link to={item.path}>{item.name}</Link> : item.name}
             </Breadcrumb.Item>
           );
         }
@@ -48,19 +52,29 @@ function useBreadcrumbFormRoutes({ routes }: { routes: IRoute[] }) {
         routes,
         `/${currentRouteConfig?.parentKey}`
       );
-      const breadcrumb =
-        parentRouteMatch
-          ?.map((item) => item.route.name)
-          .filter((item) => !!item) || [];
-      currentRouteConfig.name && breadcrumb.push(currentRouteConfig.name);
-      dispatch(setBreadcrumb(breadcrumb as Breadcrumb));
+      const breadcrumb = mapRouteMatchToBreadcrmb(
+        parentRouteMatch!.concat(currentRouteMatch!.at(-1)!)
+      );
+      dispatch(setBreadcrumb(breadcrumb as BreadcrumbType));
     } else {
-      const breadcrumb = currentRouteMatch
-        ?.map((item) => {
-          return item.route.name;
-        })
-        .filter((item) => !!item) as Breadcrumb;
+      const breadcrumb = mapRouteMatchToBreadcrmb(currentRouteMatch!);
       dispatch(setBreadcrumb(breadcrumb));
     }
   }, [location]);
+}
+
+function mapRouteMatchToBreadcrmb(
+  routeMatch: Array<RouteMatch>
+): BreadcrumbType {
+  return routeMatch?.map((item, index, arr) => {
+    const routeConfig = item.route as IRoute;
+    if (index === arr.length - 1) {
+      return routeConfig.name as BreadcrumbItem;
+    }
+    return {
+      name: routeConfig.name,
+      path: routeConfig.componentPath ? routeConfig.key : undefined,
+      icon: routeConfig.icon
+    } as BreadcrumbItem;
+  });
 }
