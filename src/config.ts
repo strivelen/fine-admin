@@ -12,12 +12,14 @@ const routes: IRoute[] = [
   {
     key: 'dashboard',
     name: 'Dashboard',
+    auth: true,
     path: '/',
     componentPath: 'dashboard',
     menuRender: false,
     parentKey: 'dashboard'
   },
   {
+    auth: true,
     path: 'dashboard',
     componentPath: 'dashboard',
     name: 'Dashboard',
@@ -31,12 +33,14 @@ const routes: IRoute[] = [
     icon: 'FormOutlined',
     children: [
       {
+        auth: true,
         path: 'basic-form',
         componentPath: 'form/basic-form',
         name: '基础表单',
         key: 'form/basic-form'
       },
       {
+        auth: true,
         path: 'step-form',
         componentPath: 'form/step-form',
         name: '分布表单',
@@ -51,12 +55,14 @@ const routes: IRoute[] = [
     icon: 'TableOutlined',
     children: [
       {
+        auth: true,
         path: 'search',
         componentPath: 'list/search',
         name: '搜索列表',
         key: 'list/search'
       },
       {
+        auth: true,
         path: 'table-list',
         componentPath: 'list/table-list',
         name: '查询列表',
@@ -72,12 +78,14 @@ const routes: IRoute[] = [
     icon: 'ProfileOutlined',
     children: [
       {
+        auth: true,
         path: 'basic',
         componentPath: 'profile/basic',
         name: '基础详情页',
         key: 'profile/basic'
       },
       {
+        auth: true,
         path: 'advanced',
         componentPath: 'profile/advanced',
         name: '高级详情页',
@@ -92,12 +100,14 @@ const routes: IRoute[] = [
     icon: 'CheckCircleOutlined',
     children: [
       {
+        auth: true,
         path: 'success',
         componentPath: 'result/success',
         name: '成功页',
         key: 'result/success'
       },
       {
+        auth: true,
         path: 'fail',
         componentPath: 'result/fail',
         name: '失败页',
@@ -112,12 +122,14 @@ const routes: IRoute[] = [
     icon: 'SettingOutlined',
     children: [
       {
+        auth: true,
         path: 'my-info',
         componentPath: 'my-info',
         name: '我的信息',
         key: 'setting/my-info'
       },
       {
+        auth: true,
         path: 'change-password',
         componentPath: 'change-password',
         name: '修改密码',

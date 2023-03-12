@@ -1,5 +1,6 @@
 import type { RouteObject } from 'react-router-dom';
 import type { IRoute, MenuRoute } from './routes';
+import RouteAuth from './RouteAuth';
 
 /**
  * 从路由配置中获取具有Layout的routes
@@ -53,7 +54,13 @@ export const generateRoutes = function (routes: IRoute[]) {
       const PageComponent = lazy(
         () => import(/* @vite-ignore */ `../pages/${route.componentPath}`)
       );
-      routeItem.element = <PageComponent />;
+      routeItem.element = route.auth ? (
+        <RouteAuth>
+          <PageComponent />
+        </RouteAuth>
+      ) : (
+        <PageComponent />
+      );
     }
     if (route.children) {
       routeItem.children = generateRoutes(route.children);

@@ -5,17 +5,11 @@ import {
   getLayoutRoutes,
   getNoLayoutRoutes
 } from './router.helper';
-import RouterAuth from './RouterAuth';
 import type { IconType } from '@/components/Icons';
 import config from '@/config';
 import type { MergeExclusive, SetOptional } from 'type-fest';
 
-// const modules = import.meta.glob('../pages/*/*.tsx');
-// console.log(modules);
-
-type CustomRoute = Required<
-  Omit<MenuItemRoute, 'key' | 'name' | 'icon' | 'parentKey' | 'menuRender'>
-> & {
+type CustomRoute = Omit<BaseMenuItem, 'key' | 'name' | 'icon'> & {
   layoutRender?: false;
 };
 
@@ -25,9 +19,7 @@ interface BaseMenuItem {
   // 菜单名称 同时也是面包屑名称
   name: string;
   icon?: IconType;
-  // layoutRender?: false;
-  // access?: string;
-  // breadcrumb?: boolean;
+  auth?: true;
   path: string;
   // 页面组件地址，基于pages文件夹下
   componentPath: string;
@@ -42,7 +34,7 @@ interface NoStateMenuItem extends BaseMenuItem {
 type MenuItemRoute = MergeExclusive<BaseMenuItem, NoStateMenuItem>;
 
 type MenuFoldRoute = SetOptional<
-  Omit<MenuItemRoute, 'componentPath' | 'layoutRender' | 'parentKey'>,
+  Omit<MenuItemRoute, 'componentPath' | 'layoutRender' | 'parentKey' | 'auth'>,
   'path'
 > & {
   children: Array<MergeExclusive<MenuItemRoute, MenuFoldRoute>>;
