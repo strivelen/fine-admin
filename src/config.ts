@@ -10,20 +10,11 @@ const routes: IRoute[] = [
     layoutRender: false
   },
   {
-    key: 'dashboard',
-    name: 'Dashboard',
     auth: true,
     path: '/',
     componentPath: 'dashboard',
-    menuRender: false,
-    parentKey: 'dashboard'
-  },
-  {
-    auth: true,
-    path: 'dashboard',
-    componentPath: 'dashboard',
     name: 'Dashboard',
-    key: 'dashboard',
+    key: '/',
     icon: 'DashboardOutlined'
   },
   {

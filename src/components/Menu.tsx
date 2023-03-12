@@ -83,7 +83,7 @@ export default function LayoutMenu() {
       selectedKeys={[state.selectKey || '']}
       onClick={({ key, keyPath, domEvent }) => {
         setState({ selectKey: key });
-        navigate('/' + key);
+        navigate(key);
       }}
       openKeys={state.openKeys}
       onOpenChange={onOpenChange}
