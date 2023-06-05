@@ -205,7 +205,6 @@ const config = {
     '#d6a01d'
   ],
   // 路由 & 菜单 & 面包屑 配置
-  isRenderServerMenu: false, // 是否使用服务端菜单数据
   routes
 };
 

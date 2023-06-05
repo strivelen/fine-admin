@@ -1,5 +1,4 @@
 import axios from './axios';
-import type { MenuItem } from '@/config';
 
 /**
  * 分析页接口
@@ -20,10 +19,10 @@ export const fetchLogin = async (params: Expand<API.LoginParams>) =>
 export const fetchIsTokenValid = () => axios.get<boolean>('/User/Auth');
 
 /**
- * 获取用户菜单
+ * 获取用户菜单 暂时不支持服务端菜单渲染
  */
-export const fetchUserMenu = () =>
-  axios.get<ExpandRecursively<MenuItem[]>>('/User/PageList');
+// export const fetchUserMenu = () =>
+//   axios.get<ExpandRecursively<API.MenuItem[]>>('/User/PageList');
 
 /**
  * 获取用户信息

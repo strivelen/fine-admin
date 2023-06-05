@@ -21,10 +21,7 @@ interface State {
 export default function LayoutMenu() {
   const navigate = useNavigate();
   const location = useLocation();
-  const serverMenuData = useAppSelector(selectMenuItems);
-  const menuData = config.isRenderServerMenu
-    ? serverMenuData
-    : useMemo(() => getMenuData(routes), []);
+  const menuData = useMemo(() => getMenuData(routes), []);
 
   const [state, setState] = useSetState<State>({
     openKeys: [],

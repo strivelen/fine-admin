@@ -5,14 +5,12 @@ import { PURGE } from 'redux-persist';
 import type { IRoute } from '@/router/routes';
 
 export interface UserState {
-  menuItems: IRoute[];
   userInfo: API.UserInfo;
   token: string | undefined;
   isLogin: boolean;
 }
 
 const initialState: UserState = {
-  menuItems: [],
   userInfo: {},
   token: undefined,
   isLogin: false
@@ -35,9 +33,6 @@ export const userSlice = createSlice({
     },
     setUserInfo: (state, action: PayloadAction<API.UserInfo>) => {
       state.userInfo = action.payload;
-    },
-    setMenuItems: (state, action: PayloadAction<IRoute[]>) => {
-      state.menuItems = action.payload;
     }
   },
 
@@ -45,7 +40,6 @@ export const userSlice = createSlice({
     builder
       .addCase(login.fulfilled, (state, action) => {
         const { UserInfo, SessionKey, MenuItems = [] } = action.payload;
-        state.menuItems = MenuItems as IRoute[];
         state.userInfo = UserInfo;
         state.token = SessionKey;
         state.isLogin = true;
@@ -61,7 +55,6 @@ export const userSlice = createSlice({
         //   isLogin: false
         // };
         // 可以用这种方式更新
-        state.menuItems = [];
         state.userInfo = {};
         state.token = undefined;
         state.isLogin = false;
@@ -73,6 +66,5 @@ export const { setToken, setUserInfo } = userSlice.actions;
 
 export const selectToken = (state: RootState) => state.user.token;
 export const selectUserInfo = (state: RootState) => state.user.userInfo;
-export const selectMenuItems = (state: RootState) => state.user.menuItems;
 
 export default userSlice.reducer;
