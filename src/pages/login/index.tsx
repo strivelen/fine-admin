@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import Icon from '@/components/Icons';
 import { LoginForm } from '@ant-design/pro-components';
-import LoginLogo from './LoginLogo';
+import LoginLogo from './components/LoginLogo';
 
 const FormItem = Form.Item;
 const { useToken } = theme;
