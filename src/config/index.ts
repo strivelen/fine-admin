@@ -1,9 +1,8 @@
 /**
  * 手动配置文件
  */
-import type { IRoute } from '@/router/routes';
 
-const routes: IRoute[] = [
+const routes: any[] = [
   {
     path: 'login',
     componentPath: 'login/Login',
