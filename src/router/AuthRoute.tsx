@@ -6,33 +6,35 @@ import { useRequest } from 'ahooks';
 import { Spin, Row, Col } from 'antd';
 
 /**
- * 路由守卫
- * @description 验证用户token是否在有效期。
+ * Route authentication
+ * @description Verify whether the user token is valid.
+ * @workflow The current workflow is as follows: This component will be executed once each time the route authentication page that enters the system is initialized, and will not be executed again when the subsequent non-refresh mode jumps the page.
+ * Instead, it is checked by the api used in the page, and if the api returns 401, authentication fails.
  */
 // eslint-disable-next-line no-undef
 export default function AuthRoute({ children }: { children: JSX.Element }) {
   const location = useLocation();
   const token = useAppSelector(selectToken);
   const { data: tokenIsValid, loading } = useRequest(fetchIsTokenValid, {
-    refreshDeps: [location]
+    // If you need to require authentication each time you switch routes, open the following two lines of comments.
+    // loadingDelay: 300,
+    // refreshDeps: [location]
   });
 
-  if (loading) {
-    return <RouteAuthLoading />;
-  }
+  if (loading) return <Loading />;
 
-  if (!token || !tokenIsValid) {
+  if (!token || tokenIsValid === false) {
     return <Navigate to="/login" state={location} replace />;
   }
 
   return children;
 }
 
-function RouteAuthLoading() {
+function Loading() {
   return (
     <Row justify="center" align="middle" style={{ height: '100%' }}>
       <Col>
-        <Spin tip="用户认证中..." />
+        <Spin tip="正在进行权限认证..." />
       </Col>
     </Row>
   );
