@@ -10,10 +10,11 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import {
-  defaultRouteConfig,
-  routesConfig,
-  type LayoutType
-} from '@/config/routerConfig';
+  defaultPageConfig,
+  pageConfig,
+  type LayoutType,
+  type PageConfig
+} from '@/config/pageConfig';
 
 const AuthRoute = lazy(() => import('./AuthRoute'));
 const ErrorPage = lazy(() => import('@/components/ErrorBoundary'));
@@ -41,34 +42,34 @@ const layoutConfigs = Object.entries(layoutComponentModules).map(
   }
 );
 
-type RouteConfig = RouteObject & { layout: LayoutType };
+export type RouteConfig = RouteObject & PageConfig;
 
 const routeConfigs: Array<RouteConfig> = Object.entries(
   pageComponentModules
 ).map(([pagePath, dynamicImport]) => {
   const PageComponent = lazy(dynamicImport as any);
   const path = parsePath(pagePath);
-  const pageConfig = routesConfig[path] || defaultRouteConfig;
+  const config = { ...defaultPageConfig, ...(pageConfig[path] || {}) };
   return {
+    ...config,
     path,
-    element: pageConfig.auth ? (
+    element: config.auth ? (
       <AuthRoute>
         <PageComponent />
       </AuthRoute>
     ) : (
       <PageComponent />
-    ),
-    layout: pageConfig.layout
+    )
   };
 });
 
 export type Routes = RouteObject[];
 export const routes = generateRoutes(layoutConfigs, routeConfigs);
 
-export default createBrowserRouter([
-  ...routes,
-  { path: '*', element: <NotFound /> }
-]);
+export default createBrowserRouter(
+  [...routes, { path: '*', element: <NotFound /> }],
+  { basename: import.meta.env.BASE_URL }
+);
 
 /**
  * The route path is generated based on the page file address
@@ -80,7 +81,7 @@ function parsePath(pagePath: string) {
   if (/\[.+?\]/.test(path)) {
     return path.replace(/\[/g, ':').replace(/\]/g, '');
   }
-  return path;
+  return path || '/';
 }
 
 /**
@@ -92,11 +93,11 @@ function parsePath(pagePath: string) {
 function generateRoutes(
   layoutConfigs: Array<LayoutConfig>,
   routeConfigs: Array<RouteConfig>
-): RouteObject[] {
+): RouteConfig[] {
   const noUseLayoutRoutes = routeConfigs.filter(
     (routeConfig) => routeConfig.layout === false
   );
-  const layoutRoutes = layoutConfigs.map((layoutConf) => {
+  const useLayoutRoutes = layoutConfigs.map((layoutConf) => {
     const layoutRoutes = routeConfigs.filter(
       (routeConf) => routeConf.layout === layoutConf.type
     );
@@ -106,5 +107,5 @@ function generateRoutes(
       children: layoutRoutes
     };
   });
-  return [...layoutRoutes, ...noUseLayoutRoutes];
+  return [...useLayoutRoutes, ...noUseLayoutRoutes];
 }

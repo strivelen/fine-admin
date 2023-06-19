@@ -1,17 +1,11 @@
-import { useMemo } from 'react';
-import {
-  useNavigate,
-  useLocation,
-  matchRoutes,
-  Location
-} from 'react-router-dom';
+import { useNavigate, matchRoutes, matchPath } from 'react-router-dom';
 import { Menu } from 'antd';
-import { ItemType } from 'antd/es/menu/hooks/useItems';
-import type { IRoute, MenuRoute } from '@/router/routes';
-import { layoutRoutesConfig as routes } from '@/router/routes';
-import config from '@/config';
+import type { ItemType } from 'antd/es/menu/hooks/useItems';
+import { routes } from '@/router';
+import { menus, type MenuItem } from '@/config/menuConfig';
 import Icon from './Icons';
 import { useSetState, useEventListener } from 'ahooks';
+import { flatArrTree } from '@/utils/utils';
 
 interface State {
   openKeys?: string[];
@@ -20,8 +14,6 @@ interface State {
 
 export default function LayoutMenu() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const menuData = useMemo(() => getMenuData(routes), []);
 
   const [state, setState] = useSetState<State>({
     openKeys: [],
@@ -35,27 +27,27 @@ export default function LayoutMenu() {
     }));
   };
 
-  // 初始化菜单状态
+  // Calculate the menu status at initialization
   useEffect(() => {
-    if (menuData.length === 0) {
+    if (menus.length === 0) {
       return;
     }
-    const menuState = handleMenuState(location);
-    updateMenuState(menuState);
-  }, [menuData]);
+    const menuState = mapLocationToMenuStatus(menus);
+    menuState && updateMenuState(menuState as State);
+  }, []);
 
-  // 页面前进后退时定位菜单状态
+  // Calculates the status of the menu when the page moves forward or backward
   useEventListener(
     'popstate',
     () => {
-      const menuState = handleMenuState(location);
-      updateMenuState(menuState);
+      const menuState = mapLocationToMenuStatus(menus);
+      menuState && updateMenuState(menuState as State);
     },
     { target: window }
   );
 
   const onOpenChange = (keys: string[]) => {
-    const rootKeys = menuData
+    const rootKeys = menus
       .filter((item) => item.children && item.children.length > 0)
       .map((item) => item.key);
 
@@ -84,35 +76,17 @@ export default function LayoutMenu() {
       }}
       openKeys={state.openKeys}
       onOpenChange={onOpenChange}
-      items={generateMenuItems(menuData)}
+      items={generateMenuItems(menus)}
     />
   );
 }
 
 /**
- * 获取菜单配置数据
- * @returns
- */
-function getMenuData(routes: IRoute[]) {
-  const menuData: IRoute[] = [];
-  routes.forEach((route) => {
-    const _route = { ...route };
-    if (_route.menuRender !== false) {
-      if (_route.children) {
-        _route.children = getMenuData(_route.children) as MenuRoute[];
-      }
-      menuData.push(_route);
-    }
-  });
-  return menuData;
-}
-
-/**
- * 菜单配置数据生成Menu组件用数据
+ * Generate Menu component data
  * @param {MenuItem[]} data
  * @returns
  */
-const generateMenuItems = (data: IRoute[]): ItemType[] => {
+const generateMenuItems = (data: MenuItem[]): ItemType[] => {
   const menu: ItemType[] = [];
   data.forEach((item) => {
     let children;
@@ -121,7 +95,7 @@ const generateMenuItems = (data: IRoute[]): ItemType[] => {
     }
     menu.push({
       key: item.key,
-      label: item.name,
+      label: item.label,
       icon: <Icon type={item.icon} />,
       children
     } as ItemType);
@@ -129,24 +103,58 @@ const generateMenuItems = (data: IRoute[]): ItemType[] => {
   return menu;
 };
 
-// 处理菜单状态
-const handleMenuState = (location: Location) => {
-  const currentPageMatchRoutes = matchRoutes(routes, location);
-  const selectRoute = currentPageMatchRoutes?.at(-1)?.route;
-
-  let selectKey = selectRoute?.key;
-  let openKeys = (currentPageMatchRoutes
-    ?.map((item) => item.route.key)
-    .slice(0, -1) || []) as string[];
-
-  if (selectRoute?.menuRender === false) {
-    selectKey = selectRoute?.parentKey;
-    if (selectKey) {
-      const parentMatchRoute = matchRoutes(routes, `/${selectKey}`);
-      openKeys = (parentMatchRoute
-        ?.map((item) => item.route.key)
-        .slice(0, -1) || []) as string[];
-    }
-  }
+/**
+ * Map location to menu status
+ * @returns
+ */
+const mapLocationToMenuStatus = (menus: MenuItem[]) => {
+  const selectKey = computeMenuStatusSelectKey(menus);
+  if (!selectKey) return;
+  const openKeys = computeMenuStatusOpenKeys(menus, selectKey);
   return { selectKey, openKeys };
 };
+
+/**
+ * Compute the selectKey value
+ */
+function computeMenuStatusSelectKey(menus: MenuItem[]) {
+  if (menus.length === 0) return;
+  // First step: Check whether the current route is a menu route.
+  const currentPath = location.pathname;
+  const menuKeys: string[] = flatArrTree(menus, 'children')
+    .map((item: any) => item.key)
+    .filter(Boolean);
+  if (menuKeys.length === 0) return;
+  let selectKey = menuKeys.find((item) => item === currentPath);
+  if (selectKey) return selectKey;
+  // Second step: Whether menuKey is configured in the current route configuration.
+  const currentPageMatchRoutes = matchRoutes(routes, location);
+  const currentRoute = currentPageMatchRoutes?.at(-1)?.route;
+  if (currentRoute?.menuKey) return currentRoute.menuKey;
+  // Third step: Check whether the current route is a dynamic route, obtain the matching mode, and check whether there is a key successfully matched in the menu.
+  if (currentPath === currentRoute?.path) return;
+  return menuKeys.find((item) => matchPath(currentRoute?.path as any, item));
+}
+
+/**
+ * Compute the openKeys value
+ */
+function computeMenuStatusOpenKeys(menus: MenuItem[], selectKey: string) {
+  const newMenus: (MenuItem & { _parent_: string })[] = flatArrTree(
+    menus,
+    'children'
+  );
+  let openKeys: string[] = [];
+  const generateOpenKeys = (key: string, isUseValue: boolean) => {
+    const item = newMenus.find((item) => item.key === key);
+    if (!item) {
+      return;
+    }
+    isUseValue && openKeys.push(item.key);
+    if (item?._parent_) {
+      generateOpenKeys(item._parent_, true);
+    }
+  };
+  generateOpenKeys(selectKey, false);
+  return openKeys;
+}
