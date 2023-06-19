@@ -138,7 +138,11 @@ export function handleLongText(text, length, icon) {
  * @param nodeKey
  * @returns
  */
-export function flatArrTree(data: object[] = [], nodeKey: string) {
+export function flatArrTree(
+  data: object[] = [],
+  nodeKey: string,
+  parent?: string
+) {
   let newData = JSON.parse(JSON.stringify(data));
   if (newData.length === 0) {
     return [];
@@ -147,11 +151,11 @@ export function flatArrTree(data: object[] = [], nodeKey: string) {
   for (let leaf of newData) {
     const childs = leaf[nodeKey];
     if (childs) {
-      const flatChilds = flatArrTree(childs, nodeKey);
+      const flatChilds = flatArrTree(childs, nodeKey, leaf.key);
       delete leaf[nodeKey];
-      arr = [...arr, leaf, ...flatChilds];
+      arr = [...arr, { ...leaf, _parent_: parent }, ...flatChilds];
     } else {
-      arr.push(leaf);
+      arr.push({ ...leaf, _parent_: parent });
     }
   }
   return arr;
