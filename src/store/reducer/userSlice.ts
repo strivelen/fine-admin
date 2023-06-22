@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
 import { fetchLogin } from '@/services/api';
 import { PURGE } from 'redux-persist';
-import type { IRoute } from '@/router/routes';
 
 export interface UserState {
   userInfo: API.UserInfo;
