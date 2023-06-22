@@ -31,7 +31,7 @@ export default function LayoutBreadcrumb() {
               {item.icon && (
                 <Icon type={item.icon} style={{ marginRight: 8 }} />
               )}
-              {item.path ? <Link to={item.path}>{item.name}</Link> : item.name}
+              {item.name}
             </Breadcrumb.Item>
           );
         }
