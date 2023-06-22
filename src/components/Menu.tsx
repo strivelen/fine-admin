@@ -108,7 +108,7 @@ const generateMenuItems = (data: MenuItem[]): ItemType[] => {
  * @returns
  */
 const mapLocationToMenuStatus = (menus: MenuItem[]) => {
-  const selectKey = computeMenuStatusSelectKey(menus);
+  const selectKey = computeMenuStatusSelectKey(menus, location.pathname);
   if (!selectKey) return;
   const openKeys = computeMenuStatusOpenKeys(menus, selectKey);
   return { selectKey, openKeys };
@@ -117,22 +117,21 @@ const mapLocationToMenuStatus = (menus: MenuItem[]) => {
 /**
  * Compute the selectKey value
  */
-function computeMenuStatusSelectKey(menus: MenuItem[]) {
+function computeMenuStatusSelectKey(menus: MenuItem[], path: string) {
   if (menus.length === 0) return;
   // First step: Check whether the current route is a menu route.
-  const currentPath = location.pathname;
   const menuKeys: string[] = flatArrTree(menus, 'children')
     .map((item: any) => item.key)
     .filter(Boolean);
   if (menuKeys.length === 0) return;
-  let selectKey = menuKeys.find((item) => item === currentPath);
+  let selectKey = menuKeys.find((item) => item === path);
   if (selectKey) return selectKey;
   // Second step: Whether menuKey is configured in the current route configuration.
-  const currentPageMatchRoutes = matchRoutes(routes, location);
+  const currentPageMatchRoutes = matchRoutes(routes, path);
   const currentRoute = currentPageMatchRoutes?.at(-1)?.route;
   if (currentRoute?.menuKey) return currentRoute.menuKey;
   // Third step: Check whether the current route is a dynamic route, obtain the matching mode, and check whether there is a key successfully matched in the menu.
-  if (currentPath === currentRoute?.path) return;
+  if (path === currentRoute?.path) return;
   return menuKeys.find((item) => matchPath(currentRoute?.path as any, item));
 }
 
