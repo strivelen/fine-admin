@@ -42,7 +42,7 @@ const layoutConfigs = Object.entries(layoutComponentModules).map(
   }
 );
 
-export type RouteConfig = RouteObject & PageConfig;
+export type RouteConfig = RouteObject & Partial<PageConfig>;
 
 const routeConfigs: Array<RouteConfig> = Object.entries(
   pageComponentModules

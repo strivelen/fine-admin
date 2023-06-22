@@ -32,16 +32,16 @@ export default function LayoutMenu() {
     if (menus.length === 0) {
       return;
     }
-    const menuState = mapLocationToMenuStatus(menus);
-    menuState && updateMenuState(menuState as State);
+    const menuState = mapRouteToMenuStatus(menus, location.pathname) || {};
+    updateMenuState(menuState as State);
   }, []);
 
   // Calculates the status of the menu when the page moves forward or backward
   useEventListener(
     'popstate',
     () => {
-      const menuState = mapLocationToMenuStatus(menus);
-      menuState && updateMenuState(menuState as State);
+      const menuState = mapRouteToMenuStatus(menus, location.pathname) || {};
+      updateMenuState(menuState as State);
     },
     { target: window }
   );
@@ -104,11 +104,11 @@ const generateMenuItems = (data: MenuItem[]): ItemType[] => {
 };
 
 /**
- * Map location to menu status
+ * Map route to menu status
  * @returns
  */
-const mapLocationToMenuStatus = (menus: MenuItem[]) => {
-  const selectKey = computeMenuStatusSelectKey(menus, location.pathname);
+export const mapRouteToMenuStatus = (menus: MenuItem[], pathname: string) => {
+  const selectKey = computeMenuStatusSelectKey(menus, pathname);
   if (!selectKey) return;
   const openKeys = computeMenuStatusOpenKeys(menus, selectKey);
   return { selectKey, openKeys };
@@ -131,7 +131,6 @@ function computeMenuStatusSelectKey(menus: MenuItem[], path: string) {
   const currentRoute = currentPageMatchRoutes?.at(-1)?.route;
   if (currentRoute?.menuKey) return currentRoute.menuKey;
   // Third step: Check whether the current route is a dynamic route, obtain the matching mode, and check whether there is a key successfully matched in the menu.
-  if (path === currentRoute?.path) return;
   return menuKeys.find((item) => matchPath(currentRoute?.path as any, item));
 }
 

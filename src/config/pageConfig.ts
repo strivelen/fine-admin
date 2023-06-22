@@ -1,15 +1,14 @@
 export type LayoutType = 'default' | false;
 
 export interface PageConfig {
-  title?: string;
+  title: string;
   layout?: LayoutType;
   auth?: boolean;
-  icon?: string;
   menuKey?: string;
   // wrappers?: Array<any>;
 }
 
-export const defaultPageConfig: PageConfig = {
+export const defaultPageConfig: Omit<PageConfig, 'title'> = {
   layout: 'default',
   auth: true
 };
@@ -20,7 +19,7 @@ export const pageConfig: { [propName: string]: PageConfig } = {
   '/login': { title: '登录', layout: false, auth: false },
   '/form/basic-form': { title: '基础表单' },
   '/form/step-form': { title: '分布表单' },
-  '/list/search': { title: '搜索列表', menuKey: '/result/success' },
+  '/list/search': { title: '搜索列表' },
   '/list/table-list': { title: '查询列表' },
   '/profile/basic': { title: '基础详情页' },
   '/profile/advanced': { title: '高级详情页' },

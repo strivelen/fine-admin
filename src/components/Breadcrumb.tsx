@@ -1,25 +1,30 @@
-import React from 'react';
 import { Breadcrumb } from 'antd';
-import { Link, useLocation, matchRoutes, RouteMatch } from 'react-router-dom';
+import { Link, useLocation, matchRoutes } from 'react-router-dom';
 import { selectBreadcrumb, setBreadcrumb } from '@/store/reducer/layoutSlice';
-import { IRoute, layoutRoutesConfig as routes } from '@/router/routes';
+import { routes } from '@/router';
 import Icon, { IconType } from '@/components/Icons';
+import { menus, MenuItem } from '@/config/menuConfig';
+import { flatArrTree } from '@/utils/utils';
+import { mapRouteToMenuStatus } from '@/components/Menu';
 
 type BreadcrumbItem = string | { name: string; path?: string; icon?: IconType };
 
 export type BreadcrumbType = Array<BreadcrumbItem>;
 
 /**
- * Layout面包屑
+ * Layout Breadcrumb
  * @param {BreadcrumbType} data
  * @returns
  */
 export default function LayoutBreadcrumb() {
+  useBreadcrumbFromMenu();
   const breadcrumb = useAppSelector(selectBreadcrumb);
-  useBreadcrumbFormRoutes({ routes });
-  return breadcrumb.length > 0 ? (
+  if (breadcrumb.length === 0) {
+    return null;
+  }
+  return (
     <Breadcrumb separator="/">
-      {breadcrumb.map((item, index) => {
+      {breadcrumb.map((item: any, index: any) => {
         if (typeof item === 'object') {
           return (
             <Breadcrumb.Item key={index}>
@@ -33,51 +38,53 @@ export default function LayoutBreadcrumb() {
         return <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>;
       })}
     </Breadcrumb>
-  ) : (
-    <div style={{ height: 16 }} />
   );
 }
 
 /**
- * 渲染来自路由配置的面包屑
+ * Dynamically generate breadcrumb configuration data
  */
-function useBreadcrumbFormRoutes({ routes }: { routes: IRoute[] }) {
+function useBreadcrumbFromMenu() {
   const location = useLocation();
   const dispatch = useAppDispatch();
+
+  const generateMenuBreadcrumb = ({
+    openKeys = [],
+    selectKey
+  }: {
+    openKeys: string[];
+    selectKey: string;
+  }) => {
+    if (!selectKey) return;
+    const menuItems: MenuItem[] = flatArrTree(menus, 'children');
+    const menuOpenKeysInfo = openKeys
+      .map((key: string) => menuItems.find((item) => item.key === key))
+      .reverse();
+    const menuSelectKeyInfo = menuItems.find((item) => item.key === selectKey);
+    const breadcrumb = [...menuOpenKeysInfo, menuSelectKeyInfo].map((item) => ({
+      name: item?.label,
+      path: item?.key,
+      icon: item?.icon
+    })) as BreadcrumbType;
+    dispatch(setBreadcrumb(breadcrumb));
+  };
+
   useEffect(() => {
     const currentRouteMatch = matchRoutes(routes, location);
+    if (!currentRouteMatch) {
+      // The current route is undefined
+      return;
+    }
     const currentRouteConfig = currentRouteMatch?.at(-1)?.route;
-    if (currentRouteConfig?.parentKey) {
-      const parentRouteMatch = matchRoutes(
-        routes,
-        `/${currentRouteConfig?.parentKey}`
-      );
-      const breadcrumb = mapRouteMatchToBreadcrmb(
-        parentRouteMatch!.concat(currentRouteMatch!.at(-1)!)
-      );
-      dispatch(setBreadcrumb(breadcrumb as BreadcrumbType));
-    } else {
-      const breadcrumb = mapRouteMatchToBreadcrmb(currentRouteMatch!);
-      dispatch(setBreadcrumb(breadcrumb));
+    if (!currentRouteConfig) {
+      return;
     }
+    let menuState = mapRouteToMenuStatus(menus, location.pathname);
+    if (menuState) {
+      // Currently a menu route (including menuKey)
+      generateMenuBreadcrumb(menuState);
+      return;
+    }
+    dispatch(setBreadcrumb([{ name: currentRouteConfig.title! }]));
   }, [location]);
-}
-
-function mapRouteMatchToBreadcrmb(
-  routeMatch: Array<RouteMatch>
-): BreadcrumbType {
-  return routeMatch?.map((item, index, arr) => {
-    const routeConfig = item.route as IRoute;
-    if (index === arr.length - 1) {
-      return {
-        name: routeConfig.name,
-        icon: routeConfig.icon
-      } as BreadcrumbItem;
-    }
-    return {
-      name: routeConfig.name,
-      path: routeConfig.componentPath ? routeConfig.key : undefined,
-      icon: routeConfig.icon
-    } as BreadcrumbItem;
-  });
 }
