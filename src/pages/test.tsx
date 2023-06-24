@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Space, Input, Select, DatePicker } from 'antd';
 import Icon from '@/components/Icons';
 // import Loading from '@/components/Loading';
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <>
       {/* <Loading /> */}
@@ -42,13 +43,10 @@ export default function Home() {
           ]}
         />
         {/* <Button type="primary" onClick={() => setPrefixCls("light")}>明亮</Button> */}
-        <Button type="primary">按钮</Button>
-      </Space>
-      <div>
-        <Button title="按钮" block icon={<Icon type="HomeOutlined" />}>
-          按钮
+        <Button type="primary" onClick={() => navigate('/non-menu')}>
+          跳转至子页面
         </Button>
-      </div>
+      </Space>
     </>
   );
 }

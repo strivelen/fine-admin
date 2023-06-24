@@ -1,5 +1,5 @@
 import { Breadcrumb } from 'antd';
-import { Link, useLocation, matchRoutes } from 'react-router-dom';
+import { useLocation, matchRoutes } from 'react-router-dom';
 import { selectBreadcrumb, setBreadcrumb } from '@/store/reducer/layoutSlice';
 import { routes } from '@/router';
 import Icon, { IconType } from '@/components/Icons';
@@ -55,7 +55,6 @@ function useBreadcrumbFromMenu() {
     openKeys: string[];
     selectKey: string;
   }) => {
-    if (!selectKey) return;
     const menuItems: MenuItem[] = flatArrTree(menus, 'children');
     const menuOpenKeysInfo = openKeys
       .map((key: string) => menuItems.find((item) => item.key === key))
@@ -66,13 +65,12 @@ function useBreadcrumbFromMenu() {
       path: item?.key,
       icon: item?.icon
     })) as BreadcrumbType;
-    dispatch(setBreadcrumb(breadcrumb));
+    return breadcrumb;
   };
 
   useEffect(() => {
     const currentRouteMatch = matchRoutes(routes, location);
     if (!currentRouteMatch) {
-      // The current route is undefined
       return;
     }
     const currentRouteConfig = currentRouteMatch?.at(-1)?.route;
@@ -81,8 +79,11 @@ function useBreadcrumbFromMenu() {
     }
     let menuState = mapRouteToMenuStatus(menus, location.pathname);
     if (menuState) {
-      // Currently a menu route (including menuKey)
-      generateMenuBreadcrumb(menuState);
+      let menuBreadCrumb = generateMenuBreadcrumb(menuState);
+      if (currentRouteConfig.menuKey) {
+        menuBreadCrumb?.push({ name: currentRouteConfig.title! });
+      }
+      dispatch(setBreadcrumb(menuBreadCrumb));
       return;
     }
     dispatch(setBreadcrumb([{ name: currentRouteConfig.title! }]));
