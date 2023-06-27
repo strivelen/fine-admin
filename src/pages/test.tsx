@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       {/* <Loading /> */}
-      <Space>
+      <Space wrap>
         <Link to="/login">到登录页</Link>
         <DatePicker
         // onChange={(date, dateString) => {
@@ -45,6 +45,12 @@ export default function Home() {
         {/* <Button type="primary" onClick={() => setPrefixCls("light")}>明亮</Button> */}
         <Button type="primary" onClick={() => navigate('/non-menu')}>
           跳转至子页面
+        </Button>
+        <Button type="primary" onClick={() => navigate('/details')}>
+          动态路由: /details
+        </Button>
+        <Button type="primary" onClick={() => navigate('/details/100')}>
+          动态路由: /details/100
         </Button>
       </Space>
     </>

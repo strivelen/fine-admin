@@ -78,6 +78,9 @@ export default createBrowserRouter(
  */
 function parsePath(pagePath: string) {
   let path = pagePath.replace('/src/pages', '').replace(/.tsx|\/index.tsx/, '');
+  if (/\[\[.+?\]\]/.test(path)) {
+    return path.replace(/\[\[/g, ':').replace(/\]\]/g, '?');
+  }
   if (/\[.+?\]/.test(path)) {
     return path.replace(/\[/g, ':').replace(/\]/g, '');
   }

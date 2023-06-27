@@ -20,5 +20,6 @@ export const defaultPageConfig: Omit<PageConfig, 'title'> = {
 
 export const pageConfig: { [propName: string]: PageConfig } = {
   '/login': { title: '登录', layout: false, auth: false },
-  '/non-menu': { title: '非菜单页面', menuKey: '/test' }
+  '/non-menu': { title: '非菜单页面', menuKey: '/test' },
+  '/details/:id?': { title: '动态详情页', menuKey: '/test' }
 };
