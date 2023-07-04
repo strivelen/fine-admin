@@ -1,25 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store';
-import type { BreadcrumbType } from '@/components/Breadcrumb';
+import type { BreadcrumbType } from '@/layouts/default/components/Breadcrumb';
+import type { LayoutModeType } from '@/layouts/default';
 
 export interface LayoutState {
+  layoutMode: LayoutModeType;
   collapsed: boolean;
   breadcrumb: BreadcrumbType;
   isDarkMode: boolean;
   themeColor: string;
+  isOpenSetting: boolean;
 }
 
 const initialState: LayoutState = {
+  layoutMode: 'sidemenu',
   collapsed: false,
   breadcrumb: ['首页'],
   isDarkMode: false,
-  themeColor: '#1677ff'
+  themeColor: '#1677ff',
+  isOpenSetting: false
 };
 
 export const layoutSlice = createSlice({
   name: 'layout',
   initialState,
   reducers: {
+    setLayoutMode: (state, action: PayloadAction<LayoutModeType>) => {
+      state.layoutMode = action.payload;
+    },
     setBreadcrumb: (state, action: PayloadAction<BreadcrumbType>) => {
       state.breadcrumb = action.payload;
     },
@@ -31,12 +39,23 @@ export const layoutSlice = createSlice({
     },
     setThemeColor: (state, action: PayloadAction<string>) => {
       state.themeColor = action.payload;
+    },
+    setIsOpenSetting: (state, action: PayloadAction<boolean>) => {
+      state.isOpenSetting = action.payload;
     }
   }
 });
 
-export const { setBreadcrumb, setCollapsed, setDarkMode, setThemeColor } =
-  layoutSlice.actions;
+export const {
+  setLayoutMode,
+  setBreadcrumb,
+  setCollapsed,
+  setDarkMode,
+  setThemeColor,
+  setIsOpenSetting
+} = layoutSlice.actions;
+
+export const selectLayoutMode = (state: RootState) => state.layout.layoutMode;
 
 export const selectCollapsed = (state: RootState) => state.layout.collapsed;
 
@@ -45,5 +64,8 @@ export const selectBreadcrumb = (state: RootState) => state.layout.breadcrumb;
 export const selectIsDarkMode = (state: RootState) => state.layout.isDarkMode;
 
 export const selectThemeColor = (state: RootState) => state.layout.themeColor;
+
+export const selectIsOpenSetting = (state: RootState) =>
+  state.layout.isOpenSetting;
 
 export default layoutSlice.reducer;

@@ -18,6 +18,8 @@
     "selectCollapsed": true,
     "selectCount": true,
     "selectIsDarkMode": true,
+    "selectIsOpenSetting": true,
+    "selectLayoutMode": true,
     "selectLoading": true,
     "selectThemeColor": true,
     "selectToken": true,

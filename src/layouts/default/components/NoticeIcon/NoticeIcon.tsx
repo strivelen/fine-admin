@@ -1,11 +1,10 @@
 import React from 'react';
-import { Tabs, TabsProps, Popover, Spin, Badge, theme } from 'antd';
+import { Tabs, TabsProps, Popover, Spin, Badge, theme, Button } from 'antd';
 import Icon from '@/components/Icons';
 import NoticeList, { NoticeIconTabProps } from './NoticeList';
 import { useControllableValue } from 'ahooks';
 // import classNames from 'classnames';
 import styles from './index.module.css';
-import HeaderButton from '../HeaderButton';
 
 export type NoticeIconProps = {
   count?: number;
@@ -116,7 +115,8 @@ const NoticeIcon: React.FC<NoticeIconProps> & {
     //     {NoticeBellIcon}
     //   </Badge>
     // </span>
-    <HeaderButton
+    <Button
+      type="text"
       icon={
         <Badge
           size="small"

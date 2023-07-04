@@ -1,18 +1,17 @@
 import { useNavigate, matchRoutes, matchPath } from 'react-router-dom';
-import { Menu } from 'antd';
 import type { ItemType } from 'antd/es/menu/hooks/useItems';
 import { routes } from '@/router';
 import { menus, type MenuItem } from '@/config/menuConfig';
-import Icon from './Icons';
 import { useSetState, useEventListener } from 'ahooks';
 import { flatArrTree } from '@/utils/utils';
+import Icon from '@/components/Icons';
 
 interface State {
   openKeys?: string[];
   selectKey?: string;
 }
 
-export default function LayoutMenu() {
+export default function useMenu() {
   const navigate = useNavigate();
 
   const [state, setState] = useSetState<State>({
@@ -64,21 +63,16 @@ export default function LayoutMenu() {
     }
   };
 
-  return (
-    <Menu
-      id="custom-menu-popup"
-      theme="dark"
-      mode="inline"
-      selectedKeys={[state.selectKey || '']}
-      onClick={({ key, keyPath, domEvent }) => {
-        setState({ selectKey: key });
-        navigate(key);
-      }}
-      openKeys={state.openKeys}
-      onOpenChange={onOpenChange}
-      items={generateMenuItems(menus)}
-    />
-  );
+  return {
+    selectKey: state.selectKey,
+    onSelectKey: (key: string) => {
+      setState({ selectKey: key });
+      navigate(key);
+    },
+    openKeys: state.openKeys,
+    onOpenKeys: onOpenChange,
+    items: generateMenuItems(menus)
+  };
 }
 
 /**

@@ -5,7 +5,7 @@ import { routes } from '@/router';
 import Icon, { IconType } from '@/components/Icons';
 import { menus, MenuItem } from '@/config/menuConfig';
 import { flatArrTree } from '@/utils/utils';
-import { mapRouteToMenuStatus } from '@/components/Menu';
+import { mapRouteToMenuStatus } from '../useMenu';
 
 type BreadcrumbItem = string | { name: string; path?: string; icon?: IconType };
 
