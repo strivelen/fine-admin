@@ -32,7 +32,7 @@ export default function AuthRoute({ children }: { children: JSX.Element }) {
 
 function Loading() {
   return (
-    <Row justify="center" align="middle" style={{ height: '100%' }}>
+    <Row justify="center" align="middle" style={{ flex: 1 }}>
       <Col>
         <Spin tip="正在进行权限认证..." />
       </Col>

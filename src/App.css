@@ -17,6 +17,8 @@
   min-height: 100vh;
 }
 .site-content {
+  display: flex;
+  flex-direction: column;
   margin: 16px 16px 0;
   overflow: initial;
 }

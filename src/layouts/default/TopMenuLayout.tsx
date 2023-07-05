@@ -14,7 +14,7 @@ export default function TopMenuLayout() {
   } = useToken();
   const menu = useMenu();
   return (
-    <Layout>
+    <Layout className="site-layout">
       <Header
         style={{
           paddingLeft: 20,
