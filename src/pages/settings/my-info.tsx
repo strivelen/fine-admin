@@ -13,7 +13,7 @@ export default function MyInfo() {
     console.log(values);
   };
   return (
-    <Card style={{ minHeight: '100%' }}>
+    <Card style={{ flex: 1 }} bordered={false}>
       <Row>
         <Col offset={1} xs={23} md={18} lg={16} xl={12} xxl={10}>
           <ProForm

@@ -18,7 +18,7 @@ export default function BasicForm() {
   };
 
   return (
-    <Card bordered={false} style={{ minHeight: '100%' }}>
+    <Card bordered={false} style={{ flex: 1 }}>
       <ProForm
         hideRequiredMark
         style={{ margin: 'auto', marginTop: 8, maxWidth: 600 }}

@@ -62,7 +62,7 @@ export default function StepForm() {
     });
   }, []);
   return (
-    <Card bordered={false} style={{ minHeight: '100%' }}>
+    <Card bordered={false} style={{ flex: 1 }}>
       <StepsForm
         formMapRef={formMapRef}
         onFinish={(values) => {

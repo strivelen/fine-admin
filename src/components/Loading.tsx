@@ -20,6 +20,7 @@ export default function Loading({ height }: LoadingParams) {
       align="middle"
       justify="center"
       style={{
+        flex: 1,
         height: height || '100vh',
         backgroundColor: isDarkMode ? '#000' : '#fff'
       }}

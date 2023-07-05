@@ -70,7 +70,7 @@ const extra = (
 );
 
 export default () => (
-  <Card bordered={false} style={{ height: '100%' }}>
+  <Card bordered={false} style={{ flex: 1 }}>
     <Result
       status="success"
       title="提交成功"

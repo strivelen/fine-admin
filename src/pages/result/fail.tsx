@@ -37,7 +37,7 @@ const Content = (
 
 export default function Fail() {
   return (
-    <Card bordered={false} style={{ height: '100%' }}>
+    <Card bordered={false} style={{ flex: 1 }}>
       <Result
         status="error"
         title="提交失败"
