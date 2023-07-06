@@ -19,6 +19,7 @@ declare global {
   const selectCollapsed: typeof import('./store/reducer/layoutSlice')['selectCollapsed']
   const selectCount: typeof import('./store/reducer/counterSlice')['selectCount']
   const selectIsDarkMode: typeof import('./store/reducer/layoutSlice')['selectIsDarkMode']
+  const selectIsFixedWidth: typeof import('./store/reducer/layoutSlice')['selectIsFixedWidth']
   const selectIsOpenSetting: typeof import('./store/reducer/layoutSlice')['selectIsOpenSetting']
   const selectLayoutMode: typeof import('./store/reducer/layoutSlice')['selectLayoutMode']
   const selectLoading: typeof import('./store/reducer/loadingSlice')['selectLoading']

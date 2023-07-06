@@ -18,6 +18,7 @@
     "selectCollapsed": true,
     "selectCount": true,
     "selectIsDarkMode": true,
+    "selectIsFixedWidth": true,
     "selectIsOpenSetting": true,
     "selectLayoutMode": true,
     "selectLoading": true,

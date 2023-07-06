@@ -10,6 +10,7 @@ export interface LayoutState {
   isDarkMode: boolean;
   themeColor: string;
   isOpenSetting: boolean;
+  isFixedWidth: boolean;
 }
 
 const initialState: LayoutState = {
@@ -18,7 +19,8 @@ const initialState: LayoutState = {
   breadcrumb: ['首页'],
   isDarkMode: false,
   themeColor: '#1677ff',
-  isOpenSetting: false
+  isOpenSetting: false,
+  isFixedWidth: false
 };
 
 export const layoutSlice = createSlice({
@@ -42,6 +44,9 @@ export const layoutSlice = createSlice({
     },
     setIsOpenSetting: (state, action: PayloadAction<boolean>) => {
       state.isOpenSetting = action.payload;
+    },
+    setIsFixedWidth: (state, action: PayloadAction<boolean>) => {
+      state.isFixedWidth = action.payload;
     }
   }
 });
@@ -52,7 +57,8 @@ export const {
   setCollapsed,
   setDarkMode,
   setThemeColor,
-  setIsOpenSetting
+  setIsOpenSetting,
+  setIsFixedWidth
 } = layoutSlice.actions;
 
 export const selectLayoutMode = (state: RootState) => state.layout.layoutMode;
@@ -67,5 +73,8 @@ export const selectThemeColor = (state: RootState) => state.layout.themeColor;
 
 export const selectIsOpenSetting = (state: RootState) =>
   state.layout.isOpenSetting;
+
+export const selectIsFixedWidth = (state: RootState) =>
+  state.layout.isFixedWidth;
 
 export default layoutSlice.reducer;

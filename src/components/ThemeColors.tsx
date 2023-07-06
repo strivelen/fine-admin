@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ConfigProvider, Space } from 'antd';
 import Icon from '@/components/Icons';
 import { useAppSelector, useAppDispatch } from '@/hooks/useAppHooks';
@@ -28,7 +28,7 @@ export function ThemeColorsSelect() {
   const dispatch = useAppDispatch();
   const themeColor = useAppSelector(selectThemeColor);
   return (
-    <Space>
+    <Space wrap size="small" direction="horizontal">
       {config.themeColors.map((color, index) => (
         <ColorBlockItem
           key={index}
@@ -46,7 +46,7 @@ export function ThemeColorsSelect() {
 interface ColorBlockItemParams {
   color: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
-  isActive?: boolean;
+  isActive: boolean;
 }
 
 function ColorBlockItem({ color, isActive, onClick }: ColorBlockItemParams) {
@@ -57,36 +57,29 @@ function ColorBlockItem({ color, isActive, onClick }: ColorBlockItemParams) {
         borderRadius: 6,
         width: 26,
         height: 26,
-        textAlign: 'center',
-        marginRight: 0,
-        lineHeight: '24px',
         overflow: 'hidden',
         backgroundColor: color
       }}
-      color={color}
       onClick={onClick}
     >
-      {isActive && <ColorItemActive />}
+      <ColorItemActive isShow={isActive!} />
     </div>
   );
 }
 
-function ColorItemActive() {
+function ColorItemActive({ isShow }: { isShow: boolean }) {
   return (
     <div
       style={{
+        display: isShow ? 'block' : 'none',
         width: '100%',
         height: '100%',
         backgroundColor: 'rgba(0,0,0,.3)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
+        textAlign: 'center',
+        lineHeight: '26px'
       }}
     >
-      <Icon
-        type="CheckOutlined"
-        style={{ color: '#fff', fontWeight: 'bold' }}
-      />
+      <Icon type="CheckOutlined" style={{ color: '#fff' }} />
     </div>
   );
 }

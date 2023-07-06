@@ -35,7 +35,8 @@ const config = {
     '#7cb305',
     '#13c2c2',
     '#d6a01d'
-  ]
+  ],
+  fixedWidth: 1200
 };
 
 export default config;
