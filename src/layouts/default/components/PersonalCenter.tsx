@@ -43,10 +43,10 @@ export default function PersonalCenterEntry() {
         onClick: (e) => {
           switch (e.key) {
             case PersonalCenterMenuKeys.MyInfo:
-              navigate('/my-info');
+              navigate('/settings/my-info');
               break;
             case PersonalCenterMenuKeys.ModifyPassword:
-              navigate('/change-password');
+              navigate('/settings/change-password');
               break;
             case PersonalCenterMenuKeys.Logout:
               persistor.purge(); // 清楚硬盘（如：localStorage）中的所有数据
