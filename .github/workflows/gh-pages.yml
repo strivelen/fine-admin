@@ -45,7 +45,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: Build project
-        run: pnpm run build
+        run: pnpm run build:gh-pages
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

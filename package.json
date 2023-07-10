@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "tsc && vite build --base=/fine-admin/ && deploy.sh"
+    "build:gh-pages": "tsc && vite build --base=/fine-admin/"
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
