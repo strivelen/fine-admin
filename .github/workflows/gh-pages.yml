@@ -48,9 +48,9 @@ jobs:
         run: pnpm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
-          name: fine-admin
+          name: release
           path: ./dist
 
   # Deployment job
@@ -64,7 +64,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: fine-admin
+          name: release
           path: ./dist
 
       - name: Deploy to GitHub Pages
