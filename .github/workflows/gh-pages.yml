@@ -29,6 +29,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install pnpm
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+          curl -fsSL https://get.pnpm.io/install.sh | sh
+          export PATH=$HOME/.pnpm/bin:$PATH
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -37,12 +44,7 @@ jobs:
           cache-dependency-path: ./pnpm-lock.yaml
 
       - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y curl
-          curl -fsSL https://get.pnpm.io/install.sh | sh
-          export PATH=$HOME/.pnpm/bin:$PATH
-          pnpm install
+        run: pnpm install
 
       - name: Build project
         run: pnpm run build
