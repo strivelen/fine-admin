@@ -29,8 +29,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install pnpm
-        run: wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+      #- name: Install pnpm
+      #  run: wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -38,6 +38,8 @@ jobs:
           node-version-file: '.nvmrc'
           # cache: 'pnpm'
           # cache-dependency-path: ./pnpm-lock.yaml
+      - name: Install pnpm package manager
+        run: npm i -g pnpm
 
       - name: Install dependencies
         run: pnpm install
