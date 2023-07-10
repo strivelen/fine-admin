@@ -30,11 +30,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install pnpm
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y curl
-          curl -fsSL https://get.pnpm.io/install.sh | sh
-          export PATH=$HOME/.pnpm/bin:$PATH
+        run: wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 
       - name: Setup Node
         uses: actions/setup-node@v3
