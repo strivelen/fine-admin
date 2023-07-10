@@ -64,7 +64,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: release-files
+          name: fine-admin
           path: ./dist
 
       - name: Deploy to GitHub Pages
