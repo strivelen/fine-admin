@@ -123,6 +123,7 @@ function computeMenuStatusSelectKey(menus: MenuItem[], path: string) {
   // Second step: Whether menuKey is configured in the current route configuration.
   const currentPageMatchRoutes = matchRoutes(routes, path);
   const currentRoute = currentPageMatchRoutes?.at(-1)?.route;
+  if (!currentRoute) return;
   if (currentRoute?.menuKey) return currentRoute.menuKey;
   // Third step: Check whether the current route is a dynamic route, obtain the matching mode, and check whether there is a key successfully matched in the menu.
   return menuKeys.find((item) => matchPath(currentRoute?.path as any, item));

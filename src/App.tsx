@@ -6,12 +6,11 @@ import useGlobalTips from '@/hooks/useGlobalTips';
 
 function MyApp() {
   useGlobalTips();
-  return <h1>测试 CI</h1>;
-  // return (
-  //   <Suspense fallback={<Loading />}>
-  //     <RouterProvider router={router} />
-  //   </Suspense>
-  // );
+  return (
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 }
 
 export default MyApp;
