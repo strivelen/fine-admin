@@ -1,0 +1,1 @@
+import{ao as n,aq as a,j as e}from"./vendor-0e720bfc.js";function o(){return n(a,{children:[e("h1",{children:"非菜单页面"}),e("h3",{children:"当前页面不属于菜单页面，但也可以通过在 `config/pageConfig.ts` 中为当前页面配置menuKey从而定位到菜单某个状态"})]})}export{o as default};
