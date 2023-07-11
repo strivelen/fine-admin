@@ -39,7 +39,7 @@ jobs:
           # cache: 'pnpm'
           # cache-dependency-path: ./pnpm-lock.yaml
       - name: Install pnpm package manager
-        run: npm i -g pnpm
+        run: npm i -g pnpm@7.16.1
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
