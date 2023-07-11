@@ -1,0 +1,1 @@
+import{ap as r,ao as a,aq as e,j as i}from"./vendor-0e720bfc.js";function t(){const s=r();return a(e,{children:[i("h1",{children:"详情页"}),a("h1",{children:["路由参数 id 值是：",s.id]})]})}export{t as default};
