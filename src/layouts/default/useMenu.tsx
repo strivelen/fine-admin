@@ -7,7 +7,7 @@ import {
 import type { ItemType } from 'antd/es/menu/hooks/useItems';
 import { routes } from '@/router';
 import { menus, type MenuItem } from '@/config/menuConfig';
-import { useSetState, useEventListener } from 'ahooks';
+import { useSetState } from 'ahooks';
 import { flatArrTree } from '@/utils/utils';
 import Icon from '@/components/Icons';
 
@@ -37,21 +37,9 @@ export default function useMenu() {
     if (menus.length === 0) {
       return;
     }
-    console.log('菜单监听路由改变location: ', location);
     const menuState = mapRouteToMenuStatus(menus, location.pathname) || {};
-    console.log('compute_menu_state: ', menuState);
     updateMenuState(menuState as State);
   }, [location]);
-
-  // Calculates the status of the menu when the page moves forward or backward
-  // useEventListener(
-  //   'popstate',
-  //   () => {
-  //     const menuState = mapRouteToMenuStatus(menus, location.pathname) || {};
-  //     updateMenuState(menuState as State);
-  //   },
-  //   { target: window }
-  // );
 
   const onOpenChange = (keys: string[]) => {
     const rootKeys = menus
@@ -111,8 +99,6 @@ const generateMenuItems = (data: MenuItem[]): ItemType[] => {
  * @returns
  */
 export const mapRouteToMenuStatus = (menus: MenuItem[], pathname: string) => {
-  console.log('menus: ', menus);
-  console.log('pathname: ', pathname);
   const selectKey = computeMenuStatusSelectKey(menus, pathname);
   if (!selectKey) return;
   const openKeys = computeMenuStatusOpenKeys(menus, selectKey);
@@ -128,16 +114,12 @@ function computeMenuStatusSelectKey(menus: MenuItem[], path: string) {
   const menuKeys: string[] = flatArrTree(menus, 'children')
     .map((item: any) => item.key)
     .filter(Boolean);
-  console.log('menuKeys: ', menuKeys);
   if (menuKeys.length === 0) return;
   let selectKey = menuKeys.find((item) => item === path);
-  console.log('menuKeys_to_selectKey: ', selectKey);
   if (selectKey) return selectKey;
   // Second step: Whether menuKey is configured in the current route configuration.
   const currentPageMatchRoutes = matchRoutes(routes, path);
-  console.log('currentPageMatchRoutes: ', currentPageMatchRoutes);
   const currentRoute = currentPageMatchRoutes?.at(-1)?.route;
-  console.log('currentRoute: ', currentPageMatchRoutes);
   if (!currentRoute) return;
   if (currentRoute?.menuKey) return currentRoute.menuKey;
   // Third step: Check whether the current route is a dynamic route, obtain the matching mode, and check whether there is a key successfully matched in the menu.
