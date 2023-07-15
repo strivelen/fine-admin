@@ -1,10 +1,11 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { Tooltip, Drawer, Button, Card, theme } from 'antd';
 import Icon from '@/components/Icons';
 import type { DrawerProps } from 'antd';
 import { DarkModeSwitch } from '@/components/DarkModeSwitch';
 import { ThemeColorsSelect } from '@/components/ThemeColors';
 import SwitchFiexdWidth from '@/components/SwitchFiexdWidth';
+import SwitchFiexdHeader from '@/components/SwitchFiexdHeader';
 import LayoutToggle from './LayoutToggle';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -41,7 +42,8 @@ export function LocalSettingsDrawer(props: DrawerProps) {
       <ConfigItem title="整体风格" content={<DarkModeSwitch />} />
       <ConfigItem title="导航模式" content={<LayoutToggle />} />
       <ConfigItem title="主题色" content={<ThemeColorsSelect />} />
-      <ConfigItem title="固定内容区域宽度" content={<SwitchFiexdWidth />} />
+      <ConfigItem title="固定顶部内容" content={<SwitchFiexdHeader />} />
+      <ConfigItem title="固定内容宽度" content={<SwitchFiexdWidth />} />
     </Drawer>
   );
 }

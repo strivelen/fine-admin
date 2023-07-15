@@ -9,17 +9,19 @@ export default function LayoutHeader({
   children: ReactNode;
   style?: CSSProperties;
 }) {
+  const isFixedHeader = useAppSelector(selectIsFixedHeader);
   const {
     token: { colorBgContainer }
   } = theme.useToken();
+  const headerStyle: CSSProperties = isFixedHeader
+    ? { position: 'sticky', top: 0, zIndex: 100 }
+    : {};
   return (
     <Header
       style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
         padding: '0 16px',
         backgroundColor: colorBgContainer,
+        ...headerStyle,
         ...style
       }}
     >

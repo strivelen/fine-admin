@@ -11,6 +11,7 @@ export interface LayoutState {
   themeColor: string;
   isOpenSetting: boolean;
   isFixedWidth: boolean;
+  isFixedHeader: boolean;
 }
 
 const initialState: LayoutState = {
@@ -20,7 +21,8 @@ const initialState: LayoutState = {
   isDarkMode: false,
   themeColor: '#1677ff',
   isOpenSetting: false,
-  isFixedWidth: false
+  isFixedWidth: false,
+  isFixedHeader: true
 };
 
 export const layoutSlice = createSlice({
@@ -47,6 +49,9 @@ export const layoutSlice = createSlice({
     },
     setIsFixedWidth: (state, action: PayloadAction<boolean>) => {
       state.isFixedWidth = action.payload;
+    },
+    setIsFixedHeader: (state, action: PayloadAction<boolean>) => {
+      state.isFixedHeader = action.payload;
     }
   }
 });
@@ -58,7 +63,8 @@ export const {
   setDarkMode,
   setThemeColor,
   setIsOpenSetting,
-  setIsFixedWidth
+  setIsFixedWidth,
+  setIsFixedHeader
 } = layoutSlice.actions;
 
 export const selectLayoutMode = (state: RootState) => state.layout.layoutMode;
@@ -76,5 +82,8 @@ export const selectIsOpenSetting = (state: RootState) =>
 
 export const selectIsFixedWidth = (state: RootState) =>
   state.layout.isFixedWidth;
+
+export const selectIsFixedHeader = (state: RootState) =>
+  state.layout.isFixedHeader;
 
 export default layoutSlice.reducer;
