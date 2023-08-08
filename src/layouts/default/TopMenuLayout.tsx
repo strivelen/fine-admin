@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { Layout, theme, Menu } from 'antd';
 import Content from './components/Content';
 import Logo from './components/Logo';
@@ -9,22 +10,25 @@ const { Header } = Layout;
 const { useToken } = theme;
 
 export default function TopMenuLayout() {
+  const isFixedHeader = useAppSelector(selectIsFixedHeader);
   const {
     token: { colorBgContainer, colorBorderSecondary }
   } = useToken();
   const menu = useMenu();
+  const headerStyle: CSSProperties = isFixedHeader
+    ? { position: 'sticky', top: 0, zIndex: 100 }
+    : {};
+
   return (
     <Layout className="site-layout">
       <Header
         style={{
           paddingLeft: 20,
           paddingRight: 20,
-          position: 'sticky',
-          top: 0,
-          zIndex: 100,
           display: 'flex',
           backgroundColor: colorBgContainer,
-          borderBottom: `1px solid ${colorBorderSecondary}`
+          borderBottom: `1px solid ${colorBorderSecondary}`,
+          ...headerStyle
         }}
       >
         <Logo />
