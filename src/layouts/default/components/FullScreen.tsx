@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Tooltip, Button } from 'antd';
 import Icon from '@/components/Icons';
 import { useFullscreen } from 'ahooks';
 
-export function FullScreenHeaderButton() {
+function FullScreenHeaderButton() {
   const [isFullscreen, { toggleFullscreen }] = useFullscreen(() =>
     document.querySelector('html')
   );
@@ -23,3 +23,5 @@ export function FullScreenHeaderButton() {
     </Tooltip>
   );
 }
+
+export default memo(FullScreenHeaderButton);

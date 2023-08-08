@@ -1,5 +1,5 @@
 import { Space } from 'antd';
-import { FullScreenHeaderButton } from './FullScreen';
+import FullScreenHeaderButton from './FullScreen';
 import NoticeHeaderButton from './NoticeIcon';
 import PersonalCenter from './PersonalCenter';
 import LocalSettingsHeaderButton from './LocalSettings';
