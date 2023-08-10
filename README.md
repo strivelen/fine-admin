@@ -20,7 +20,7 @@
 <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/strivelen/fine-admin/total">
 </div>
 
-[在线演示](https://strivelen.github.io/fine-admin/)
+[在线演示](https://strivelen.github.io/fine-admin/)&nbsp; | &nbsp;[在线文档](https://strivelen.github.io/fine-admin-docs/)
 
 ### 📦 快速开始
 
